@@ -1,0 +1,2604 @@
+core_defects:
+- D1
+- D2
+- D3b
+- D4hi
+- D5
+- D8
+entries:
+  IIWA/D1/L0:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D1/L1:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.002617993877991494
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D1/L2:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.006981317007977318
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D1/L3:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.012217304763960306
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D1/L4:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D2/L0:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 0.0
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D2/L1:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 1.0
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D2/L2:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 2.0
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D2/L3:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 3.0
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D2/L4:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 4.0
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D3b/L0:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.05
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D3b/L1:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D3b/L2:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.2
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D3b/L3:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.4
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D3b/L4:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.6
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D4hi/L0:
+    compile_sha256: 3caedb2ae86f84cd9acc4a43971423d259753dd966907fbec4b9f4cc1b3b8fc7
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 8
+    family: IIWA
+    identical_to_clean: false
+    level: 0
+    n_joints: 8
+    robosuite_robot: IIWA
+  IIWA/D4hi/L1:
+    compile_sha256: 05c1a93e164e8aebe9e8b403dba8c2604a4eec2b6b5dcdfd44cd174f8bd11151
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0017453292519943296
+    dof: 8
+    family: IIWA
+    identical_to_clean: false
+    level: 1
+    n_joints: 8
+    robosuite_robot: IIWA
+  IIWA/D4hi/L2:
+    compile_sha256: f139d4ddf6dec0a39e07b1f8f4a3e8a8d3c0ac4ea30f50876857262fde80c7c1
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.005235987755982988
+    dof: 8
+    family: IIWA
+    identical_to_clean: false
+    level: 2
+    n_joints: 8
+    robosuite_robot: IIWA
+  IIWA/D4hi/L3:
+    compile_sha256: 959b9ef1388f11fcb715c26b95cc5c096a5cc3675025f4599c54d2eb0feceb65
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 8
+    family: IIWA
+    identical_to_clean: false
+    level: 3
+    n_joints: 8
+    robosuite_robot: IIWA
+  IIWA/D4hi/L4:
+    compile_sha256: 819cb9da779d4ed4dfb3e4c80c3fd0f337db592fc4b7d2de462654cb5468250d
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.05235987755982989
+    dof: 8
+    family: IIWA
+    identical_to_clean: false
+    level: 4
+    n_joints: 8
+    robosuite_robot: IIWA
+  IIWA/D5/L0:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.005
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D5/L1:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.01
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D5/L2:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.03
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D5/L3:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.06
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D5/L4:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D8/L0:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.95
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D8/L1:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.9
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D8/L2:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.8
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D8/L3:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.7
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/D8/L4:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.55
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: IIWA
+  IIWA/clean:
+    compile_sha256: 261003f18edf70805f80454b03ec76417f095bf2e903528267350fb68013f361
+    defect_id: null
+    defect_impl_variant: null
+    delta: {}
+    dof: 7
+    family: IIWA
+    identical_to_clean: true
+    level: null
+    n_joints: 7
+    robosuite_robot: IIWA
+  Kinova3/D1/L0:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D1/L1:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.002617993877991494
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D1/L2:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.006981317007977318
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D1/L3:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.012217304763960306
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D1/L4:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D2/L0:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 0.0
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D2/L1:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 1.0
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D2/L2:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 2.0
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D2/L3:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 3.0
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D2/L4:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 4.0
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D3b/L0:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.05
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D3b/L1:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D3b/L2:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.2
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D3b/L3:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.4
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D3b/L4:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.6
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D4hi/L0:
+    compile_sha256: 8c6d3976b390263f8860cc028c3addeebcea68c80a5ed8297fe79a1f7af57626
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 8
+    family: Kinova3
+    identical_to_clean: false
+    level: 0
+    n_joints: 8
+    robosuite_robot: Kinova3
+  Kinova3/D4hi/L1:
+    compile_sha256: 38952d706546a116531bbeabc5a3efb654cf9309133d0842cd0aec8004d78442
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0017453292519943296
+    dof: 8
+    family: Kinova3
+    identical_to_clean: false
+    level: 1
+    n_joints: 8
+    robosuite_robot: Kinova3
+  Kinova3/D4hi/L2:
+    compile_sha256: a76d0e482b2e45d244a9b075a154b84bab1162caee1cb9dbc6d5fc325d447e0c
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.005235987755982988
+    dof: 8
+    family: Kinova3
+    identical_to_clean: false
+    level: 2
+    n_joints: 8
+    robosuite_robot: Kinova3
+  Kinova3/D4hi/L3:
+    compile_sha256: 86c60106fef55590ae936cbe54466b753ff328d0fa08c462cc2003a0fb70bb45
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 8
+    family: Kinova3
+    identical_to_clean: false
+    level: 3
+    n_joints: 8
+    robosuite_robot: Kinova3
+  Kinova3/D4hi/L4:
+    compile_sha256: 5fff3a2d19470a292ea2561dbfd9109ceb4f45873a0aab83da271bb2f41ecfe0
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.05235987755982989
+    dof: 8
+    family: Kinova3
+    identical_to_clean: false
+    level: 4
+    n_joints: 8
+    robosuite_robot: Kinova3
+  Kinova3/D5/L0:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.005
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D5/L1:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.01
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D5/L2:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.03
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D5/L3:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.06
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D5/L4:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D8/L0:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.95
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D8/L1:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.9
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D8/L2:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.8
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D8/L3:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.7
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/D8/L4:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.55
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Kinova3/clean:
+    compile_sha256: 3d5bdb716d3f89dab8abd5daeb76434f32395a03f76ba27ae5b958c968478606
+    defect_id: null
+    defect_impl_variant: null
+    delta: {}
+    dof: 7
+    family: Kinova3
+    identical_to_clean: true
+    level: null
+    n_joints: 7
+    robosuite_robot: Kinova3
+  Panda/D1/L0:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D1/L1:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.002617993877991494
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D1/L2:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.006981317007977318
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D1/L3:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.012217304763960306
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D1/L4:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D2/L0:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 0.0
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D2/L1:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 1.0
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D2/L2:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 2.0
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D2/L3:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 3.0
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D2/L4:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 4.0
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D3b/L0:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.05
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D3b/L1:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D3b/L2:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.2
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D3b/L3:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.4
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D3b/L4:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.6
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D4hi/L0:
+    compile_sha256: ca405a05b25723d74b84790e21104f0d949ee6c82fa2cde55c949cbff88d1abf
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 8
+    family: Panda
+    identical_to_clean: false
+    level: 0
+    n_joints: 8
+    robosuite_robot: Panda
+  Panda/D4hi/L1:
+    compile_sha256: 85e94532137f442b28e59d38ed6110e8c826cac6b275db6636dabd5fd38b8701
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0017453292519943296
+    dof: 8
+    family: Panda
+    identical_to_clean: false
+    level: 1
+    n_joints: 8
+    robosuite_robot: Panda
+  Panda/D4hi/L2:
+    compile_sha256: f226cf7b163c2c63b769d4e603728ca6c8b933a4f8d6f8552614fa19de64df1d
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.005235987755982988
+    dof: 8
+    family: Panda
+    identical_to_clean: false
+    level: 2
+    n_joints: 8
+    robosuite_robot: Panda
+  Panda/D4hi/L3:
+    compile_sha256: a6fe761cf0411fc8564a897247a82a23714d18a95bd362b23b6bc5aebcc2d8d2
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 8
+    family: Panda
+    identical_to_clean: false
+    level: 3
+    n_joints: 8
+    robosuite_robot: Panda
+  Panda/D4hi/L4:
+    compile_sha256: 68fd01f66fa85a41a021f604de237f27deb2fa657343830cb73f43e5dbbfd9d6
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.05235987755982989
+    dof: 8
+    family: Panda
+    identical_to_clean: false
+    level: 4
+    n_joints: 8
+    robosuite_robot: Panda
+  Panda/D5/L0:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.005
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D5/L1:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.01
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D5/L2:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.03
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D5/L3:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.06
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D5/L4:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D8/L0:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.95
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D8/L1:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.9
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D8/L2:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.8
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D8/L3:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.7
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/D8/L4:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.55
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Panda
+  Panda/clean:
+    compile_sha256: 8bdd92fbbea7afce4a5819d0c123cfbf45fe4d411e33da9e07dbf4064166b59b
+    defect_id: null
+    defect_impl_variant: null
+    delta: {}
+    dof: 7
+    family: Panda
+    identical_to_clean: true
+    level: null
+    n_joints: 7
+    robosuite_robot: Panda
+  Sawyer/D1/L0:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D1/L1:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.002617993877991494
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D1/L2:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.006981317007977318
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D1/L3:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.012217304763960306
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D1/L4:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D2/L0:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 0.0
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D2/L1:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 1.0
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D2/L2:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 2.0
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D2/L3:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 3.0
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D2/L4:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 4.0
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D3b/L0:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.05
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D3b/L1:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D3b/L2:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.2
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D3b/L3:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.4
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D3b/L4:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.6
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D4hi/L0:
+    compile_sha256: 0980cd41d6eb3a76286ff0a3e09b2b6a991767d47268a24d53ccb24a33e39a7a
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 8
+    family: Sawyer
+    identical_to_clean: false
+    level: 0
+    n_joints: 8
+    robosuite_robot: Sawyer
+  Sawyer/D4hi/L1:
+    compile_sha256: b82053a6b6c74d2c39d7f2cc421ab0dfff43b6a4e92b232937da92c0569b55ac
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0017453292519943296
+    dof: 8
+    family: Sawyer
+    identical_to_clean: false
+    level: 1
+    n_joints: 8
+    robosuite_robot: Sawyer
+  Sawyer/D4hi/L2:
+    compile_sha256: b60b6c46b40001db626ad1ba529fdb2327f618e0e883b10953165454596315cf
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.005235987755982988
+    dof: 8
+    family: Sawyer
+    identical_to_clean: false
+    level: 2
+    n_joints: 8
+    robosuite_robot: Sawyer
+  Sawyer/D4hi/L3:
+    compile_sha256: 0ac6a47d5d73aac8e665779d5468bafb5a12a7ea367e7378d6f19ce7338e23d1
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 8
+    family: Sawyer
+    identical_to_clean: false
+    level: 3
+    n_joints: 8
+    robosuite_robot: Sawyer
+  Sawyer/D4hi/L4:
+    compile_sha256: ef384c3d47e2af198779ec2bd3791ec9e9c54d44e50d12635a2408744081e6c9
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.05235987755982989
+    dof: 8
+    family: Sawyer
+    identical_to_clean: false
+    level: 4
+    n_joints: 8
+    robosuite_robot: Sawyer
+  Sawyer/D5/L0:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.005
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D5/L1:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.01
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D5/L2:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.03
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D5/L3:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.06
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D5/L4:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D8/L0:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.95
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D8/L1:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.9
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D8/L2:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.8
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D8/L3:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.7
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/D8/L4:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.55
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: Sawyer
+  Sawyer/clean:
+    compile_sha256: ca96f20178a29a71002ecacd6076e2601635adc565ca3e64947c338cfe833c1c
+    defect_id: null
+    defect_impl_variant: null
+    delta: {}
+    dof: 7
+    family: Sawyer
+    identical_to_clean: true
+    level: null
+    n_joints: 7
+    robosuite_robot: Sawyer
+  UR5e/D1/L0:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 0
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D1/L1:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.002617993877991494
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 1
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D1/L2:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.006981317007977318
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 2
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D1/L3:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.012217304763960306
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 3
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D1/L4:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 4
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D2/L0:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 0.0
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 0
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D2/L1:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 1.0
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 1
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D2/L2:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 2.0
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 2
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D2/L3:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 3.0
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 3
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D2/L4:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 4.0
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 4
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D3b/L0:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.05
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 0
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D3b/L1:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.1
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 1
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D3b/L2:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.2
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 2
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D3b/L3:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.4
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 3
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D3b/L4:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.6
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 4
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D4hi/L0:
+    compile_sha256: 0fbe8078a0c4e459d6325e46e1260568c95062bd0cf2399c95d0e7cc0b012c40
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 7
+    family: UR5e
+    identical_to_clean: false
+    level: 0
+    n_joints: 7
+    robosuite_robot: UR5e
+  UR5e/D4hi/L1:
+    compile_sha256: 78fe268961c8aa113a6e2279817b89aa17586b69f1f02dd55e56468e8bf3ba27
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0017453292519943296
+    dof: 7
+    family: UR5e
+    identical_to_clean: false
+    level: 1
+    n_joints: 7
+    robosuite_robot: UR5e
+  UR5e/D4hi/L2:
+    compile_sha256: 6aefac51e0061697afe83b059ea3b84f38cf3de9e752644bfacc3f5ce1795018
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.005235987755982988
+    dof: 7
+    family: UR5e
+    identical_to_clean: false
+    level: 2
+    n_joints: 7
+    robosuite_robot: UR5e
+  UR5e/D4hi/L3:
+    compile_sha256: 28574558075372f8130f023c8f4c04be2664bc6156f17c47c6e5bd5b135c6da3
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 7
+    family: UR5e
+    identical_to_clean: false
+    level: 3
+    n_joints: 7
+    robosuite_robot: UR5e
+  UR5e/D4hi/L4:
+    compile_sha256: 314d4aa451a0e061448d8f27b6b9e8f92f3d1ceb6796a59d9449534ceff10ec3
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.05235987755982989
+    dof: 7
+    family: UR5e
+    identical_to_clean: false
+    level: 4
+    n_joints: 7
+    robosuite_robot: UR5e
+  UR5e/D5/L0:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.005
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 0
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D5/L1:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.01
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 1
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D5/L2:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.03
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 2
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D5/L3:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.06
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 3
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D5/L4:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.1
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 4
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D8/L0:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.95
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 0
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D8/L1:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.9
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 1
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D8/L2:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.8
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 2
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D8/L3:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.7
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 3
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/D8/L4:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.55
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: 4
+    n_joints: 6
+    robosuite_robot: UR5e
+  UR5e/clean:
+    compile_sha256: f1cb33d9c760cf027d9c6125a58569b8a006cf324b97d6d806dcd93959ccda39
+    defect_id: null
+    defect_impl_variant: null
+    delta: {}
+    dof: 6
+    family: UR5e
+    identical_to_clean: true
+    level: null
+    n_joints: 6
+    robosuite_robot: UR5e
+  XArm7/D1/L0:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D1/L1:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.002617993877991494
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D1/L2:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.006981317007977318
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D1/L3:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.012217304763960306
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D1/L4:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D1
+    defect_impl_variant: D1:sensing_twin
+    delta:
+      delta_q:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D2/L0:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 0.0
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D2/L1:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 1.0
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D2/L2:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 2.0
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D2/L3:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 3.0
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D2/L4:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D2
+    defect_impl_variant: D2:action_side
+    delta:
+      n_control_steps:
+        unit: control_steps
+        value: 4.0
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D3b/L0:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.05
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D3b/L1:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D3b/L2:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.2
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D3b/L3:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.4
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D3b/L4:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D3b
+    defect_impl_variant: D3:b
+    delta:
+      sigma_g:
+        unit: dimensionless
+        value: 0.6
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D4hi/L0:
+    compile_sha256: fd42d15a1201ad12d76bcdc942a824e2ddcdadce4cdf65ab194b8bba6a6ac676
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0008726646259971648
+    dof: 8
+    family: XArm7
+    identical_to_clean: false
+    level: 0
+    n_joints: 8
+    robosuite_robot: XArm7
+  XArm7/D4hi/L1:
+    compile_sha256: 345932508e2ee5b95107ef58d43b4e63f68b552e33d91cb8a52f6d70af0b4b09
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.0017453292519943296
+    dof: 8
+    family: XArm7
+    identical_to_clean: false
+    level: 1
+    n_joints: 8
+    robosuite_robot: XArm7
+  XArm7/D4hi/L2:
+    compile_sha256: cc0c8431029a5eae2b056195e8296b76b7a16d66fa3101b7bd5c4ed12346bacc
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.005235987755982988
+    dof: 8
+    family: XArm7
+    identical_to_clean: false
+    level: 2
+    n_joints: 8
+    robosuite_robot: XArm7
+  XArm7/D4hi/L3:
+    compile_sha256: 08b995a997338a4be76191c175e438c22bc4abaa54155da85480c985f726181c
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.017453292519943295
+    dof: 8
+    family: XArm7
+    identical_to_clean: false
+    level: 3
+    n_joints: 8
+    robosuite_robot: XArm7
+  XArm7/D4hi/L4:
+    compile_sha256: ae657ffc928e8730e1acb4743ab53721bc92513b8e5a2078ea89bf8e568c5c59
+    defect_id: D4hi
+    defect_impl_variant: D4:hi
+    delta:
+      backlash:
+        unit: rad
+        value: 0.05235987755982989
+    dof: 8
+    family: XArm7
+    identical_to_clean: false
+    level: 4
+    n_joints: 8
+    robosuite_robot: XArm7
+  XArm7/D5/L0:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.005
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D5/L1:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.01
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D5/L2:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.03
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D5/L3:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.06
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D5/L4:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D5
+    defect_impl_variant: D5:total_ctrl
+    delta:
+      w_over_tau_max:
+        unit: dimensionless
+        value: 0.1
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D8/L0:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.95
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 0
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D8/L1:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.9
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 1
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D8/L2:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.8
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 2
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D8/L3:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.7
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 3
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/D8/L4:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: D8
+    defect_impl_variant: D8:gainprm
+    delta:
+      gain:
+        unit: dimensionless
+        value: 0.55
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: 4
+    n_joints: 7
+    robosuite_robot: XArm7
+  XArm7/clean:
+    compile_sha256: abfcc888d02e8f1daa9a28557dfd4625fa3440ea44d0bf7bc53adfaac9b0caa1
+    defect_id: null
+    defect_impl_variant: null
+    delta: {}
+    dof: 7
+    family: XArm7
+    identical_to_clean: true
+    level: null
+    n_joints: 7
+    robosuite_robot: XArm7
+entries_sha256: 17b9bbe2307dfe0027593f9bded2fd954213808928460712a0fb9594f7330a60
+hash_input: canonical MJCF from RobotModel.get_xml(); the robosuite asset prefix is
+  replaced by a token so the digest is path independent
+n_entries: 186
+proposal_ref: 9.3.3, 11.2
+schema: portal_trace.registry.manifest/1
+versions:
+  mujoco: 3.3.2
+  robomimic: 0.5.0
+  robosuite: 1.5.2

@@ -1,0 +1,1855 @@
+{
+  "backend": "cpu_mujoco",
+  "literature": {
+    "fgw.featset_baseline": {
+      "citation": "arXiv:2602.18025 appendix E; URMA arXiv:2409.06366 appendix A",
+      "description": "node attributes the baseline embodiment-grouping method reads. Its appendix E takes URMA's local joint/foot descriptors verbatim, and URMA's d_j contains damping and a friction coefficient -- which is what forces D6 onto the qfrc_applied variant (proposal 9.2.6)",
+      "proposal_ref": "9.3.4",
+      "value": [
+        "jnt_pos",
+        "jnt_axis",
+        "jnt_range",
+        "torque_limit",
+        "dof_damping",
+        "dof_frictionloss",
+        "dof_armature",
+        "qpos0"
+      ]
+    },
+    "fgw.hyperparameters_baseline": {
+      "citation": "arXiv:2602.18025 appendix E table 8",
+      "description": "POT settings the baseline uses for the FGW distance",
+      "proposal_ref": "9.3.4",
+      "value": {
+        "alpha": 0.5,
+        "armijo": false,
+        "descriptors_standardised": true,
+        "deviations": [
+          "table 8 gives epsilon = 1e-3, i.e. the entropic solver; the exact conditional-gradient solver is used so that an isomorphic pair returns an exact zero, which 9.3.4's 1e-12 assertion requires",
+          "table 8 gives a Euclidean feature ground metric; the squared Euclidean is used so the fused objective stays homogeneous with the square_loss structure term and alpha means one thing at every scale"
+        ],
+        "epsilon_reported": 0.001,
+        "feature_ground_metric_reported": "euclidean",
+        "feature_ground_metric_used": "sqeuclidean",
+        "loss_fun": "square_loss",
+        "node_weights": "uniform",
+        "omitted_urma_fields": {
+          "general_robot_part": "kp, kd, sigma_a, m, L, W, H are constant within a robot",
+          "n_child_joints": "structural; carried by the FGW shortest-path term over the same edges",
+          "stiffness": "jnt_stiffness is identically zero on every robosuite arm joint",
+          "velocity_limit": "no MuJoCo 3.3.2 field; robosuite keeps it in controller configs"
+        },
+        "pot_version": "0.9.7.post1",
+        "solver": "ot.gromov.fused_gromov_wasserstein2",
+        "structure_ground_metric": "shortest path distance",
+        "verified_against_source": true
+      }
+    }
+  },
+  "measurements": {
+    "defect.d6_stiction_offset.IIWA.robot0_joint_1": {
+      "extra": {
+        "armature": 5.0,
+        "damping": 0.1,
+        "f_bar": 3.52,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.088,
+        "native_frictionloss": 0.1,
+        "offset": 3.5199999999999996,
+        "rated_torque": 176.0,
+        "rejects_d6": true,
+        "settling_time_s": 50.0,
+        "threshold_constraint": 3.6079999999999997,
+        "threshold_force": 0.088
+      },
+      "notes": "constraint 3.6080 - force 0.0880 N m, f_bar = 3.5200, ladder step 0.08800 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:48+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 3.5199999999999996
+    },
+    "defect.d6_stiction_offset.IIWA.robot0_joint_2": {
+      "extra": {
+        "armature": 2.5,
+        "damping": 0.1,
+        "f_bar": 3.52,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.088,
+        "native_frictionloss": 0.1,
+        "offset": 3.5199999999999996,
+        "rated_torque": 176.0,
+        "rejects_d6": true,
+        "settling_time_s": 25.0,
+        "threshold_constraint": 3.6079999999999997,
+        "threshold_force": 0.088
+      },
+      "notes": "constraint 3.6080 - force 0.0880 N m, f_bar = 3.5200, ladder step 0.08800 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:48+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 3.5199999999999996
+    },
+    "defect.d6_stiction_offset.IIWA.robot0_joint_3": {
+      "extra": {
+        "armature": 1.6666666666666667,
+        "damping": 0.1,
+        "f_bar": 2.2,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.05500000000000001,
+        "native_frictionloss": 0.1,
+        "offset": 1.6500000000000004,
+        "rated_torque": 110.0,
+        "rejects_d6": true,
+        "settling_time_s": 16.666666666666668,
+        "threshold_constraint": 1.7050000000000003,
+        "threshold_force": 0.05500000000000001
+      },
+      "notes": "constraint 1.7050 - force 0.0550 N m, f_bar = 2.2000, ladder step 0.05500 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:48+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6500000000000004
+    },
+    "defect.d6_stiction_offset.IIWA.robot0_joint_4": {
+      "extra": {
+        "armature": 1.25,
+        "damping": 0.1,
+        "f_bar": 2.2,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.05500000000000001,
+        "native_frictionloss": 0.1,
+        "offset": 1.6500000000000004,
+        "rated_torque": 110.0,
+        "rejects_d6": true,
+        "settling_time_s": 12.5,
+        "threshold_constraint": 1.7050000000000003,
+        "threshold_force": 0.05500000000000001
+      },
+      "notes": "constraint 1.7050 - force 0.0550 N m, f_bar = 2.2000, ladder step 0.05500 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:48+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6500000000000004
+    },
+    "defect.d6_stiction_offset.IIWA.robot0_joint_5": {
+      "extra": {
+        "armature": 1.0,
+        "damping": 0.1,
+        "f_bar": 2.2,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.05500000000000001,
+        "native_frictionloss": 0.1,
+        "offset": 0.935,
+        "rated_torque": 110.0,
+        "rejects_d6": true,
+        "settling_time_s": 10.0,
+        "threshold_constraint": 0.9900000000000001,
+        "threshold_force": 0.05500000000000001
+      },
+      "notes": "constraint 0.9900 - force 0.0550 N m, f_bar = 2.2000, ladder step 0.05500 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:48+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.935
+    },
+    "defect.d6_stiction_offset.IIWA.robot0_joint_6": {
+      "extra": {
+        "armature": 0.8333333333333334,
+        "damping": 0.1,
+        "f_bar": 0.8,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.02,
+        "native_frictionloss": 0.1,
+        "offset": 0.8,
+        "rated_torque": 40.0,
+        "rejects_d6": true,
+        "settling_time_s": 8.333333333333334,
+        "threshold_constraint": 0.8200000000000001,
+        "threshold_force": 0.02
+      },
+      "notes": "constraint 0.8200 - force 0.0200 N m, f_bar = 0.8000, ladder step 0.02000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:48+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.8
+    },
+    "defect.d6_stiction_offset.IIWA.robot0_joint_7": {
+      "extra": {
+        "armature": 0.7142857142857143,
+        "damping": 0.1,
+        "f_bar": 0.8,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.02,
+        "native_frictionloss": 0.1,
+        "offset": 0.66,
+        "rated_torque": 40.0,
+        "rejects_d6": true,
+        "settling_time_s": 7.142857142857142,
+        "threshold_constraint": 0.68,
+        "threshold_force": 0.02
+      },
+      "notes": "constraint 0.6800 - force 0.0200 N m, f_bar = 0.8000, ladder step 0.02000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:48+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.66
+    },
+    "defect.d6_stiction_offset.Kinova3.robot0_Actuator1": {
+      "extra": {
+        "armature": 5.0,
+        "damping": 0.1,
+        "f_bar": 0.64,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.016,
+        "native_frictionloss": 0.1,
+        "offset": 0.64,
+        "rated_torque": 32.0,
+        "rejects_d6": true,
+        "settling_time_s": 50.0,
+        "threshold_constraint": 0.656,
+        "threshold_force": 0.016
+      },
+      "notes": "constraint 0.6560 - force 0.0160 N m, f_bar = 0.6400, ladder step 0.01600 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:52+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.64
+    },
+    "defect.d6_stiction_offset.Kinova3.robot0_Actuator2": {
+      "extra": {
+        "armature": 2.5,
+        "damping": 0.1,
+        "f_bar": 0.64,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.016,
+        "native_frictionloss": 0.1,
+        "offset": 0.64,
+        "rated_torque": 32.0,
+        "rejects_d6": true,
+        "settling_time_s": 25.0,
+        "threshold_constraint": 0.656,
+        "threshold_force": 0.016
+      },
+      "notes": "constraint 0.6560 - force 0.0160 N m, f_bar = 0.6400, ladder step 0.01600 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:52+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.64
+    },
+    "defect.d6_stiction_offset.Kinova3.robot0_Actuator3": {
+      "extra": {
+        "armature": 1.6666666666666667,
+        "damping": 0.1,
+        "f_bar": 0.64,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.016,
+        "native_frictionloss": 0.1,
+        "offset": 0.64,
+        "rated_torque": 32.0,
+        "rejects_d6": true,
+        "settling_time_s": 16.666666666666668,
+        "threshold_constraint": 0.656,
+        "threshold_force": 0.016
+      },
+      "notes": "constraint 0.6560 - force 0.0160 N m, f_bar = 0.6400, ladder step 0.01600 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:52+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.64
+    },
+    "defect.d6_stiction_offset.Kinova3.robot0_Actuator4": {
+      "extra": {
+        "armature": 1.25,
+        "damping": 0.1,
+        "f_bar": 0.64,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.016,
+        "native_frictionloss": 0.1,
+        "offset": 0.64,
+        "rated_torque": 32.0,
+        "rejects_d6": true,
+        "settling_time_s": 12.5,
+        "threshold_constraint": 0.656,
+        "threshold_force": 0.016
+      },
+      "notes": "constraint 0.6560 - force 0.0160 N m, f_bar = 0.6400, ladder step 0.01600 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:52+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.64
+    },
+    "defect.d6_stiction_offset.Kinova3.robot0_Actuator5": {
+      "extra": {
+        "armature": 1.0,
+        "damping": 0.1,
+        "f_bar": 0.64,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.016,
+        "native_frictionloss": 0.1,
+        "offset": 0.64,
+        "rated_torque": 32.0,
+        "rejects_d6": true,
+        "settling_time_s": 10.0,
+        "threshold_constraint": 0.656,
+        "threshold_force": 0.016
+      },
+      "notes": "constraint 0.6560 - force 0.0160 N m, f_bar = 0.6400, ladder step 0.01600 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:52+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.64
+    },
+    "defect.d6_stiction_offset.Kinova3.robot0_Actuator6": {
+      "extra": {
+        "armature": 0.8333333333333334,
+        "damping": 0.01,
+        "f_bar": 0.26,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.006500000000000001,
+        "native_frictionloss": 0.1,
+        "offset": 0.26,
+        "rated_torque": 13.0,
+        "rejects_d6": true,
+        "settling_time_s": 83.33333333333333,
+        "threshold_constraint": 0.2665,
+        "threshold_force": 0.006500000000000001
+      },
+      "notes": "constraint 0.2665 - force 0.0065 N m, f_bar = 0.2600, ladder step 0.00650 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:52+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.26
+    },
+    "defect.d6_stiction_offset.Kinova3.robot0_Actuator7": {
+      "extra": {
+        "armature": 0.7142857142857143,
+        "damping": 0.01,
+        "f_bar": 0.26,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.006500000000000001,
+        "native_frictionloss": 0.1,
+        "offset": 0.26,
+        "rated_torque": 13.0,
+        "rejects_d6": true,
+        "settling_time_s": 71.42857142857143,
+        "threshold_constraint": 0.2665,
+        "threshold_force": 0.006500000000000001
+      },
+      "notes": "constraint 0.2665 - force 0.0065 N m, f_bar = 0.2600, ladder step 0.00650 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:52+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.26
+    },
+    "defect.d6_stiction_offset.Panda.robot0_joint1": {
+      "extra": {
+        "armature": 5.0,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 0.1,
+        "offset": 1.6,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 50.0,
+        "threshold_constraint": 1.6400000000000001,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6400 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:38+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6
+    },
+    "defect.d6_stiction_offset.Panda.robot0_joint2": {
+      "extra": {
+        "armature": 2.5,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 0.1,
+        "offset": 1.6,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 25.0,
+        "threshold_constraint": 1.6400000000000001,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6400 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:38+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6
+    },
+    "defect.d6_stiction_offset.Panda.robot0_joint3": {
+      "extra": {
+        "armature": 1.6666666666666667,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 0.1,
+        "offset": 1.6,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 16.666666666666668,
+        "threshold_constraint": 1.6400000000000001,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6400 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:38+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6
+    },
+    "defect.d6_stiction_offset.Panda.robot0_joint4": {
+      "extra": {
+        "armature": 1.25,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 0.1,
+        "offset": 1.6,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 12.5,
+        "threshold_constraint": 1.6400000000000001,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6400 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:38+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6
+    },
+    "defect.d6_stiction_offset.Panda.robot0_joint5": {
+      "extra": {
+        "armature": 1.0,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 0.1,
+        "offset": 1.24,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 10.0,
+        "threshold_constraint": 1.28,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.2800 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:38+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.24
+    },
+    "defect.d6_stiction_offset.Panda.robot0_joint6": {
+      "extra": {
+        "armature": 0.8333333333333334,
+        "damping": 0.01,
+        "f_bar": 0.24,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.006,
+        "native_frictionloss": 0.1,
+        "offset": 0.24,
+        "rated_torque": 12.0,
+        "rejects_d6": true,
+        "settling_time_s": 83.33333333333333,
+        "threshold_constraint": 0.246,
+        "threshold_force": 0.006
+      },
+      "notes": "constraint 0.2460 - force 0.0060 N m, f_bar = 0.2400, ladder step 0.00600 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:38+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.24
+    },
+    "defect.d6_stiction_offset.Panda.robot0_joint7": {
+      "extra": {
+        "armature": 0.7142857142857143,
+        "damping": 0.01,
+        "f_bar": 0.24,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.006,
+        "native_frictionloss": 0.1,
+        "offset": 0.24,
+        "rated_torque": 12.0,
+        "rejects_d6": true,
+        "settling_time_s": 71.42857142857143,
+        "threshold_constraint": 0.246,
+        "threshold_force": 0.006
+      },
+      "notes": "constraint 0.2460 - force 0.0060 N m, f_bar = 0.2400, ladder step 0.00600 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:38+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.24
+    },
+    "defect.d6_stiction_offset.Sawyer.robot0_right_j0": {
+      "extra": {
+        "armature": 5.0,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 0.1,
+        "offset": 1.6,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 50.0,
+        "threshold_constraint": 1.6400000000000001,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6400 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:44+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6
+    },
+    "defect.d6_stiction_offset.Sawyer.robot0_right_j1": {
+      "extra": {
+        "armature": 2.5,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 0.1,
+        "offset": 1.6,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 25.0,
+        "threshold_constraint": 1.6400000000000001,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6400 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:44+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6
+    },
+    "defect.d6_stiction_offset.Sawyer.robot0_right_j2": {
+      "extra": {
+        "armature": 1.6666666666666667,
+        "damping": 0.1,
+        "f_bar": 0.8,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.02,
+        "native_frictionloss": 0.1,
+        "offset": 0.8,
+        "rated_torque": 40.0,
+        "rejects_d6": true,
+        "settling_time_s": 16.666666666666668,
+        "threshold_constraint": 0.8200000000000001,
+        "threshold_force": 0.02
+      },
+      "notes": "constraint 0.8200 - force 0.0200 N m, f_bar = 0.8000, ladder step 0.02000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:44+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.8
+    },
+    "defect.d6_stiction_offset.Sawyer.robot0_right_j3": {
+      "extra": {
+        "armature": 1.25,
+        "damping": 0.1,
+        "f_bar": 0.8,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.02,
+        "native_frictionloss": 0.1,
+        "offset": 0.8,
+        "rated_torque": 40.0,
+        "rejects_d6": true,
+        "settling_time_s": 12.5,
+        "threshold_constraint": 0.8200000000000001,
+        "threshold_force": 0.02
+      },
+      "notes": "constraint 0.8200 - force 0.0200 N m, f_bar = 0.8000, ladder step 0.02000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:44+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.8
+    },
+    "defect.d6_stiction_offset.Sawyer.robot0_right_j4": {
+      "extra": {
+        "armature": 1.0,
+        "damping": 0.1,
+        "f_bar": 0.18,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.0045,
+        "native_frictionloss": 0.1,
+        "offset": 0.18,
+        "rated_torque": 9.0,
+        "rejects_d6": true,
+        "settling_time_s": 10.0,
+        "threshold_constraint": 0.1845,
+        "threshold_force": 0.0045
+      },
+      "notes": "constraint 0.1845 - force 0.0045 N m, f_bar = 0.1800, ladder step 0.00450 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:44+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.18
+    },
+    "defect.d6_stiction_offset.Sawyer.robot0_right_j5": {
+      "extra": {
+        "armature": 0.8333333333333334,
+        "damping": 0.2,
+        "f_bar": 0.18,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.0045,
+        "native_frictionloss": 0.1,
+        "offset": 0.18,
+        "rated_torque": 9.0,
+        "rejects_d6": true,
+        "settling_time_s": 4.166666666666667,
+        "threshold_constraint": 0.1845,
+        "threshold_force": 0.0045
+      },
+      "notes": "constraint 0.1845 - force 0.0045 N m, f_bar = 0.1800, ladder step 0.00450 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:44+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.18
+    },
+    "defect.d6_stiction_offset.Sawyer.robot0_right_j6": {
+      "extra": {
+        "armature": 0.7142857142857143,
+        "damping": 0.1,
+        "f_bar": 0.18,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.0045,
+        "native_frictionloss": 0.1,
+        "offset": 0.18,
+        "rated_torque": 9.0,
+        "rejects_d6": true,
+        "settling_time_s": 7.142857142857142,
+        "threshold_constraint": 0.1845,
+        "threshold_force": 0.0045
+      },
+      "notes": "constraint 0.1845 - force 0.0045 N m, f_bar = 0.1800, ladder step 0.00450 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:44+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.18
+    },
+    "defect.d6_stiction_offset.UR5e.robot0_elbow_joint": {
+      "extra": {
+        "armature": 1.6666666666666667,
+        "damping": 0.001,
+        "f_bar": 3.0,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.075,
+        "native_frictionloss": 0.01,
+        "offset": 1.8,
+        "rated_torque": 150.0,
+        "rejects_d6": true,
+        "settling_time_s": 1666.6666666666667,
+        "threshold_constraint": 1.875,
+        "threshold_force": 0.075
+      },
+      "notes": "constraint 1.8750 - force 0.0750 N m, f_bar = 3.0000, ladder step 0.07500 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:57+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.8
+    },
+    "defect.d6_stiction_offset.UR5e.robot0_shoulder_lift_joint": {
+      "extra": {
+        "armature": 2.5,
+        "damping": 0.001,
+        "f_bar": 3.0,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.075,
+        "native_frictionloss": 0.01,
+        "offset": 2.9999999999999996,
+        "rated_torque": 150.0,
+        "rejects_d6": true,
+        "settling_time_s": 2500.0,
+        "threshold_constraint": 3.0749999999999997,
+        "threshold_force": 0.075
+      },
+      "notes": "constraint 3.0750 - force 0.0750 N m, f_bar = 3.0000, ladder step 0.07500 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:57+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 2.9999999999999996
+    },
+    "defect.d6_stiction_offset.UR5e.robot0_shoulder_pan_joint": {
+      "extra": {
+        "armature": 5.0,
+        "damping": 0.001,
+        "f_bar": 3.0,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.075,
+        "native_frictionloss": 0.01,
+        "offset": 2.9999999999999996,
+        "rated_torque": 150.0,
+        "rejects_d6": true,
+        "settling_time_s": 5000.0,
+        "threshold_constraint": 3.0749999999999997,
+        "threshold_force": 0.075
+      },
+      "notes": "constraint 3.0750 - force 0.0750 N m, f_bar = 3.0000, ladder step 0.07500 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:57+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 2.9999999999999996
+    },
+    "defect.d6_stiction_offset.UR5e.robot0_wrist_1_joint": {
+      "extra": {
+        "armature": 1.25,
+        "damping": 0.001,
+        "f_bar": 0.56,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.014000000000000002,
+        "native_frictionloss": 0.01,
+        "offset": 0.56,
+        "rated_torque": 28.0,
+        "rejects_d6": true,
+        "settling_time_s": 1250.0,
+        "threshold_constraint": 0.5740000000000001,
+        "threshold_force": 0.014000000000000002
+      },
+      "notes": "constraint 0.5740 - force 0.0140 N m, f_bar = 0.5600, ladder step 0.01400 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:57+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.56
+    },
+    "defect.d6_stiction_offset.UR5e.robot0_wrist_2_joint": {
+      "extra": {
+        "armature": 1.0,
+        "damping": 0.001,
+        "f_bar": 0.56,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.014000000000000002,
+        "native_frictionloss": 0.01,
+        "offset": 0.56,
+        "rated_torque": 28.0,
+        "rejects_d6": true,
+        "settling_time_s": 1000.0,
+        "threshold_constraint": 0.5740000000000001,
+        "threshold_force": 0.014000000000000002
+      },
+      "notes": "constraint 0.5740 - force 0.0140 N m, f_bar = 0.5600, ladder step 0.01400 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:57+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.56
+    },
+    "defect.d6_stiction_offset.UR5e.robot0_wrist_3_joint": {
+      "extra": {
+        "armature": 0.8333333333333334,
+        "damping": 0.001,
+        "f_bar": 0.56,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.014000000000000002,
+        "native_frictionloss": 0.01,
+        "offset": 0.56,
+        "rated_torque": 28.0,
+        "rejects_d6": true,
+        "settling_time_s": 833.3333333333334,
+        "threshold_constraint": 0.5740000000000001,
+        "threshold_force": 0.014000000000000002
+      },
+      "notes": "constraint 0.5740 - force 0.0140 N m, f_bar = 0.5600, ladder step 0.01400 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:23:57+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.56
+    },
+    "defect.d6_stiction_offset.XArm7.robot0_joint1": {
+      "extra": {
+        "armature": 5.0,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 1.0,
+        "offset": 1.6,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 50.0,
+        "threshold_constraint": 1.6400000000000001,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6400 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:24:01+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6
+    },
+    "defect.d6_stiction_offset.XArm7.robot0_joint2": {
+      "extra": {
+        "armature": 2.5,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 1.0,
+        "offset": 1.6,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 25.0,
+        "threshold_constraint": 1.6400000000000001,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6400 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:24:01+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6
+    },
+    "defect.d6_stiction_offset.XArm7.robot0_joint3": {
+      "extra": {
+        "armature": 1.6666666666666667,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 1.0,
+        "offset": 1.6,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 16.666666666666668,
+        "threshold_constraint": 1.6400000000000001,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6400 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:24:01+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.6
+    },
+    "defect.d6_stiction_offset.XArm7.robot0_joint4": {
+      "extra": {
+        "armature": 1.25,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 1.0,
+        "offset": 1.56,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 12.5,
+        "threshold_constraint": 1.6,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 1.6000 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:24:01+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 1.56
+    },
+    "defect.d6_stiction_offset.XArm7.robot0_joint5": {
+      "extra": {
+        "armature": 1.0,
+        "damping": 0.1,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 1.0,
+        "offset": 0.9199999999999999,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 10.0,
+        "threshold_constraint": 0.96,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 0.9600 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:24:01+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.9199999999999999
+    },
+    "defect.d6_stiction_offset.XArm7.robot0_joint6": {
+      "extra": {
+        "armature": 0.8333333333333334,
+        "damping": 0.01,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 1.0,
+        "offset": 0.76,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 83.33333333333333,
+        "threshold_constraint": 0.8,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 0.8000 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:24:01+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.76
+    },
+    "defect.d6_stiction_offset.XArm7.robot0_joint7": {
+      "extra": {
+        "armature": 0.7142857142857143,
+        "damping": 0.01,
+        "f_bar": 1.6,
+        "hold_time_s": 0.5,
+        "ladder_step": 0.04,
+        "native_frictionloss": 1.0,
+        "offset": 0.64,
+        "rated_torque": 80.0,
+        "rejects_d6": true,
+        "settling_time_s": 71.42857142857143,
+        "threshold_constraint": 0.68,
+        "threshold_force": 0.04
+      },
+      "notes": "constraint 0.6800 - force 0.0400 N m, f_bar = 1.6000, ladder step 0.04000 N m, 0.5 s hold; rejects the 0.025 bound",
+      "produced_at": "2026-07-31T08:24:01+00:00",
+      "produced_by": "scripts/measure_constants.py --what stiction",
+      "source_commit": "not-a-git-checkout",
+      "unit": "N m",
+      "value": 0.64
+    },
+    "defect.d7_clean_compliance": {
+      "extra": {
+        "link_compliance": 0.027777777777777776,
+        "margin": 0.75,
+        "n_over_defective": 6,
+        "n_steps": 40,
+        "omega_dt_clean": 0.7539822368615504,
+        "omega_dt_defective": 0.12566370614359174,
+        "omega_dt_first_divergent": 1.1309733552923256,
+        "omega_dt_last_stable": 1.0053096491487339,
+        "omega_ref": 62.83185307179586,
+        "timestep": 0.002,
+        "trials": [
+          {
+            "diverged": false,
+            "link_compliance": 1.0,
+            "n_over_defective": 1,
+            "omega_dt": 0.12566370614359174,
+            "steps_survived": 40
+          },
+          {
+            "diverged": false,
+            "link_compliance": 0.25,
+            "n_over_defective": 2,
+            "omega_dt": 0.25132741228718347,
+            "steps_survived": 40
+          },
+          {
+            "diverged": false,
+            "link_compliance": 0.1111111111111111,
+            "n_over_defective": 3,
+            "omega_dt": 0.3769911184307752,
+            "steps_survived": 40
+          },
+          {
+            "diverged": false,
+            "link_compliance": 0.0625,
+            "n_over_defective": 4,
+            "omega_dt": 0.5026548245743669,
+            "steps_survived": 40
+          },
+          {
+            "diverged": false,
+            "link_compliance": 0.04000000000000001,
+            "n_over_defective": 5,
+            "omega_dt": 0.6283185307179586,
+            "steps_survived": 40
+          },
+          {
+            "diverged": false,
+            "link_compliance": 0.027777777777777776,
+            "n_over_defective": 6,
+            "omega_dt": 0.7539822368615504,
+            "steps_survived": 40
+          },
+          {
+            "diverged": false,
+            "link_compliance": 0.02040816326530612,
+            "n_over_defective": 7,
+            "omega_dt": 0.8796459430051422,
+            "steps_survived": 40
+          },
+          {
+            "diverged": false,
+            "link_compliance": 0.015625,
+            "n_over_defective": 8,
+            "omega_dt": 1.0053096491487339,
+            "steps_survived": 40
+          },
+          {
+            "diverged": true,
+            "link_compliance": 0.01234567901234568,
+            "n_over_defective": 9,
+            "omega_dt": 1.1309733552923256,
+            "steps_survived": 4
+          }
+        ]
+      },
+      "notes": "rigid twin at N=6x the defective mode, omega*dt=0.7540; last stable 1.0053, first divergent 1.1310; margin 0.75; swept on Panda/NutAssemblySquare, all 9 grid points run to 40 control steps",
+      "produced_at": "2026-07-31T06:51:19+00:00",
+      "produced_by": "scripts/measure_constants.py --what d7_stability",
+      "source_commit": "not-a-git-checkout",
+      "unit": "dimensionless",
+      "value": 0.027777777777777776
+    },
+    "geom.clearance.NutAssemblyRound.G0.minus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "RoundNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "RoundNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.2
+    },
+    "geom.clearance.NutAssemblyRound.G0.plus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "RoundNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "RoundNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.0
+    },
+    "geom.clearance.NutAssemblyRoundTight-v0.G0.minus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "RoundNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "RoundNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:10+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.2
+    },
+    "geom.clearance.NutAssemblyRoundTight-v0.G0.plus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "RoundNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "RoundNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:10+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.0
+    },
+    "geom.clearance.NutAssemblySquare.G0.minus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "SquareNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "SquareNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:05+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.2
+    },
+    "geom.clearance.NutAssemblySquare.G0.plus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "SquareNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "SquareNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:05+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.0
+    },
+    "geom.clearance.NutAssemblySquareTight-v0.G0.minus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "SquareNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "SquareNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:03+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.2
+    },
+    "geom.clearance.NutAssemblySquareTight-v0.G0.plus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "SquareNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "SquareNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:03+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.0
+    },
+    "geom.clearance.NutAssemblySquareTight-v0.G1.minus": {
+      "extra": {
+        "asymmetry_m": 0.1975,
+        "body": "SquareNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0025,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "SquareNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 197.500 mm",
+      "produced_at": "2026-07-31T08:16:03+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.2
+    },
+    "geom.clearance.NutAssemblySquareTight-v0.G1.plus": {
+      "extra": {
+        "asymmetry_m": 0.1975,
+        "body": "SquareNut_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0025,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "table_collision",
+          "SquareNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 197.500 mm",
+      "produced_at": "2026-07-31T08:16:03+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.0025
+    },
+    "geom.clearance.NutAssemblySquareTight-v0.G2.minus": {
+      "extra": {
+        "asymmetry_m": -0.0017000000000000001,
+        "body": "SquareNut_main",
+        "cl_minus_m": 0.0008,
+        "cl_plus_m": 0.0025,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [
+          "SquareNut_g0",
+          "baffle1_collision"
+        ],
+        "first_contact_plus": [
+          "table_collision",
+          "SquareNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": false,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = -1.700 mm",
+      "produced_at": "2026-07-31T08:16:03+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.0008
+    },
+    "geom.clearance.NutAssemblySquareTight-v0.G2.plus": {
+      "extra": {
+        "asymmetry_m": -0.0017000000000000001,
+        "body": "SquareNut_main",
+        "cl_minus_m": 0.0008,
+        "cl_plus_m": 0.0025,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [
+          "SquareNut_g0",
+          "baffle1_collision"
+        ],
+        "first_contact_plus": [
+          "table_collision",
+          "SquareNut_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": false,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = -1.700 mm",
+      "produced_at": "2026-07-31T08:16:03+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.0025
+    },
+    "geom.clearance.Stack.G0.minus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "cubeA_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "cubeA_g0",
+          "cubeB_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:12+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.2
+    },
+    "geom.clearance.Stack.G0.plus": {
+      "extra": {
+        "asymmetry_m": 0.2,
+        "body": "cubeA_main",
+        "cl_minus_m": 0.2,
+        "cl_plus_m": 0.0,
+        "contact_at_pose": false,
+        "direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "first_contact_minus": [],
+        "first_contact_plus": [
+          "cubeA_g0",
+          "cubeB_g0"
+        ],
+        "max_steps": 2000,
+        "saturated_minus": true,
+        "saturated_plus": false,
+        "step_m": 0.0001
+      },
+      "notes": "stepped mj_collision at 0.10 mm over at most 2000 steps, on Panda; A = 200.000 mm",
+      "produced_at": "2026-07-31T08:16:12+00:00",
+      "produced_by": "scripts/measure_constants.py --what clearance",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.0
+    },
+    "mjcf.agentview_pose.NutAssemblySquare": {
+      "produced_at": "2026-07-31T05:45:08+00:00",
+      "produced_by": "scripts/measure_constants.py --what camera_pose",
+      "source_commit": "not-a-git-checkout",
+      "unit": "pose7",
+      "value": {
+        "agentview": {
+          "fovy": 45.0,
+          "mat": [
+            0.0,
+            -0.706147844353306,
+            0.7080644193257978,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.7080644193257978,
+            0.706147844353306
+          ],
+          "pos": [
+            0.5,
+            0.0,
+            1.35
+          ]
+        },
+        "robot0_eye_in_hand": {
+          "fovy": 75.0,
+          "mat": [
+            -0.025723271731209862,
+            0.99301276741818,
+            -0.11516925386546303,
+            -0.9996684164606661,
+            -0.025686887042387252,
+            0.0018002680615526317,
+            -0.0011706504449012292,
+            0.11517737442118037,
+            0.9933442515054771
+          ],
+          "pos": [
+            -0.06435688160334108,
+            -0.016747294668064114,
+            1.1062826566994144
+          ]
+        }
+      }
+    },
+    "mjcf.armature.Panda.robot0_joint1": {
+      "extra": {
+        "armature": 5.0,
+        "damping": 0.1,
+        "frictionloss": 0.1
+      },
+      "notes": "damping=0.1, frictionloss=0.1",
+      "produced_at": "2026-07-31T05:45:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what armature",
+      "source_commit": "not-a-git-checkout",
+      "unit": "kg m^2",
+      "value": 5.0
+    },
+    "mjcf.armature.Panda.robot0_joint2": {
+      "extra": {
+        "armature": 2.5,
+        "damping": 0.1,
+        "frictionloss": 0.1
+      },
+      "notes": "damping=0.1, frictionloss=0.1",
+      "produced_at": "2026-07-31T05:45:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what armature",
+      "source_commit": "not-a-git-checkout",
+      "unit": "kg m^2",
+      "value": 2.5
+    },
+    "mjcf.armature.Panda.robot0_joint3": {
+      "extra": {
+        "armature": 1.6666666666666667,
+        "damping": 0.1,
+        "frictionloss": 0.1
+      },
+      "notes": "damping=0.1, frictionloss=0.1",
+      "produced_at": "2026-07-31T05:45:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what armature",
+      "source_commit": "not-a-git-checkout",
+      "unit": "kg m^2",
+      "value": 1.6666666666666667
+    },
+    "mjcf.armature.Panda.robot0_joint4": {
+      "extra": {
+        "armature": 1.25,
+        "damping": 0.1,
+        "frictionloss": 0.1
+      },
+      "notes": "damping=0.1, frictionloss=0.1",
+      "produced_at": "2026-07-31T05:45:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what armature",
+      "source_commit": "not-a-git-checkout",
+      "unit": "kg m^2",
+      "value": 1.25
+    },
+    "mjcf.armature.Panda.robot0_joint5": {
+      "extra": {
+        "armature": 1.0,
+        "damping": 0.1,
+        "frictionloss": 0.1
+      },
+      "notes": "damping=0.1, frictionloss=0.1",
+      "produced_at": "2026-07-31T05:45:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what armature",
+      "source_commit": "not-a-git-checkout",
+      "unit": "kg m^2",
+      "value": 1.0
+    },
+    "mjcf.armature.Panda.robot0_joint6": {
+      "extra": {
+        "armature": 0.8333333333333334,
+        "damping": 0.01,
+        "frictionloss": 0.1
+      },
+      "notes": "damping=0.01, frictionloss=0.1",
+      "produced_at": "2026-07-31T05:45:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what armature",
+      "source_commit": "not-a-git-checkout",
+      "unit": "kg m^2",
+      "value": 0.8333333333333334
+    },
+    "mjcf.armature.Panda.robot0_joint7": {
+      "extra": {
+        "armature": 0.7142857142857143,
+        "damping": 0.01,
+        "frictionloss": 0.1
+      },
+      "notes": "damping=0.01, frictionloss=0.1",
+      "produced_at": "2026-07-31T05:45:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what armature",
+      "source_commit": "not-a-git-checkout",
+      "unit": "kg m^2",
+      "value": 0.7142857142857143
+    },
+    "obs.proprio_native_dim.Panda": {
+      "extra": {
+        "breakdown": "50 native + 7 tau_g + 6 wrist F/T + 7 DoF mask",
+        "components": {
+          "robot0_eef_pos": 3,
+          "robot0_eef_quat": 4,
+          "robot0_eef_quat_site": 4,
+          "robot0_gripper_qpos": 2,
+          "robot0_gripper_qvel": 2,
+          "robot0_joint_acc": 7,
+          "robot0_joint_pos": 7,
+          "robot0_joint_pos_cos": 7,
+          "robot0_joint_pos_sin": 7,
+          "robot0_joint_vel": 7
+        },
+        "n_arm_joints": 7,
+        "native": 50,
+        "physical_channels": 63,
+        "stored": 70
+      },
+      "notes": "50 native + 7 tau_g + 6 wrist F/T + 7 DoF mask",
+      "produced_at": "2026-07-31T05:45:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what proprio_dim",
+      "source_commit": "not-a-git-checkout",
+      "unit": "count",
+      "value": 50
+    },
+    "sim.hard_reset_default": {
+      "notes": "lite_physics default is True",
+      "produced_at": "2026-07-31T05:45:07+00:00",
+      "produced_by": "scripts/measure_constants.py --what hard_reset",
+      "source_commit": "not-a-git-checkout",
+      "unit": "bool",
+      "value": true
+    },
+    "sim.tau_frame.Panda.NutAssemblySquare": {
+      "notes": "marginal cost of one rendered 84x84 frame, two cameras on; median 0.00527 s",
+      "produced_at": "2026-07-31T05:45:17+00:00",
+      "produced_by": "scripts/measure_constants.py --what tau_frame",
+      "source_commit": "not-a-git-checkout",
+      "unit": "s",
+      "value": 0.005381602671307823
+    },
+    "sim.tau_frame.Panda.Stack": {
+      "notes": "marginal cost of one rendered 84x84 frame, two cameras on; median 0.0004289 s",
+      "produced_at": "2026-08-25T12:14:43+00:00",
+      "produced_by": "scripts/measure_constants.py --what tau_frame",
+      "source_commit": "dfc2a53559006570afebe4c6c29d9e95579dbcfe",
+      "unit": "s",
+      "value": 0.0004552974450052717
+    },
+    "sim.tau_step.Panda.NutAssemblySquare": {
+      "notes": "mean of 300 steps after 30 warm-up; median 0.004784 s, std 0.0007105 s, render off",
+      "produced_at": "2026-07-31T05:45:09+00:00",
+      "produced_by": "scripts/measure_constants.py --what tau_step",
+      "source_commit": "not-a-git-checkout",
+      "unit": "s",
+      "value": 0.004816906653965513
+    },
+    "sim.tau_step.Panda.Stack": {
+      "notes": "mean of 200 steps after 20 warm-up; median 0.003114 s, std 7.455e-05 s, render off",
+      "produced_at": "2026-08-25T12:14:41+00:00",
+      "produced_by": "scripts/measure_constants.py --what tau_step",
+      "source_commit": "dfc2a53559006570afebe4c6c29d9e95579dbcfe",
+      "unit": "s",
+      "value": 0.0031451121502323078
+    },
+    "storage.gzip_ratio.lowdim_float32": {
+      "produced_at": "2026-07-31T05:45:19+00:00",
+      "produced_by": "scripts/measure_constants.py --what gzip_ratio",
+      "source_commit": "not-a-git-checkout",
+      "unit": "dimensionless",
+      "value": 2.6936026936026938
+    },
+    "storage.gzip_ratio.rgb84": {
+      "produced_at": "2026-07-31T05:45:19+00:00",
+      "produced_by": "scripts/measure_constants.py --what gzip_ratio",
+      "source_commit": "not-a-git-checkout",
+      "unit": "dimensionless",
+      "value": 3.106688964928669
+    },
+    "task.tol.NutAssemblyRound.G0": {
+      "extra": {
+        "hole_geoms": [
+          "RoundNut_g0",
+          "RoundNut_g1",
+          "RoundNut_g2",
+          "RoundNut_g3",
+          "RoundNut_g4",
+          "RoundNut_g5",
+          "RoundNut_g6",
+          "RoundNut_g7",
+          "RoundNut_g8"
+        ],
+        "inserted_geoms": [
+          "geom15"
+        ],
+        "r_hole_axis_mm": 31.2,
+        "r_inserted_axis_mm": 20.0,
+        "task_id": "NutAssemblyRound",
+        "tol_argmin_deg": 315.0000093623894,
+        "tol_axis_mm": 11.200000000000694,
+        "tol_diagonal_mm": 11.176406871334331,
+        "tol_kind": "radial_clearance",
+        "tol_mm": 11.17640687133166
+      },
+      "notes": "min over 720 directions; axis=0.0112 m, diagonal=0.0111764 m",
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.01117640687133166
+    },
+    "task.tol.NutAssemblyRoundTight-v0.G0": {
+      "extra": {
+        "hole_geoms": [
+          "RoundNut_g0",
+          "RoundNut_g1",
+          "RoundNut_g2",
+          "RoundNut_g3",
+          "RoundNut_g4",
+          "RoundNut_g5",
+          "RoundNut_g6",
+          "RoundNut_g7",
+          "RoundNut_g8"
+        ],
+        "inserted_geoms": [
+          "geom15",
+          "peg2_leadin_collision"
+        ],
+        "r_hole_axis_mm": 31.2,
+        "r_inserted_axis_mm": 30.200000852,
+        "task_id": "NutAssemblyRoundTight-v0",
+        "tol_argmin_deg": 45.000009362389314,
+        "tol_axis_mm": 0.999999148,
+        "tol_diagonal_mm": 0.9764065741120944,
+        "tol_kind": "radial_clearance",
+        "tol_mm": 0.9764065741120821
+      },
+      "notes": "min over 720 directions; axis=0.000999999 m, diagonal=0.000976407 m",
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.0009764065741120821
+    },
+    "task.tol.NutAssemblySquare.G0": {
+      "extra": {
+        "hole_geoms": [
+          "SquareNut_g0",
+          "SquareNut_g1",
+          "SquareNut_g2",
+          "SquareNut_g3",
+          "SquareNut_g4"
+        ],
+        "inserted_geoms": [
+          "geom13"
+        ],
+        "r_hole_axis_mm": 22.75,
+        "r_inserted_axis_mm": 16.0,
+        "task_id": "NutAssemblySquare",
+        "tol_argmin_deg": 90.0,
+        "tol_axis_mm": 6.75,
+        "tol_diagonal_mm": 9.545941546018389,
+        "tol_kind": "radial_clearance",
+        "tol_mm": 6.75
+      },
+      "notes": "min over 720 directions; axis=0.00675 m, diagonal=0.00954594 m",
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.00675
+    },
+    "task.tol.NutAssemblySquareTight-v0.G0": {
+      "extra": {
+        "hole_geoms": [
+          "SquareNut_g0",
+          "SquareNut_g1",
+          "SquareNut_g2",
+          "SquareNut_g3",
+          "SquareNut_g4"
+        ],
+        "inserted_geoms": [
+          "geom13",
+          "peg1_leadin_collision"
+        ],
+        "r_hole_axis_mm": 22.75,
+        "r_inserted_axis_mm": 21.75,
+        "task_id": "NutAssemblySquareTight-v0",
+        "tol_argmin_deg": 90.0,
+        "tol_axis_mm": 1.0,
+        "tol_diagonal_mm": 1.4142135623730947,
+        "tol_kind": "radial_clearance",
+        "tol_mm": 1.0
+      },
+      "notes": "min over 720 directions; axis=0.001 m, diagonal=0.00141421 m",
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.001
+    },
+    "task.tol.Stack.G0": {
+      "extra": {
+        "hole_geoms": [
+          "cubeB_g0"
+        ],
+        "inserted_geoms": [
+          "cubeA_g0"
+        ],
+        "r_hole_axis_mm": 25.001106520180524,
+        "r_inserted_axis_mm": 0.0,
+        "task_id": "Stack",
+        "tol_argmin_deg": 89.5,
+        "tol_axis_mm": 25.001106520180524,
+        "tol_diagonal_mm": 35.02734221725275,
+        "tol_kind": "radial_clearance",
+        "tol_mm": 24.999999999603588
+      },
+      "notes": "min over 720 directions; axis=0.0250011 m, diagonal=0.0350273 m",
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "m",
+      "value": 0.02499999999960359
+    },
+    "task.tol_kind.NutAssemblyRound.G0": {
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "enum",
+      "value": "radial_clearance"
+    },
+    "task.tol_kind.NutAssemblyRoundTight-v0.G0": {
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "enum",
+      "value": "radial_clearance"
+    },
+    "task.tol_kind.NutAssemblySquare.G0": {
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "enum",
+      "value": "radial_clearance"
+    },
+    "task.tol_kind.NutAssemblySquareTight-v0.G0": {
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "enum",
+      "value": "radial_clearance"
+    },
+    "task.tol_kind.Stack.G0": {
+      "produced_at": "2026-07-31T08:08:12+00:00",
+      "produced_by": "scripts/compute_task_tol.py",
+      "source_commit": "not-a-git-checkout",
+      "unit": "enum",
+      "value": "radial_clearance"
+    }
+  },
+  "schema_version": 1,
+  "versions": {
+    "mujoco": "3.3.2",
+    "robomimic": "0.5.0",
+    "robosuite": "1.5.2"
+  }
+}
