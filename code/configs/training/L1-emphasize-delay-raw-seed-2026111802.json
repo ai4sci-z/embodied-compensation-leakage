@@ -1,0 +1,30 @@
+{
+  "augment": false,
+  "batch_size": 16,
+  "checkpoint_every": 10000,
+  "d_model": 512,
+  "dropout": 0.1,
+  "episode_cache_mib": 6144,
+  "evaluate_every": 10000,
+  "ffn_dim": 2048,
+  "gradient_clip_norm": null,
+  "k_hist": 5,
+  "label_mode": "raw",
+  "learning_rate": 0.0003,
+  "level": 1,
+  "log_every": 100,
+  "n_heads": 8,
+  "n_layers": 4,
+  "sampling_seed": 20261119,
+  "schema": "dl_course.three_source_training/1",
+  "seed": 2026111802,
+  "source_weights": {
+    "backlash": 0.125,
+    "clean": 0.125,
+    "delay": 0.625,
+    "droop": 0.125
+  },
+  "torch_threads": 4,
+  "updates": 30000,
+  "validation_stride": 1
+}
