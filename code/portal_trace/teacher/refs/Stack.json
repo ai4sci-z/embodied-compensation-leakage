@@ -1,0 +1,293 @@
+{
+  "task_id": "Stack",
+  "horizon": 400,
+  "control_freq": 20,
+  "notes": "the low-kappa control of 9.5.2. tol is a centroid-containment radius (TolRule.CENTROID_CONTAINMENT), so the terminal pose only has to put cubeA's centre inside cubeB's top face",
+  "waypoints": [
+    {
+      "name": "pre_grasp",
+      "phase": "approach",
+      "steps": 60,
+      "gripper": -1.0,
+      "anchor": "cubeA_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cubeA_main"
+      }
+    },
+    {
+      "name": "grasp",
+      "phase": "approach",
+      "steps": 44,
+      "gripper": -1.0,
+      "anchor": "cubeA_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cubeA_main"
+      }
+    },
+    {
+      "name": "close",
+      "phase": "grasp",
+      "steps": 20,
+      "gripper": 1.0,
+      "anchor": "cubeA_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cubeA_main"
+      }
+    },
+    {
+      "name": "lift",
+      "phase": "transport",
+      "steps": 40,
+      "gripper": 1.0,
+      "anchor": "cubeA_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.17
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cubeA_main"
+      }
+    },
+    {
+      "name": "align",
+      "phase": "transport",
+      "steps": 68,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "site_pos",
+          "a": "cubeB_default_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "body_top_z",
+          "a": "cubeB_main",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cubeA_main"
+      },
+      "derived_from": "cubeB top + STANDOFF_M"
+    },
+    {
+      "name": "descend",
+      "phase": "transport",
+      "steps": 48,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "site_pos",
+          "a": "cubeB_default_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "body_top_z",
+          "a": "cubeB_main",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "cubeA_main",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "axis": 2
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cubeA_main"
+      }
+    },
+    {
+      "name": "place",
+      "phase": "terminal",
+      "steps": 56,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "site_pos",
+          "a": "cubeB_default_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "body_top_z",
+          "a": "cubeB_main",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "cubeA_main",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "axis": 2
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.004
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cubeA_main"
+      },
+      "derived_from": "cubeB top + cubeA half height + SEATING_MARGIN_M"
+    },
+    {
+      "name": "release",
+      "phase": "terminal",
+      "steps": 20,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "site_pos",
+          "a": "cubeB_default_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "body_top_z",
+          "a": "cubeB_main",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "cubeA_main",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "axis": 2
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.004
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cubeA_main"
+      }
+    },
+    {
+      "name": "retreat",
+      "phase": "terminal",
+      "steps": 44,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "site_pos",
+          "a": "cubeB_default_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "body_top_z",
+          "a": "cubeB_main",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cubeA_main"
+      }
+    }
+  ]
+}

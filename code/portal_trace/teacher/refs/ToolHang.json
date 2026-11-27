@@ -1,0 +1,1124 @@
+{
+  "task_id": "ToolHang",
+  "horizon": 400,
+  "control_freq": 20,
+  "notes": "two insertions inside one horizon. 9.5.2 note 2 makes ToolHang's median episode length a W1 item: if the reference needs more than 400 steps to complete both stages, the core/heldout roles swap",
+  "waypoints": [
+    {
+      "name": "frame_pre_grasp",
+      "phase": "approach",
+      "steps": 32,
+      "gripper": -1.0,
+      "anchor": "frame_intersection_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "terms": [
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      }
+    },
+    {
+      "name": "frame_grasp",
+      "phase": "approach",
+      "steps": 24,
+      "gripper": -1.0,
+      "anchor": "frame_intersection_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "terms": [
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        }
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      }
+    },
+    {
+      "name": "frame_close",
+      "phase": "grasp",
+      "steps": 12,
+      "gripper": 1.0,
+      "anchor": "frame_intersection_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "terms": [
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        }
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      }
+    },
+    {
+      "name": "frame_lift",
+      "phase": "transport",
+      "steps": 24,
+      "gripper": 1.0,
+      "anchor": "frame_intersection_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "terms": [
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        },
+        {
+          "kind": "body_top_z",
+          "a": "stand_root",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.07
+      ],
+      "yaw": {
+        "kind": "fixed",
+        "offset_rad": 0.001
+      },
+      "rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      }
+    },
+    {
+      "name": "frame_align",
+      "phase": "transport",
+      "steps": 60,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_tip_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        },
+        {
+          "kind": "body_top_z",
+          "a": "stand_root",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_tip_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        }
+      ],
+      "const": [
+        0.0,
+        0.045,
+        0.07
+      ],
+      "yaw": {
+        "kind": "fixed",
+        "offset_rad": 0.001
+      },
+      "rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      },
+      "tilt_rad": 1.5707963267948966,
+      "derived_from": "frame-tip xy over stand, stand top + clearance"
+    },
+    {
+      "name": "frame_insert",
+      "phase": "terminal",
+      "steps": 48,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_tip_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_tip_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        }
+      ],
+      "const": [
+        0.0,
+        0.045,
+        0.0
+      ],
+      "yaw": {
+        "kind": "fixed",
+        "offset_rad": 0.001
+      },
+      "rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      },
+      "tilt_rad": 1.5707963267948966
+    },
+    {
+      "name": "frame_release",
+      "phase": "terminal",
+      "steps": 12,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_tip_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_tip_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        }
+      ],
+      "const": [
+        0.0,
+        0.045,
+        0.0
+      ],
+      "yaw": {
+        "kind": "fixed",
+        "offset_rad": 0.001
+      },
+      "rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      },
+      "tilt_rad": 1.5707963267948966
+    },
+    {
+      "name": "frame_retreat",
+      "phase": "transport",
+      "steps": 12,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_tip_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        },
+        {
+          "kind": "body_top_z",
+          "a": "stand_root",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_tip_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_mount_site",
+          "b": "frame_intersection_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": 0.1914893617021277,
+          "rotate": true
+        }
+      ],
+      "const": [
+        0.0,
+        0.045,
+        0.0
+      ],
+      "yaw": {
+        "kind": "fixed",
+        "offset_rad": 0.001
+      },
+      "rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      },
+      "tilt_rad": 1.5707963267948966
+    },
+    {
+      "name": "tool_pre_grasp",
+      "phase": "approach",
+      "steps": 24,
+      "gripper": -1.0,
+      "anchor": "tool_grip_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.08
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root"
+      }
+    },
+    {
+      "name": "tool_grasp",
+      "phase": "approach",
+      "steps": 24,
+      "gripper": -1.0,
+      "anchor": "tool_grip_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        -0.02
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root"
+      }
+    },
+    {
+      "name": "tool_close",
+      "phase": "grasp",
+      "steps": 12,
+      "gripper": 1.0,
+      "anchor": "tool_grip_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        -0.02
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root"
+      }
+    },
+    {
+      "name": "tool_lift",
+      "phase": "transport",
+      "steps": 24,
+      "gripper": 1.0,
+      "anchor": "tool_grip_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "terms": [
+        {
+          "kind": "body_top_z",
+          "a": "stand_root",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.07
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root"
+      }
+    },
+    {
+      "name": "tool_align",
+      "phase": "transport",
+      "steps": 36,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "geom_pos",
+          "a": "stand_wall0",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.5
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_wall2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.5
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_hang_site",
+          "b": "frame_tip_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_hang_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.4,
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "tool_grip_default_site",
+          "b": "tool_hole1_center",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true,
+          "frame": "command"
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_hang_site",
+          "b": "frame_tip_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_hang_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": 0.4,
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "tool_grip_default_site",
+          "b": "tool_hole1_center",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true,
+          "frame": "command"
+        }
+      ],
+      "const": [
+        -0.01115,
+        0.00477,
+        0.05
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root",
+        "offset_rad": 0.1
+      },
+      "rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      },
+      "term_yaw": {
+        "kind": "fixed",
+        "offset_rad": 0.001
+      },
+      "term_tilt_rad": 1.5707963267948966,
+      "command_rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root"
+      },
+      "tilt_rad": -0.09,
+      "derived_from": "planned frame hook midpoint + hole-to-grip offset"
+    },
+    {
+      "name": "tool_hang",
+      "phase": "terminal",
+      "steps": 28,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "geom_pos",
+          "a": "stand_wall0",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.5
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_wall2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.5
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_hang_site",
+          "b": "frame_tip_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_hang_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.4,
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "tool_grip_default_site",
+          "b": "tool_hole1_center",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true,
+          "frame": "command"
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_hang_site",
+          "b": "frame_tip_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_hang_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": 0.4,
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "tool_grip_default_site",
+          "b": "tool_hole1_center",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true,
+          "frame": "command"
+        }
+      ],
+      "const": [
+        -0.01115,
+        0.00477,
+        -0.08754
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root",
+        "offset_rad": 0.1
+      },
+      "rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      },
+      "term_yaw": {
+        "kind": "fixed",
+        "offset_rad": 0.001
+      },
+      "term_tilt_rad": 1.5707963267948966,
+      "command_rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root"
+      },
+      "tilt_rad": -0.09
+    },
+    {
+      "name": "tool_release",
+      "phase": "terminal",
+      "steps": 12,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "geom_pos",
+          "a": "stand_wall0",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.5
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_wall2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.5
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_hang_site",
+          "b": "frame_tip_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_hang_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.4,
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "tool_grip_default_site",
+          "b": "tool_hole1_center",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true,
+          "frame": "command"
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_hang_site",
+          "b": "frame_tip_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_hang_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": 0.4,
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "tool_grip_default_site",
+          "b": "tool_hole1_center",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true,
+          "frame": "command"
+        }
+      ],
+      "const": [
+        -0.01115,
+        0.00477,
+        -0.08754
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root",
+        "offset_rad": 0.1
+      },
+      "rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      },
+      "term_yaw": {
+        "kind": "fixed",
+        "offset_rad": 0.001
+      },
+      "term_tilt_rad": 1.5707963267948966,
+      "command_rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root"
+      },
+      "tilt_rad": -0.09
+    },
+    {
+      "name": "tool_retreat",
+      "phase": "terminal",
+      "steps": 16,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "geom_pos",
+          "a": "stand_wall0",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.5
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_wall2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.5
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_hang_site",
+          "b": "frame_tip_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_hang_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "scale": 0.4,
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "tool_grip_default_site",
+          "b": "tool_hole1_center",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true,
+          "frame": "command"
+        },
+        {
+          "kind": "geom_pos",
+          "a": "stand_base",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_hang_site",
+          "b": "frame_tip_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "frame_intersection_site",
+          "b": "frame_hang_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": 0.4,
+          "rotate": true
+        },
+        {
+          "kind": "site_delta",
+          "a": "tool_grip_default_site",
+          "b": "tool_hole1_center",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotate": true,
+          "frame": "command"
+        }
+      ],
+      "const": [
+        -0.01115,
+        0.00477,
+        -0.017539999999999997
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root",
+        "offset_rad": 0.1
+      },
+      "rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "frame_root"
+      },
+      "term_yaw": {
+        "kind": "fixed",
+        "offset_rad": 0.001
+      },
+      "term_tilt_rad": 1.5707963267948966,
+      "command_rotate_from_yaw": {
+        "kind": "body_yaw",
+        "anchor": "tool_root"
+      },
+      "tilt_rad": -0.09
+    }
+  ]
+}

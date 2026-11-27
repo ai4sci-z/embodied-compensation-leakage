@@ -1,0 +1,174 @@
+{
+  "task_id": "Door",
+  "horizon": 400,
+  "control_freq": 20,
+  "notes": "unlocked r2 quasi-static carrier. The swing is an arc about the Door_hinge joint pivot, 0.35 rad inside the 0.4 rad joint limit, against a success criterion of 0.3 rad",
+  "waypoints": [
+    {
+      "name": "pre_grasp",
+      "phase": "approach",
+      "steps": 64,
+      "gripper": -1.0,
+      "anchor": "Door_handle",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.09,
+        0.09
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Door_door"
+      },
+      "derived_from": "handle site + DOOR_STANDOFF_M along the approach diagonal"
+    },
+    {
+      "name": "reach",
+      "phase": "approach",
+      "steps": 44,
+      "gripper": -1.0,
+      "anchor": "Door_handle",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Door_door"
+      }
+    },
+    {
+      "name": "close",
+      "phase": "grasp",
+      "steps": 24,
+      "gripper": 1.0,
+      "anchor": "Door_handle",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Door_door"
+      }
+    },
+    {
+      "name": "grasp_hold",
+      "phase": "transport",
+      "steps": 40,
+      "gripper": 1.0,
+      "anchor": "Door_handle",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Door_door"
+      }
+    },
+    {
+      "name": "pull_1",
+      "phase": "transport",
+      "steps": 52,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "joint_arc",
+          "a": "Door_handle",
+          "b": "Door_hinge",
+          "mask": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "angle_rad": 0.119
+        }
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Door_door"
+      }
+    },
+    {
+      "name": "pull_2",
+      "phase": "transport",
+      "steps": 52,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "joint_arc",
+          "a": "Door_handle",
+          "b": "Door_hinge",
+          "mask": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "angle_rad": 0.2345
+        }
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Door_door"
+      }
+    },
+    {
+      "name": "pull_3",
+      "phase": "terminal",
+      "steps": 52,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "joint_arc",
+          "a": "Door_handle",
+          "b": "Door_hinge",
+          "mask": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "angle_rad": 0.35
+        }
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Door_door"
+      }
+    },
+    {
+      "name": "hold",
+      "phase": "terminal",
+      "steps": 72,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "joint_arc",
+          "a": "Door_handle",
+          "b": "Door_hinge",
+          "mask": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "angle_rad": 0.35
+        }
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Door_door"
+      }
+    }
+  ]
+}

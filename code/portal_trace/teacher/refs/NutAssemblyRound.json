@@ -1,0 +1,426 @@
+{
+  "task_id": "NutAssemblyRound",
+  "horizon": 400,
+  "control_freq": 20,
+  "notes": "nut=RoundNut, peg=peg2. Grasp yaw is the handle's radial direction; the align waypoint carries the handle-to-centre offset so that the hole, not the grip, ends up over the peg. Body RoundNut_main is the moving body of the 9.5.2 table",
+  "waypoints": [
+    {
+      "name": "pre_grasp",
+      "phase": "approach",
+      "steps": 60,
+      "gripper": -1.0,
+      "anchor": "RoundNut_handle_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "yaw": {
+        "kind": "radial",
+        "anchor": "RoundNut_handle_site",
+        "center": "RoundNut_center_site",
+        "offset_rad": 1.5707963267948966
+      },
+      "align": {
+        "target_body": "peg2",
+        "source_body": "RoundNut_main",
+        "grip_site": "RoundNut_handle_site",
+        "axis_site": "RoundNut_center_site",
+        "symmetry_fold": 8,
+        "engaged": false
+      },
+      "derived_from": "handle site + STANDOFF_M"
+    },
+    {
+      "name": "grasp",
+      "phase": "approach",
+      "steps": 44,
+      "gripper": -1.0,
+      "anchor": "RoundNut_handle_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "radial",
+        "anchor": "RoundNut_handle_site",
+        "center": "RoundNut_center_site",
+        "offset_rad": 1.5707963267948966
+      },
+      "align": {
+        "target_body": "peg2",
+        "source_body": "RoundNut_main",
+        "grip_site": "RoundNut_handle_site",
+        "axis_site": "RoundNut_center_site",
+        "symmetry_fold": 8,
+        "engaged": false
+      },
+      "derived_from": "handle site"
+    },
+    {
+      "name": "close",
+      "phase": "grasp",
+      "steps": 20,
+      "gripper": 1.0,
+      "anchor": "RoundNut_handle_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "radial",
+        "anchor": "RoundNut_handle_site",
+        "center": "RoundNut_center_site",
+        "offset_rad": 1.5707963267948966
+      },
+      "align": {
+        "target_body": "peg2",
+        "source_body": "RoundNut_main",
+        "grip_site": "RoundNut_handle_site",
+        "axis_site": "RoundNut_center_site",
+        "symmetry_fold": 8,
+        "engaged": false
+      },
+      "derived_from": "handle site, jaws closing"
+    },
+    {
+      "name": "lift",
+      "phase": "transport",
+      "steps": 40,
+      "gripper": 1.0,
+      "anchor": "RoundNut_handle_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "terms": [
+        {
+          "kind": "body_top_z",
+          "a": "peg2",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.07
+      ],
+      "yaw": {
+        "kind": "radial",
+        "anchor": "RoundNut_handle_site",
+        "center": "RoundNut_center_site",
+        "offset_rad": 1.5707963267948966
+      },
+      "align": {
+        "target_body": "peg2",
+        "source_body": "RoundNut_main",
+        "grip_site": "RoundNut_handle_site",
+        "axis_site": "RoundNut_center_site",
+        "symmetry_fold": 8,
+        "engaged": true
+      },
+      "derived_from": "peg top + TRANSPORT_CLEARANCE_M, above the nut"
+    },
+    {
+      "name": "align",
+      "phase": "transport",
+      "steps": 68,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "body_pos",
+          "a": "peg2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "RoundNut_handle_site",
+          "b": "RoundNut_center_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "body_top_z",
+          "a": "peg2",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.07
+      ],
+      "yaw": {
+        "kind": "radial",
+        "anchor": "RoundNut_handle_site",
+        "center": "RoundNut_center_site",
+        "offset_rad": 1.5707963267948966
+      },
+      "align": {
+        "target_body": "peg2",
+        "source_body": "RoundNut_main",
+        "grip_site": "RoundNut_handle_site",
+        "axis_site": "RoundNut_center_site",
+        "symmetry_fold": 8,
+        "engaged": true
+      },
+      "derived_from": "peg xy + grasp offset, peg top + TRANSPORT_CLEARANCE_M"
+    },
+    {
+      "name": "descend",
+      "phase": "transport",
+      "steps": 48,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "body_pos",
+          "a": "peg2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "RoundNut_handle_site",
+          "b": "RoundNut_center_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "body_top_z",
+          "a": "peg2",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "yaw": {
+        "kind": "radial",
+        "anchor": "RoundNut_handle_site",
+        "center": "RoundNut_center_site",
+        "offset_rad": 1.5707963267948966
+      },
+      "align": {
+        "target_body": "peg2",
+        "source_body": "RoundNut_main",
+        "grip_site": "RoundNut_handle_site",
+        "axis_site": "RoundNut_center_site",
+        "symmetry_fold": 8,
+        "engaged": true
+      },
+      "derived_from": "peg top + FINAL_APPROACH_M"
+    },
+    {
+      "name": "insert",
+      "phase": "terminal",
+      "steps": 56,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "body_pos",
+          "a": "peg2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "RoundNut_handle_site",
+          "b": "RoundNut_center_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_pos",
+          "a": "RoundNut_handle_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.004
+      ],
+      "yaw": {
+        "kind": "radial",
+        "anchor": "RoundNut_handle_site",
+        "center": "RoundNut_center_site",
+        "offset_rad": 1.5707963267948966
+      },
+      "align": {
+        "target_body": "peg2",
+        "source_body": "RoundNut_main",
+        "grip_site": "RoundNut_handle_site",
+        "axis_site": "RoundNut_center_site",
+        "symmetry_fold": 8,
+        "engaged": true
+      },
+      "derived_from": "peg xy + grasp offset, settled handle z + SEATING_MARGIN_M"
+    },
+    {
+      "name": "release",
+      "phase": "terminal",
+      "steps": 20,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "body_pos",
+          "a": "peg2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "RoundNut_handle_site",
+          "b": "RoundNut_center_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "site_pos",
+          "a": "RoundNut_handle_site",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.004
+      ],
+      "yaw": {
+        "kind": "radial",
+        "anchor": "RoundNut_handle_site",
+        "center": "RoundNut_center_site",
+        "offset_rad": 1.5707963267948966
+      },
+      "align": {
+        "target_body": "peg2",
+        "source_body": "RoundNut_main",
+        "grip_site": "RoundNut_handle_site",
+        "axis_site": "RoundNut_center_site",
+        "symmetry_fold": 8,
+        "engaged": true
+      },
+      "derived_from": "same pose, jaws opening"
+    },
+    {
+      "name": "retreat",
+      "phase": "terminal",
+      "steps": 44,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "body_pos",
+          "a": "peg2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "site_delta",
+          "a": "RoundNut_handle_site",
+          "b": "RoundNut_center_site",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotate": true
+        },
+        {
+          "kind": "body_top_z",
+          "a": "peg2",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.07
+      ],
+      "yaw": {
+        "kind": "radial",
+        "anchor": "RoundNut_handle_site",
+        "center": "RoundNut_center_site",
+        "offset_rad": 1.5707963267948966
+      },
+      "align": {
+        "target_body": "peg2",
+        "source_body": "RoundNut_main",
+        "grip_site": "RoundNut_handle_site",
+        "axis_site": "RoundNut_center_site",
+        "symmetry_fold": 8,
+        "engaged": true
+      },
+      "derived_from": "peg top + TRANSPORT_CLEARANCE_M"
+    }
+  ]
+}

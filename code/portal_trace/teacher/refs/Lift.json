@@ -1,0 +1,110 @@
+{
+  "task_id": "Lift",
+  "horizon": 400,
+  "control_freq": 20,
+  "notes": "held out; no fit at all, the low end of defect-active occupancy (9.5.2)",
+  "waypoints": [
+    {
+      "name": "pre_grasp",
+      "phase": "approach",
+      "steps": 72,
+      "gripper": -1.0,
+      "anchor": "cube_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cube_main"
+      }
+    },
+    {
+      "name": "grasp",
+      "phase": "approach",
+      "steps": 48,
+      "gripper": -1.0,
+      "anchor": "cube_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cube_main"
+      }
+    },
+    {
+      "name": "close",
+      "phase": "grasp",
+      "steps": 24,
+      "gripper": 1.0,
+      "anchor": "cube_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cube_main"
+      }
+    },
+    {
+      "name": "lift",
+      "phase": "transport",
+      "steps": 56,
+      "gripper": 1.0,
+      "anchor": "cube_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cube_main"
+      },
+      "derived_from": "0.10 m, well above the 0.04 m success threshold"
+    },
+    {
+      "name": "hold",
+      "phase": "terminal",
+      "steps": 200,
+      "gripper": 1.0,
+      "anchor": "cube_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "cube_main"
+      },
+      "derived_from": "9.6.1 fixed-length collection: hold to the horizon"
+    }
+  ]
+}

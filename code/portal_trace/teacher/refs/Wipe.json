@@ -1,0 +1,110 @@
+{
+  "task_id": "Wipe",
+  "horizon": 400,
+  "control_freq": 20,
+  "notes": "no crisp terminal pose (9.5.2); the marker count is an environment parameter, so the sweep is an expansion rather than a fixed list",
+  "waypoints": [
+    {
+      "name": "pre_touch",
+      "phase": "approach",
+      "steps": 40,
+      "gripper": 1.0,
+      "anchor": "contact0_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "derived_from": "first marker + STANDOFF_M"
+    },
+    {
+      "name": "touch",
+      "phase": "grasp",
+      "steps": 24,
+      "gripper": 1.0,
+      "anchor": "contact0_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.002,
+        -0.004
+      ],
+      "derived_from": "first marker, pressed WIPE_CONTACT_DEPTH_M into the surface"
+    },
+    {
+      "name": "sweep",
+      "phase": "terminal",
+      "steps": 296,
+      "gripper": 1.0,
+      "const": [
+        0.0,
+        0.002,
+        -0.004
+      ],
+      "expand": {
+        "site_pattern": "contact{i}_default_site",
+        "max_count": 100
+      },
+      "derived_from": "marker path shifted 2 mm in world +y to centre the wiper footprint"
+    },
+    {
+      "name": "sweep_hold",
+      "phase": "terminal",
+      "steps": 16,
+      "gripper": 1.0,
+      "anchor": "contact99_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.002,
+        -0.004
+      ],
+      "derived_from": "terminal dwell on the final marker before lift-off"
+    },
+    {
+      "name": "lift_off",
+      "phase": "terminal",
+      "steps": 24,
+      "gripper": 1.0,
+      "anchor": "contact0_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "terms": [
+        {
+          "kind": "site_pos",
+          "a": "table_top",
+          "mask": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ]
+    }
+  ]
+}

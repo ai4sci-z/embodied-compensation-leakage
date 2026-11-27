@@ -1,0 +1,315 @@
+{
+  "task_id": "PickPlaceCan",
+  "horizon": 400,
+  "control_freq": 20,
+  "notes": "held out; used only for the (A4) hold-out R^2 (9.6.6)",
+  "waypoints": [
+    {
+      "name": "pre_grasp",
+      "phase": "approach",
+      "steps": 56,
+      "gripper": -1.0,
+      "anchor": "Can_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Can_main"
+      }
+    },
+    {
+      "name": "grasp",
+      "phase": "approach",
+      "steps": 40,
+      "gripper": -1.0,
+      "anchor": "Can_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Can_main"
+      }
+    },
+    {
+      "name": "close",
+      "phase": "grasp",
+      "steps": 20,
+      "gripper": 1.0,
+      "anchor": "Can_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Can_main"
+      }
+    },
+    {
+      "name": "lift",
+      "phase": "transport",
+      "steps": 44,
+      "gripper": 1.0,
+      "anchor": "Can_default_site",
+      "anchor_kind": "site",
+      "anchor_mask": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.17
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Can_main"
+      }
+    },
+    {
+      "name": "transit",
+      "phase": "transport",
+      "steps": 80,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "body_pos",
+          "a": "bin2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "bin2",
+          "mask": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "axis": 0,
+          "scale": 0.5
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "bin2",
+          "mask": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "axis": 1,
+          "scale": 0.5
+        },
+        {
+          "kind": "body_top_z",
+          "a": "bin2",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.17
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Can_main"
+      },
+      "derived_from": "bin2 centre + quarter bounding extent on x and y"
+    },
+    {
+      "name": "descend",
+      "phase": "terminal",
+      "steps": 60,
+      "gripper": 1.0,
+      "terms": [
+        {
+          "kind": "body_pos",
+          "a": "bin2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "bin2",
+          "mask": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "axis": 0,
+          "scale": 0.5
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "bin2",
+          "mask": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "axis": 1,
+          "scale": 0.5
+        },
+        {
+          "kind": "body_top_z",
+          "a": "bin2",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Can_main"
+      }
+    },
+    {
+      "name": "release",
+      "phase": "terminal",
+      "steps": 24,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "body_pos",
+          "a": "bin2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "bin2",
+          "mask": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "axis": 0,
+          "scale": 0.5
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "bin2",
+          "mask": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "axis": 1,
+          "scale": 0.5
+        },
+        {
+          "kind": "body_top_z",
+          "a": "bin2",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Can_main"
+      }
+    },
+    {
+      "name": "retreat",
+      "phase": "terminal",
+      "steps": 76,
+      "gripper": -1.0,
+      "terms": [
+        {
+          "kind": "body_pos",
+          "a": "bin2",
+          "mask": [
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "bin2",
+          "mask": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "axis": 0,
+          "scale": 0.5
+        },
+        {
+          "kind": "body_bbox_half",
+          "a": "bin2",
+          "mask": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "axis": 1,
+          "scale": 0.5
+        },
+        {
+          "kind": "body_top_z",
+          "a": "bin2",
+          "mask": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "const": [
+        0.0,
+        0.0,
+        0.17
+      ],
+      "yaw": {
+        "kind": "body_yaw",
+        "anchor": "Can_main"
+      }
+    }
+  ]
+}
