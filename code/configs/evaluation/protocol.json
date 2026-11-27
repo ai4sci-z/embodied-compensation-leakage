@@ -1,0 +1,195 @@
+{
+  "queue_sha256": "a9c198ed75adf57920cb230eed9d234f7d8af779edeb4913b87a08cbc4b7c2d9",
+  "final_models": 33,
+  "final_updates": 30000,
+  "test_scenes": [
+    141294887,
+    237932263,
+    317319393,
+    324748445,
+    421832638,
+    592686971,
+    723421456,
+    932032837,
+    1012722926,
+    1203873804,
+    1211338696,
+    1345469332,
+    1345665817,
+    1505629181,
+    1580322758,
+    1652530782,
+    1713652149,
+    1731640983,
+    1797339650,
+    1887034755,
+    1968504980,
+    2041699549,
+    2042014320,
+    2109721079
+  ],
+  "selected_run_ids": [
+    "L1-balanced-raw-seed-2026111801",
+    "L1-balanced-remove-delay-seed-2026111801",
+    "L1-balanced-remove-backlash-seed-2026111801",
+    "L1-balanced-remove-droop-seed-2026111801",
+    "L1-balanced-remove-all-seed-2026111801",
+    "L1-emphasize-delay-raw-seed-2026111801",
+    "L1-emphasize-backlash-raw-seed-2026111801",
+    "L1-emphasize-droop-raw-seed-2026111801",
+    "L2-balanced-raw-seed-2026111801",
+    "L2-balanced-remove-all-seed-2026111801",
+    "clean-only-seed-2026111801",
+    "L1-balanced-raw-seed-2026111802",
+    "L1-balanced-remove-delay-seed-2026111802",
+    "L1-balanced-remove-backlash-seed-2026111802",
+    "L1-balanced-remove-droop-seed-2026111802",
+    "L1-balanced-remove-all-seed-2026111802",
+    "L1-emphasize-delay-raw-seed-2026111802",
+    "L1-emphasize-backlash-raw-seed-2026111802",
+    "L1-emphasize-droop-raw-seed-2026111802",
+    "L2-balanced-raw-seed-2026111802",
+    "L2-balanced-remove-all-seed-2026111802",
+    "clean-only-seed-2026111802",
+    "L1-balanced-raw-seed-2026111803",
+    "L1-balanced-remove-delay-seed-2026111803",
+    "L1-balanced-remove-backlash-seed-2026111803",
+    "L1-balanced-remove-droop-seed-2026111803",
+    "L1-balanced-remove-all-seed-2026111803",
+    "L1-emphasize-delay-raw-seed-2026111803",
+    "L1-emphasize-backlash-raw-seed-2026111803",
+    "L1-emphasize-droop-raw-seed-2026111803",
+    "L2-balanced-raw-seed-2026111803",
+    "L2-balanced-remove-all-seed-2026111803",
+    "clean-only-seed-2026111803"
+  ],
+  "skip_history": true,
+  "contrast_pairs": [
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111801",
+      "intervention_run": "L1-balanced-remove-delay-seed-2026111801"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111801",
+      "intervention_run": "L1-balanced-remove-backlash-seed-2026111801"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111801",
+      "intervention_run": "L1-balanced-remove-droop-seed-2026111801"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111801",
+      "intervention_run": "L1-balanced-remove-all-seed-2026111801"
+    },
+    {
+      "raw_run": "L2-balanced-raw-seed-2026111801",
+      "intervention_run": "L2-balanced-remove-all-seed-2026111801"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111802",
+      "intervention_run": "L1-balanced-remove-delay-seed-2026111802"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111802",
+      "intervention_run": "L1-balanced-remove-backlash-seed-2026111802"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111802",
+      "intervention_run": "L1-balanced-remove-droop-seed-2026111802"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111802",
+      "intervention_run": "L1-balanced-remove-all-seed-2026111802"
+    },
+    {
+      "raw_run": "L2-balanced-raw-seed-2026111802",
+      "intervention_run": "L2-balanced-remove-all-seed-2026111802"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111803",
+      "intervention_run": "L1-balanced-remove-delay-seed-2026111803"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111803",
+      "intervention_run": "L1-balanced-remove-backlash-seed-2026111803"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111803",
+      "intervention_run": "L1-balanced-remove-droop-seed-2026111803"
+    },
+    {
+      "raw_run": "L1-balanced-raw-seed-2026111803",
+      "intervention_run": "L1-balanced-remove-all-seed-2026111803"
+    },
+    {
+      "raw_run": "L2-balanced-raw-seed-2026111803",
+      "intervention_run": "L2-balanced-remove-all-seed-2026111803"
+    }
+  ],
+  "targets": [
+    [
+      "normal",
+      1
+    ],
+    [
+      "D2",
+      1
+    ],
+    [
+      "D2",
+      2
+    ],
+    [
+      "D4hi",
+      1
+    ],
+    [
+      "D4hi",
+      2
+    ],
+    [
+      "D3b",
+      1
+    ],
+    [
+      "D3b",
+      2
+    ]
+  ],
+  "workers": 96,
+  "probe_workers": 4,
+  "probe_device": "cuda",
+  "probe_gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "probe_gpu_process_limit": 1,
+  "probe_gpu_output": "/workspace/PORTAL-Trace/course_results/formal-downstream-v1/common-probes-gpu",
+  "execution_history": [
+    {
+      "probe_device": "cuda",
+      "probe_workers": 4,
+      "probe_gpus": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "rollout_workers": 96,
+      "host_worker_launcher": "scripts/run-eval-worker.sh",
+      "updated_unix": 1795041181.1997905
+    }
+  ],
+  "probe_restart_policy": "Started jobs retain original command/output; never-started jobs use selected probe device.",
+  "additional_learning_curve": {
+    "run": "L1-balanced-raw-seed-2026111801",
+    "steps": []
+  },
+  "intermediate_evaluation_use": "learning curves; final comparisons use fixed 30000 updates",
+  "teacher_intervention": false,
+  "device": "cpu",
+  "scheduler_sha256": "4400a43ab3b4b25ac2acfcd35248623414c1e058fbfe643f0ef839773843eb9e",
+  "started_unix": 1795041181.1999032
+}
