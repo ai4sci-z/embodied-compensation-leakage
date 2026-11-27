@@ -1,0 +1,3 @@
+# Keep pip from replacing the GPU-validated wheels installed earlier in the image.
+torch==2.7.1+cu128
+torchvision==0.22.1+cu128

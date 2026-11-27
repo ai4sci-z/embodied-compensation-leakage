@@ -1,0 +1,52 @@
+diff --git a/setup.py b/setup.py
+index 5c905a5..a3d8996 100644
+--- a/setup.py
++++ b/setup.py
+@@ -29,9 +29,9 @@ setup(
+         "egl_probe>=1.0.1",
+         "torch",
+         "torchvision",
+-        "huggingface_hub==0.23.4",
+-        "transformers==4.41.2",
+-        "diffusers==0.11.1",
++        "huggingface_hub>=0.24.0,<1.0",
++        "transformers>=4.41.2,<5.0",
++        "diffusers>=0.11.1,<1.0",
+     ],
+     eager_resources=['*'],
+     include_package_data=True,
+diff --git a/robomimic/utils/lang_utils.py b/robomimic/utils/lang_utils.py
+index 1033bbf..98467fb 100644
+--- a/robomimic/utils/lang_utils.py
++++ b/robomimic/utils/lang_utils.py
+@@ -1,18 +1,23 @@
+ import os
+ from transformers import AutoModel, pipeline, AutoTokenizer, CLIPTextModelWithProjection
+
+ os.environ["TOKENIZERS_PARALLELISM"] = "true" # needed to suppress warning about potential deadlock
+-tokenizer = "openai/clip-vit-large-patch14" #"openai/clip-vit-base-patch32"
+-lang_emb_model = CLIPTextModelWithProjection.from_pretrained(
+-    tokenizer,
+-    cache_dir=os.path.expanduser(os.path.join(os.environ.get("HF_HOME", "~/tmp"), "clip"))
+-).eval()
+-tz = AutoTokenizer.from_pretrained(tokenizer, TOKENIZERS_PARALLELISM=True)
++tokenizer = "openai/clip-vit-large-patch14" #"openai/clip-vit-base-patch32"
++lang_emb_model = None
++tz = None
+
+ LANG_EMB_OBS_KEY = "lang_emb"
+
+ def get_lang_emb(lang):
++    global lang_emb_model, tz
+     if lang is None:
+         return None
++    if lang_emb_model is None:
++        lang_emb_model = CLIPTextModelWithProjection.from_pretrained(
++            tokenizer,
++            cache_dir=os.path.expanduser(os.path.join(os.environ.get("HF_HOME", "~/tmp"), "clip"))
++        ).eval()
++    if tz is None:
++        tz = AutoTokenizer.from_pretrained(tokenizer, TOKENIZERS_PARALLELISM=True)
+
+     tokens = tz(
+         text=lang,                   # the sentence to be encoded
