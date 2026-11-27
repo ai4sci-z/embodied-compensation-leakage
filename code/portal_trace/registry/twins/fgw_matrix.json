@@ -1,0 +1,1885 @@
+{
+  "assert_tol": 1e-12,
+  "clean_shadow_half_range_rad": 1e-05,
+  "d4hi_relaxed": {
+    "L0": {
+      "fgw_baseline": {
+        "max": 4.269701037173945e-09,
+        "min": 3.84273945996938e-09
+      },
+      "fgw_ours": {
+        "max": 4.269704589887624e-09,
+        "min": 3.842735907255701e-09
+      }
+    },
+    "L1": {
+      "fgw_baseline": {
+        "max": 1.748176003957269e-08,
+        "min": 1.5733593983213723e-08
+      },
+      "fgw_ours": {
+        "max": 1.748176359228637e-08,
+        "min": 1.5733590430500044e-08
+      }
+    },
+    "L2": {
+      "fgw_baseline": {
+        "max": 1.5977705558611888e-07,
+        "min": 1.4379935819874845e-07
+      },
+      "fgw_ours": {
+        "max": 1.5977705558611888e-07,
+        "min": 1.4379935464603477e-07
+      }
+    },
+    "L3": {
+      "fgw_baseline": {
+        "max": 1.784843441043904e-06,
+        "min": 1.6063591061765692e-06
+      },
+      "fgw_ours": {
+        "max": 1.7848434445966177e-06,
+        "min": 1.6063591026238555e-06
+      }
+    },
+    "L4": {
+      "fgw_baseline": {
+        "max": 1.6088171911121663e-05,
+        "min": 1.4479354724983295e-05
+      },
+      "fgw_ours": {
+        "max": 1.6088171914674376e-05,
+        "min": 1.4479354724983295e-05
+      }
+    }
+  },
+  "d4hi_shadow_vs_bare": {
+    "IIWA": {
+      "baseline": 1.735403031561481,
+      "ours": 1.6541728215040716
+    },
+    "Kinova3": {
+      "baseline": 1.210899379834085,
+      "ours": 1.042314368240348
+    },
+    "Panda": {
+      "baseline": 1.4237501372818544,
+      "ours": 1.6420041492501507
+    },
+    "Sawyer": {
+      "baseline": 1.8520868587063175,
+      "ours": 1.6838742308059267
+    },
+    "UR5e": {
+      "baseline": 2.1772041292107005,
+      "ours": 2.3391550172266626
+    },
+    "XArm7": {
+      "baseline": 2.220193548068174,
+      "ours": 1.7197054799006062
+    }
+  },
+  "n_cells": 36,
+  "n_pairs": 180,
+  "pairs": [
+    {
+      "defect_code": "D1",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Panda",
+      "fgw_baseline": 3.842743012683059e-09,
+      "fgw_ours": 3.84273945996938e-09,
+      "graph_exception": "shadow_joint",
+      "level": 0,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Panda",
+      "fgw_baseline": 1.57335975359274e-08,
+      "fgw_ours": 1.5733590430500044e-08,
+      "graph_exception": "shadow_joint",
+      "level": 1,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Panda",
+      "fgw_baseline": 1.4379936175146213e-07,
+      "fgw_ours": 1.4379935819874845e-07,
+      "graph_exception": "shadow_joint",
+      "level": 2,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Panda",
+      "fgw_baseline": 1.6063591097292829e-06,
+      "fgw_ours": 1.6063591026238555e-06,
+      "graph_exception": "shadow_joint",
+      "level": 3,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Panda",
+      "fgw_baseline": 1.4479354728536009e-05,
+      "fgw_ours": 1.4479354724983295e-05,
+      "graph_exception": "shadow_joint",
+      "level": 4,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D5",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Panda",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Sawyer",
+      "fgw_baseline": 3.84273945996938e-09,
+      "fgw_ours": 3.842743012683059e-09,
+      "graph_exception": "shadow_joint",
+      "level": 0,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Sawyer",
+      "fgw_baseline": 1.57335975359274e-08,
+      "fgw_ours": 1.5733590430500044e-08,
+      "graph_exception": "shadow_joint",
+      "level": 1,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Sawyer",
+      "fgw_baseline": 1.4379935819874845e-07,
+      "fgw_ours": 1.4379935819874845e-07,
+      "graph_exception": "shadow_joint",
+      "level": 2,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Sawyer",
+      "fgw_baseline": 1.6063591061765692e-06,
+      "fgw_ours": 1.6063591061765692e-06,
+      "graph_exception": "shadow_joint",
+      "level": 3,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Sawyer",
+      "fgw_baseline": 1.4479354724983295e-05,
+      "fgw_ours": 1.4479354728536009e-05,
+      "graph_exception": "shadow_joint",
+      "level": 4,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D5",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Sawyer",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "IIWA",
+      "fgw_baseline": 3.84273945996938e-09,
+      "fgw_ours": 3.84273945996938e-09,
+      "graph_exception": "shadow_joint",
+      "level": 0,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "IIWA",
+      "fgw_baseline": 1.5733593983213723e-08,
+      "fgw_ours": 1.5733593983213723e-08,
+      "graph_exception": "shadow_joint",
+      "level": 1,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "IIWA",
+      "fgw_baseline": 1.4379935819874845e-07,
+      "fgw_ours": 1.4379935464603477e-07,
+      "graph_exception": "shadow_joint",
+      "level": 2,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "IIWA",
+      "fgw_baseline": 1.6063591061765692e-06,
+      "fgw_ours": 1.6063591061765692e-06,
+      "graph_exception": "shadow_joint",
+      "level": 3,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "IIWA",
+      "fgw_baseline": 1.4479354728536009e-05,
+      "fgw_ours": 1.4479354728536009e-05,
+      "graph_exception": "shadow_joint",
+      "level": 4,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D5",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "IIWA",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Kinova3",
+      "fgw_baseline": 3.84273945996938e-09,
+      "fgw_ours": 3.84273945996938e-09,
+      "graph_exception": "shadow_joint",
+      "level": 0,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Kinova3",
+      "fgw_baseline": 1.57335975359274e-08,
+      "fgw_ours": 1.57335975359274e-08,
+      "graph_exception": "shadow_joint",
+      "level": 1,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Kinova3",
+      "fgw_baseline": 1.4379936175146213e-07,
+      "fgw_ours": 1.4379935819874845e-07,
+      "graph_exception": "shadow_joint",
+      "level": 2,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Kinova3",
+      "fgw_baseline": 1.6063591061765692e-06,
+      "fgw_ours": 1.6063591061765692e-06,
+      "graph_exception": "shadow_joint",
+      "level": 3,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "Kinova3",
+      "fgw_baseline": 1.4479354728536009e-05,
+      "fgw_ours": 1.4479354728536009e-05,
+      "graph_exception": "shadow_joint",
+      "level": 4,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D5",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "Kinova3",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "XArm7",
+      "fgw_baseline": 3.842743012683059e-09,
+      "fgw_ours": 3.842735907255701e-09,
+      "graph_exception": "shadow_joint",
+      "level": 0,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "XArm7",
+      "fgw_baseline": 1.5733593983213723e-08,
+      "fgw_ours": 1.5733593983213723e-08,
+      "graph_exception": "shadow_joint",
+      "level": 1,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "XArm7",
+      "fgw_baseline": 1.4379935819874845e-07,
+      "fgw_ours": 1.4379935819874845e-07,
+      "graph_exception": "shadow_joint",
+      "level": 2,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "XArm7",
+      "fgw_baseline": 1.6063591061765692e-06,
+      "fgw_ours": 1.6063591061765692e-06,
+      "graph_exception": "shadow_joint",
+      "level": 3,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "XArm7",
+      "fgw_baseline": 1.4479354728536009e-05,
+      "fgw_ours": 1.4479354728536009e-05,
+      "graph_exception": "shadow_joint",
+      "level": 4,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D5",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "XArm7",
+      "fgw_baseline": 1.7763568394002505e-15,
+      "fgw_ours": 0.0,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D1",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D2",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D3b",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "UR5e",
+      "fgw_baseline": 4.269701037173945e-09,
+      "fgw_ours": 4.269704589887624e-09,
+      "graph_exception": "shadow_joint",
+      "level": 0,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "UR5e",
+      "fgw_baseline": 1.748176003957269e-08,
+      "fgw_ours": 1.748176359228637e-08,
+      "graph_exception": "shadow_joint",
+      "level": 1,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "UR5e",
+      "fgw_baseline": 1.5977705558611888e-07,
+      "fgw_ours": 1.5977705558611888e-07,
+      "graph_exception": "shadow_joint",
+      "level": 2,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "UR5e",
+      "fgw_baseline": 1.784843441043904e-06,
+      "fgw_ours": 1.7848434445966177e-06,
+      "graph_exception": "shadow_joint",
+      "level": 3,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D4hi",
+      "family": "UR5e",
+      "fgw_baseline": 1.6088171911121663e-05,
+      "fgw_ours": 1.6088171914674376e-05,
+      "graph_exception": "shadow_joint",
+      "level": 4,
+      "node_feature_equal": false
+    },
+    {
+      "defect_code": "D5",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D5",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 0,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 1,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 2,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 3,
+      "node_feature_equal": true
+    },
+    {
+      "defect_code": "D6",
+      "family": "UR5e",
+      "fgw_baseline": 0.0,
+      "fgw_ours": 7.105427357601002e-15,
+      "graph_exception": "none",
+      "level": 4,
+      "node_feature_equal": true
+    }
+  ],
+  "real_morphology_pairs": {
+    "baseline": [
+      {
+        "a": "Panda",
+        "b": "Sawyer",
+        "fgw": 10.280744963809553
+      },
+      {
+        "a": "Panda",
+        "b": "IIWA",
+        "fgw": 2.5537606730884495
+      },
+      {
+        "a": "Panda",
+        "b": "Kinova3",
+        "fgw": 4.0931169288383344
+      },
+      {
+        "a": "Panda",
+        "b": "XArm7",
+        "fgw": 7.367214347108117
+      },
+      {
+        "a": "Panda",
+        "b": "UR5e",
+        "fgw": 11.689187849325483
+      },
+      {
+        "a": "Sawyer",
+        "b": "IIWA",
+        "fgw": 11.34517058183057
+      },
+      {
+        "a": "Sawyer",
+        "b": "Kinova3",
+        "fgw": 11.73026205172935
+      },
+      {
+        "a": "Sawyer",
+        "b": "XArm7",
+        "fgw": 12.999540626518991
+      },
+      {
+        "a": "Sawyer",
+        "b": "UR5e",
+        "fgw": 10.107786604715939
+      },
+      {
+        "a": "IIWA",
+        "b": "Kinova3",
+        "fgw": 6.680471500259737
+      },
+      {
+        "a": "IIWA",
+        "b": "XArm7",
+        "fgw": 8.46529681942849
+      },
+      {
+        "a": "IIWA",
+        "b": "UR5e",
+        "fgw": 12.023816546145413
+      },
+      {
+        "a": "Kinova3",
+        "b": "XArm7",
+        "fgw": 10.10020789054828
+      },
+      {
+        "a": "Kinova3",
+        "b": "UR5e",
+        "fgw": 14.724693047412826
+      },
+      {
+        "a": "XArm7",
+        "b": "UR5e",
+        "fgw": 12.142212919247061
+      }
+    ],
+    "ours": [
+      {
+        "a": "Panda",
+        "b": "Sawyer",
+        "fgw": 18.57684935885065
+      },
+      {
+        "a": "Panda",
+        "b": "IIWA",
+        "fgw": 11.381813664696544
+      },
+      {
+        "a": "Panda",
+        "b": "Kinova3",
+        "fgw": 13.783926201974573
+      },
+      {
+        "a": "Panda",
+        "b": "XArm7",
+        "fgw": 13.898427695390888
+      },
+      {
+        "a": "Panda",
+        "b": "UR5e",
+        "fgw": 19.572263281149155
+      },
+      {
+        "a": "Sawyer",
+        "b": "IIWA",
+        "fgw": 11.61309265381045
+      },
+      {
+        "a": "Sawyer",
+        "b": "Kinova3",
+        "fgw": 11.553816341070931
+      },
+      {
+        "a": "Sawyer",
+        "b": "XArm7",
+        "fgw": 9.555154666019634
+      },
+      {
+        "a": "Sawyer",
+        "b": "UR5e",
+        "fgw": 9.230870064842986
+      },
+      {
+        "a": "IIWA",
+        "b": "Kinova3",
+        "fgw": 7.170387728341527
+      },
+      {
+        "a": "IIWA",
+        "b": "XArm7",
+        "fgw": 5.6204221565889085
+      },
+      {
+        "a": "IIWA",
+        "b": "UR5e",
+        "fgw": 11.827129472293027
+      },
+      {
+        "a": "Kinova3",
+        "b": "XArm7",
+        "fgw": 7.123333207476563
+      },
+      {
+        "a": "Kinova3",
+        "b": "UR5e",
+        "fgw": 15.527681899950496
+      },
+      {
+        "a": "XArm7",
+        "b": "UR5e",
+        "fgw": 8.976940567689182
+      }
+    ]
+  },
+  "shadow_joint_ordinal": 3,
+  "thresholds": {
+    "baseline": {
+      "closest_real_distance": 2.5537606730884495,
+      "closest_real_pair": [
+        "Panda",
+        "IIWA"
+      ],
+      "passes": true,
+      "within_cluster_threshold": 0.25537606730884493,
+      "worst_twin_distance": 1.6088171911121663e-05
+    },
+    "ours": {
+      "closest_real_distance": 5.6204221565889085,
+      "closest_real_pair": [
+        "IIWA",
+        "XArm7"
+      ],
+      "passes": true,
+      "within_cluster_threshold": 0.5620422156588909,
+      "worst_twin_distance": 1.6088171914674376e-05
+    }
+  }
+}
