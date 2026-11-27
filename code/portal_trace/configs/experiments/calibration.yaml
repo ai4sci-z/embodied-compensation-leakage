@@ -1,0 +1,298 @@
+# P0 pre-calibration (10.2) and P1 teacher validation (10.3).
+#
+# Both are zero-GPU. P1 carries two of the three zero-GPU gates that 11.3 puts
+# ahead of everything else in the unblinding order, so its `endpoints` are the
+# gates themselves rather than descriptive statistics.
+
+schema_version: 1
+
+experiments:
+  P0:
+    title: "Pre-calibration: is the object of study inside a measurable window?"
+    phase: calibration
+    zero_gpu: true
+    question: >-
+      Before any GPU is spent, turn "is the object of study inside a measurable
+      window on this task set and this defect set" into numbers.
+    independent_variables:
+      - "6 defects x 5 amplitude levels x 6 families x 8 tasks"
+      - "3 solref/solimp groups for the force calibration curve"
+      - "geometry variants G0 / G1 / G2 on the tight nut tasks"
+    state_distribution: "on-policy rollouts of the uncompensated tracker (ILC k = 0)"
+    null_distribution: none
+    primary_test: "descriptive; no hypothesis is tested at P0"
+    bootstrap: none
+    arms: []
+    subset: null
+    design: null
+    prereg_items: [11, 12]
+    gpu_hours: 0
+    cpu_hours: 21
+    zero_result_exit: >-
+      Fewer than 5 defects satisfy the Goldilocks criterion simultaneously ->
+      return to defect design; the demonstration pipeline does not start.
+    endpoints:
+      - name: goldilocks_success_rate
+        kind: design_diagnostic
+        estimator: >-
+          uncompensated tracker terminal-hold success rate, 20 rollouts per
+          cell; the task predicate must hold on all final 20 control frames
+        statistic: "success rate in [25%, 65%], clean twin at least 90%"
+        dimension: probability
+        verdict_rule: >-
+          A cell passes when its uncompensated success rate is in [25%, 65%] and
+          the same family's clean twin is at 90% or above. It is a
+          defect-over-task-tolerance criterion, not a defect-amplitude
+          criterion.
+      - name: kappa
+        kind: design_diagnostic
+        estimator: "||c_delta(x*)|| / tol(tau), evaluated in the terminal fine-approach phase"
+        statistic: "per-cell ratio, reported with its tol_kind column"
+        dimension: dimensionless
+        verdict_rule: >-
+          Evaluated only on frames with end-effector-to-target distance below
+          15 mm and speed below 0.05 m/s. A whole-trajectory peak is not
+          admissible: at 0.30 m/s the same D2 level reads 15 mm instead of
+          1.0 mm. radial_clearance and marker_halfwidth are different semantics
+          and are never ranked in one column.
+      - name: directional_clearance
+        kind: design_diagnostic
+        estimator: "cl_+ and cl_- by MuJoCo stepwise collision query along v"
+        statistic: "asymmetry = cl_- - cl_+, with angle(v, u) and angle(v, n)"
+        dimension: dimensionless
+        verdict_rule: >-
+          Only levels with a measured angle below 30 degrees enter T8's sign
+          prediction. D1 and D6 get no prior classification; it is decided per
+          level. Ray casting is not used -- a ray through a hollow nut passes
+          through the hole.
+      - name: peak_cfrc_ext_calibration
+        kind: design_diagnostic
+        estimator: "peak cfrc_ext against terminal offset d and approach speed v"
+        statistic: "calibration curve, one per solref/solimp group"
+        dimension: dimensionless
+        verdict_rule: >-
+          The safety endpoint runs on the collision transient. Quasi-static
+          contact force is excluded (appendix A-11): controller and environment
+          stiffness are in series, so F -> k_p * d saturates, and at
+          k_p = 150 a 0.5 mm penetration is 0.075 N, under the noise floor.
+      - name: d3_equivalent_delay
+        kind: design_diagnostic
+        estimator: "equivalent delay of both D3 calibers, per level"
+        statistic: "milliseconds"
+        dimension: seconds
+        verdict_rule: >-
+          T8's carrier must be D3b, the purely static caliber (below 1 ms at
+          every level). D3a's omega_n is about 4.5 Hz, inside the control
+          bandwidth, so it is not orthogonal to D2 (appendix A-16).
+      - name: shadow_joint_offset
+        kind: design_diagnostic
+        estimator: "tracking RMS and peak cfrc_ext, shadow-joint clean twin minus plain clean"
+        statistic: "absolute offset"
+        dimension: dimensionless
+        verdict_rule: >-
+          Lambda is barely affected (both sides of the pair carry the shadow
+          joint and the mismatch cancels in the difference), but T8 and the
+          safety endpoint use absolute quantities and inherit it directly. If
+          the peak-cfrc_ext difference exceeds the safety endpoint's MDE, T8
+          either moves to the D4 low-fidelity caliber or switches to the
+          failure-type profile.
+      - name: level_real_machine_reference
+        kind: design_diagnostic
+        estimator: "injected parameter and measured observable of every level, per family"
+        statistic: "whether the level sits inside 10.2.4's real-machine range"
+        dimension: dimensionless
+        verdict_rule: >-
+          10.2.4 states the range against the observable for D1 / D2 / D3, and
+          against the injection parameter for D4 / D5 / D6; the comparison
+          follows the column the range was written for. A defect 10.2.4 does not
+          tabulate -- D8, which was priority C when that table was written --
+          gets an empty reference and says so, because inventing a range for it
+          would be the one number in the table no section stands behind.
+      - name: d5_dead_zone_duty
+        kind: design_diagnostic
+        estimator: "per (embodiment, joint) share of time inside the dead zone"
+        statistic: "share"
+        dimension: dimensionless
+        verdict_rule: >-
+          The D5 caliber (total_ctrl or task_only) must be the same across all
+          six families, or the six cells are not the same physical quantity. If
+          after unification some family has every joint below 5%, D5 leaves the
+          primary test and a seventh defect takes its place.
+    requires_measurements:
+      - key: "task.tol.{task}.{geom_variant}"
+        stages: [diagnose]
+      - key: "task.tol_kind.{task}.{geom_variant}"
+        stages: [diagnose]
+      - key: "geom.clearance.{task}.{geom_variant}.{direction}"
+        stages: [diagnose]
+        expand: {direction: [plus, minus]}
+      - key: "sim.tau_step.{family}.{task}"
+        stages: [collect, evaluate]
+      - key: "sim.tau_frame.{family}.{task}"
+        stages: [materialise]
+      - key: "sim.hard_reset_default"
+        stages: [collect]
+      - key: "mjcf.armature.{family}.{joint}"
+        stages: [diagnose]
+      - key: "defect.d6_stiction_offset.{family}.{joint}"
+        stages: [diagnose]
+      - key: "defect.observable.{defect}.{level}.{family}"
+        stages: [diagnose]
+    notes: >-
+      P0 freezes one decision level for each (family, defect) cell, the kappa
+      evaluation phase, the tracker gain table, the T8 verdict set, the three
+      solref/solimp groups, the D5 caliber and the two FGW assertions. Changing any of them
+      afterwards invalidates every subsequent preregistration.
+      The nine tables of 10.2.5 are produced by eval.calibration_tables. Eight
+      of them are the endpoints above; the ninth is the three-way feasibility
+      table, which is built here from the P0 sweep but is declared under P1,
+      where its gate G3 is recorded.
+
+  P1:
+    title: "Teacher validation: the three zero-GPU gates and the regime tables"
+    phase: gate
+    zero_gpu: true
+    question: >-
+      Is there compensation in the demonstrations at all, is it visible in the
+      feedforward's projection residual, and is T8 measurable?
+    independent_variables:
+      - "cross replay direction (defective -> twin and twin -> defective)"
+      - "regime, over the 5-way partition of 9.7.1"
+      - "geometry variant, for the T8 feasibility check"
+    state_distribution: "the collected demonstrations, replayed open loop"
+    null_distribution: >-
+      none for the gates -- they are pass/fail conditions on measured
+      quantities, not tested hypotheses
+    primary_test: "gate conditions; no significance test"
+    bootstrap: "trajectory-level block bootstrap for the reported CIs"
+    arms: []
+    subset: S36
+    design: null
+    prereg_items: [9, 11]
+    gpu_hours: 0
+    cpu_hours: 18
+    zero_result_exit: >-
+      F6: a negative gate overturns a whole strand of the argument; 11.3 records
+      the gate results as deliverables whichever way they come out. The exit is
+      10.9's F6 -- the ILC teacher is not human-like, or assumption (A4) is
+      refused by the held-out task R^2 (R^2 < 0.5 or E_phi > 0.35). The
+      conclusions then restrict to the feedforward, task-independent subclass of
+      compensation, and the strength of the task dependence itself becomes the
+      reported measurement.
+    endpoints:
+      - name: phi_projection_residual_share
+        kind: design_diagnostic
+        estimator: >-
+          share of the converged ILC feedforward's energy not captured by the
+          projection onto the state feature basis phi, reported separately for
+          the free-space and contact phases
+        statistic: "E_phi, per phase, never a merged value"
+        dimension: energy
+        reference_arm: null
+        verdict_rule: >-
+          Gate 1 of the unblinding order: it decides whether the object of study
+          exists. Reported per phase because a merged number hides the case
+          where the free-space phase carries all the structure. 10.8.1 fixes the
+          three tiers -- per cell 0.25, median 0.15, any cell above 0.50 has no
+          c_delta on it -- and the gate on the aggregate at 0.35. The aggregate
+          is E_phi over the pooled frames of all cells, computed from the summed
+          residual and de-meaned energies, because a share of sums is not a mean
+          of shares under any weight the cells supply. A cell above 0.50 is
+          recorded against that cell, whose exit is F6, and does not by itself
+          fail the gate.
+      - name: cross_replay_failure_profile
+        kind: design_diagnostic
+        estimator: >-
+          bidirectional open-loop replay, defective demonstration on the clean
+          twin and vice versa, with the failure type recorded
+        statistic: "success rate and failure-type profile in both directions"
+        dimension: probability
+        reference_arm: null
+        verdict_rule: >-
+          Gate 2: it decides whether there is compensation in the demonstrations
+          at all. The standard is a success-rate drop of at least 15 pp and a
+          peak cfrc_ext rise of at least 5 N. 10.8.1 states it for one reading
+          and the gate runs over the replayed cells; since the question is
+          whether compensation is there at all, one cell clearing both effect
+          sizes carries it, and the share of cells that did is reported next to
+          the verdict. The bidirectional failure profile is also the first
+          evidence for harm asymmetry, so it is reported whichever way it comes
+          out.
+      - name: t8_three_way_feasibility
+        kind: design_diagnostic
+        estimator: >-
+          per (defect, level, task, geometry variant): P0 bite, success-rate
+          ceiling, intermediate amplitude band
+        statistic: "the set of quadruples passing all three conditions"
+        dimension: count
+        reference_arm: null
+        verdict_rule: >-
+          Gate 3: it decides whether T8 is measurable at all. Exit F8 is taken
+          only when every geometry variant's feasible set is empty.
+      - name: regime_occupancy_mass
+        kind: design_diagnostic
+        estimator: "occupancy mass per (task, defect, regime), with tau_corr"
+        statistic: "m_r and the effective frame count n / tau_corr"
+        dimension: dimensionless
+        verdict_rule: >-
+          Admission needs m_min = 0.02 AND n_min = 2000 raw frames. A regime
+          failing admission on more than a third of the (tau, delta) cells
+          leaves the stratified analysis entirely; the outcome is a report/do-not
+          -report flag, never a remedy, because a remedy is selective reporting.
+      - name: per_regime_connectivity
+        kind: design_diagnostic
+        estimator: >-
+          component count, lambda_2 and R_eff on the key task pairs of the
+          design graph restricted to each regime, at both admission calibers
+        statistic: "the do-not-report list, with the N_0 sensitivity beside it"
+        dimension: count
+        verdict_rule: >-
+          9.7.5 states two admission rules for the same edge set and they do not
+          agree: N_0 raw frames per cell, swept over 50 / 200 / 800 with 200 as
+          the main caliber, and m >= 0.02 with n >= 2000 raw frames. The
+          stricter pair carries the do-not-report list; the N_0 sweep is
+          reported as the sensitivity, and a regime whose verdict moves across
+          the sweep is treated at its most conservative level. The outcome is a
+          report / do-not-report flag and never a remedy.
+      - name: cross_embodiment_tv
+        kind: design_diagnostic
+        estimator: >-
+          TV between the defective and clean state occupancies of one twin pair
+          on the same task, on a stated state partition
+        statistic: "TV per (task, defect configuration), with its same-distribution null"
+        dimension: probability
+        verdict_rule: >-
+          A reading on one partition is a lower bound on the true TV, which is
+          the useful direction: this is the only measurement of the first term
+          of proposition 1(e)'s bias bound, the task-scale one, and a lower
+          bound that is already large settles it. The null says how much of the
+          reading two samples of these sizes would produce on their own.
+      - name: z_probe_balanced_accuracy
+        kind: design_diagnostic
+        estimator: >-
+          balanced accuracy of a probe for the wrapper memory state z, per
+          memory-carrying defect (D2 / D4 / D10) x 5 levels x K_hist in
+          {1, 2, 5, 10}, against the majority-class baseline
+        statistic: "balanced accuracy minus majority-class baseline"
+        dimension: probability
+        verdict_rule: >-
+          The direct measurement of (A5)(ii). Below 0.10 above baseline, that
+          combination's conclusion is reported only as "on inputs where z is not
+          identifiable", and it must appear next to E_phi.
+    requires_measurements:
+      - key: "regime.threshold.{name}.{task}.{family}"
+        stages: [diagnose]
+        fixed_scope: {name: contact_force}
+      - key: "stats.tau_corr.{task}.{defect}.{regime}"
+        stages: [diagnose]
+        expand: {regime: [r0, r1, r2, r3, r4]}
+      - key: "phi.effective_rank"
+        stages: [diagnose]
+    notes: >-
+      The three gates are unblinded in the order they are listed: projection
+      residual, cross replay, T8 feasibility. None of them costs GPU time, so
+      11.3 forbids scheduling them after training. All five verdicts of 10.8 are
+      computed by runners.gates and recorded through the ledger; none of them is
+      entered by hand. P1's three mandatory outputs of 10.3.2 -- the 1440-row
+      occupancy table, the per-regime connectivity report and the
+      cross-embodiment TV table -- are produced by eval.regime_tables.

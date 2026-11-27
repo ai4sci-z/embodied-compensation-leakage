@@ -1,0 +1,1737 @@
+# The ablation table A1-A14 (proposal 10.6.1).
+#
+# Same schema as `main.yaml`, and loaded by the same code, because 10.6.1's rows
+# are preregistered objects rather than exploratory sweeps: three of them are the
+# design that discharges a confounder of 10.6.2, and a sensitivity analysis whose
+# levels were fixed after the numbers were seen discharges nothing.
+#
+# Four keys have no counterpart in a main experiment:
+#
+#   dimension           10.6.1's second column: what is varied.
+#   levels              the third column, one block each. Exactly one is `is_main`
+#                       -- the setting the main experiments already ran -- and it
+#                       adds no runs, because the ablation reads the other levels
+#                       against an arm the paper already reports rather than
+#                       against a retrained copy of it.
+#   implemented_by      the code object the levels move, `module:symbol`. Without
+#                       it a row is a description of an ablation and not one; with
+#                       it, deleting the parameterisation breaks the config load.
+#   confounders_closed  the X-numbers of 10.6.2 this row is the designated design
+#                       for. X10 is the reason the field exists: its whole content
+#                       is that a safety number can be moved by a solver knob, and
+#                       "A8 closes X10" was a sentence that nothing checked.
+#
+# Budget (10.6.1's subtotal, quoted again in the 9.8.1 table): 114 runs and 570
+# GPU-h, at the 5.0 GPU-h per run of 9.8.1. Every row runs S6 -- Panda / UR5e x
+# D2 / D3b / D4hi, six cells -- at one seed per level, except A11, whose subject
+# is the seed count. A row's `n_runs` is the sum of its levels' `incremental_runs`
+# and the loader refuses a disagreement.
+#
+# The three reading rules of 10.6.3 are preregistered here, in the rows they
+# govern: an ablation never changes a main conclusion (it annotates its scope);
+# A1 and A3 are findings rather than cleanup, and are reported whichever way they
+# come out; and A8 is a gate on the safety endpoints rather than an appendix.
+
+schema_version: 1
+
+ablations:
+
+  # -------------------------------------------------------------------------
+  A1:
+    title: "Observation modality"
+    phase: ablation
+    zero_gpu: false
+    dimension: "observation modality"
+    question: >-
+      Which sensory channel does the inherited compensation travel down? The
+      pooled arm sees two RGB streams and a 70-dimensional proprioception
+      vector; if the leakage survives with the proprioception pathway removed it
+      cannot be carried by an embodiment cue read off the joint state alone.
+    independent_variables:
+      - "sensor pathways present: RGB only / RGB + proprioception (main) / proprioception only"
+      - "everything else held at 10.4.0: pool, capacity, K_hist = 5, global normalisation"
+    state_distribution: >-
+      rho^off, as for the main Lambda endpoint; the modality intervention is on
+      the policy input and not on the state distribution it is read over
+    null_distribution: >-
+      surrogate defect distribution, the same 8 preregistered surrogates as E1,
+      recomputed per level because the nuisance basis is projected out inside
+      each level's own model
+    primary_test: >-
+      no confirmatory test: preregistration item 16 registers T3 as exploratory,
+      so the three levels are reported as a share decomposition and take no
+      multiple-comparison slot
+    bootstrap: "paired, resampling shared initial-state indices within a level"
+    arms: [B2, A1_rgb, A1_proprio]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [2, 6, 10, 14, 15, 16]
+    n_runs: 12
+    gpu_hours: 60
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.policies.obs:ObsSpec"
+      - "portal_trace.ablations.modality:ModalitySpec"
+      - "portal_trace.ablations.modality_nets:build_modality_policy"
+    confounders_closed: []
+    levels:
+      - level_id: rgb
+        label: "RGB only"
+        is_main: false
+        arm: A1_rgb
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {use_images: true, use_proprio: false}
+        rationale: >-
+          The proprioception pathway is removed structurally, not zeroed: a
+          zeroed input still lets the first layer's bias carry a per-embodiment
+          offset, so a masked arm answers a different question. This is B9's
+          intervention on the ablation subset, and running it here is what makes
+          A1's three levels one ladder instead of a cross-chapter comparison.
+      - level_id: rgb_proprio
+        label: "RGB + proprioception (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {use_images: true, use_proprio: true}
+        rationale: >-
+          10.4.0's arm. It adds no runs: the six S6 cells are a subset of B2's
+          36, so the level is read off the checkpoints the primary endpoint
+          already owns.
+      - level_id: proprio
+        label: "proprioception only"
+        is_main: false
+        arm: A1_proprio
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {use_images: false, use_proprio: true}
+        rationale: >-
+          The other end of the ladder, and the level with no counterpart
+          anywhere else in the design. The visual trunk is absent rather than
+          fed black frames, for the same reason the RGB-only level has no
+          proprioception encoder. Both camera names stay in the ObsSpec: they
+          name the streams collection recorded, and the data card reports them.
+    endpoints:
+      - name: a1_modality_share
+        kind: exploratory
+        estimator: >-
+          Lambda^part per level, each against the same B7 Oracle, reported as
+          the three-way decomposition Lambda^part(RGB) / Lambda^part(RGB+P) /
+          Lambda^part(P)
+        statistic: "point estimate and 95% CI per level, and the pairwise differences"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Reported as exploratory whichever way it comes out (10.6.3 rule 2 and
+          preregistration item 16): a result saying most of the leakage enters
+          through proprioception has direct consequences for interface design
+          and is not a licence to drop the channel and re-report the main
+          number. No confirmatory criterion, no Holm-Bonferroni slot.
+      - name: a1_leak_beh_by_modality
+        kind: descriptive
+        estimator: "Leak_beh per level, with B1's single-embodiment arm as denominator"
+        statistic: "share in [0, 1] per level"
+        dimension: dimensionless
+        verdict_rule: >-
+          Reported beside the amplitude column so that a level whose Lambda
+          moves because its policy is simply worse can be told apart from one
+          whose leakage genuinely changed.
+    requires_measurements:
+      - key: "obs.proprio_native_dim.{family}"
+        stages: [collect, train]
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+    notes: >-
+      Feeds the mechanism figure of 10.9.2 together with A3. The share
+      decomposition is subject to appendix A-4: every share is a Lambda^part
+      against one and the same B7, or the unexplained term absorbs the
+      reference-point drift.
+
+  # -------------------------------------------------------------------------
+  A2:
+    title: "History window length K_hist"
+    phase: ablation
+    zero_gpu: false
+    dimension: "history window length K_hist"
+    question: >-
+      Does a single-frame policy inherit compensation the same way a
+      history-conditioned one does, and is the regime label of 9.7 constructible
+      from the window the main arm uses?
+    independent_variables:
+      - "K_hist in {1, 2, 5 (main), 10} frames at 20 Hz"
+      - "everything else held at 10.4.0, including the two camera streams"
+    state_distribution: >-
+      rho^off; the window length changes what the policy conditions on, not the
+      distribution the endpoint is averaged over
+    null_distribution: >-
+      surrogate defect distribution, 8 preregistered surrogates, recomputed per
+      level
+    primary_test: "crossed random-effects mixed model over the six S6 cells, level as a fixed effect"
+    bootstrap: "paired, resampling shared initial-state indices within a level"
+    arms: [B2, A2_k1, A2_k2, A2_k10]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [2, 6, 9, 14, 15]
+    n_runs: 18
+    gpu_hours: 90
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.policies.obs:K_HIST_LEVELS"
+      - "portal_trace.policies.obs:ObsSpec"
+    confounders_closed: [X11]
+    levels:
+      - level_id: k1
+        label: "1 frame"
+        is_main: false
+        arm: A2_k1
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {k_hist: 1}
+        rationale: >-
+          T7's single-frame arm. A memory-carrying defect (D4's backlash band,
+          D5's dead zone) is a hidden state at one frame, so this level is where
+          the leakage structure is predicted to differ in kind rather than in
+          degree.
+      - level_id: k2
+        label: "2 frames"
+        is_main: false
+        arm: A2_k2
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {k_hist: 2}
+        rationale: >-
+          The shortest window that admits a velocity sign, which is what the r1
+          reversal predicate of 9.7.1 is built from. It separates "history helps"
+          from "two frames are enough".
+      - level_id: k5
+        label: "5 frames (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {k_hist: 5}
+        rationale: >-
+          10.4.0's caliber: 0.25 s at 20 Hz. Read off B2's checkpoints, which
+          already cover the six S6 cells.
+      - level_id: k10
+        label: "10 frames"
+        is_main: false
+        arm: A2_k10
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {k_hist: 10}
+        rationale: >-
+          The long end. X11 is the possibility that the regime label is a
+          misread hidden state; if the z-probe's balanced accuracy is flat from
+          5 to 10 frames, the main caliber is not window-starved.
+    endpoints:
+      - name: a2_lambda_by_window
+        kind: secondary
+        estimator: "Lambda^part per level against the same B7 Oracle"
+        statistic: "point estimate, 95% CI, and the k1-minus-k5 paired difference"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Significant when the k1-minus-k5 difference excludes zero on at least
+          4 of the 6 cells. A sign flip promotes the window length to a stated
+          condition of the main conclusion (10.6.3 rule 1) rather than being
+          reported as the favourable level.
+      - name: a2_z_probe_accuracy_by_window
+        kind: design_diagnostic
+        estimator: >-
+          balanced accuracy of the z probe of 10.3.3, trained on each level's
+          own window
+        statistic: "balanced accuracy in [0, 1] per level"
+        dimension: probability
+        reference_arm: B7
+        verdict_rule: >-
+          A window whose probe is at chance cannot carry the regime label, and
+          every per-regime endpoint on that level is withheld under item 9's
+          "if a regime is disconnected, that regime's conclusion is not
+          reported".
+    requires_measurements:
+      - key: "stats.tau_corr.{task}.{defect}.{regime}"
+        stages: [diagnose]
+        expand: {regime: [r0, r1, r2, r3, r4]}
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+    notes: >-
+      Carries half of X11's discharge: the regime labels are constructed from a
+      short history window, and this row is the evidence that the construction
+      is not sensitive to the window it was built with. The other half is the z
+      probe and P1's "do not report a disconnected regime" rule.
+
+  # -------------------------------------------------------------------------
+  A3:
+    title: "Action normalisation caliber"
+    phase: ablation
+    zero_gpu: false
+    dimension: "action normalisation caliber"
+    question: >-
+      Does the normalisation absorb the defect? Statistics fitted per embodiment
+      subtract exactly the per-embodiment mean a constant compensation field
+      produces, so a leakage number computed under that caliber would be smaller
+      for a reason that has nothing to do with what the learner did.
+    independent_variables:
+      - "normalisation scope: global (main) / per embodiment / per task / none"
+      - "everything else held at 10.4.0"
+    state_distribution: "rho^off"
+    null_distribution: >-
+      surrogate defect distribution, 8 preregistered surrogates, recomputed per
+      level because the caliber changes the action labels the surrogate
+      alignment is measured against
+    primary_test: "crossed random-effects mixed model over the six S6 cells, caliber as a fixed effect"
+    bootstrap: "paired, resampling shared initial-state indices within a level"
+    arms: [B2, A3_per_embodiment, A3_per_task, A3_none]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [2, 6, 10, 14, 15]
+    n_runs: 18
+    gpu_hours: 90
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.ablations.normalisation:ActionNormCaliber"
+      - "portal_trace.ablations.normalisation:absorbs_constant_offset"
+    confounders_closed: [X7]
+    levels:
+      - level_id: global
+        label: "global (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {caliber: global}
+        rationale: >-
+          9.6.2's caliber, and the reason it is the main one: a single (mean,
+          scale) pair over the whole pool cannot subtract anything that is
+          specific to one embodiment.
+      - level_id: per_embodiment
+        label: "per embodiment"
+        is_main: false
+        arm: A3_per_embodiment
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {caliber: per_embodiment}
+        rationale: >-
+          X7 itself, run deliberately. This is the caliber that removes a
+          constant per-embodiment offset from the labels; D1-type defects are
+          expected to lose their leakage entirely under it, and D3b, being
+          configuration-dependent, is not -- which makes D3b the anchor that
+          tells absorption apart from a general drop.
+      - level_id: per_task
+        label: "per task"
+        is_main: false
+        arm: A3_per_task
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {caliber: per_task}
+        rationale: >-
+          The control for the level above: its groups pool all embodiments, so a
+          per-embodiment offset survives as a within-group difference. If the
+          leakage drops here too, the mechanism is not absorption but the
+          re-scaling that any grouped caliber applies.
+      - level_id: none
+        label: "no normalisation"
+        is_main: false
+        arm: A3_none
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {caliber: none}
+        rationale: >-
+          The identity transform, which bounds the whole family: whatever the
+          normalisation does, it does not do it here. Distinct from the global
+          caliber, which has one statistics block rather than none.
+    endpoints:
+      - name: a3_lambda_by_caliber
+        kind: secondary
+        estimator: "Lambda^part per caliber against the same B7 Oracle"
+        statistic: "point estimate, 95% CI, and each caliber's difference from global"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Reported as a finding, not as a correction (10.6.3 rule 2). If the
+          per-embodiment caliber suppresses the leakage on the constant-offset
+          defects while D3b keeps it, the reading is "normalisation absorbs the
+          constant part", and the main caliber stays global regardless.
+      - name: a3_d3b_anchor_retention
+        kind: descriptive
+        estimator: >-
+          the ratio of D3b's Lambda^part under a caliber to its value under the
+          global caliber
+        statistic: "ratio, with the CI of the paired difference it is derived from"
+        dimension: dimensionless
+        verdict_rule: >-
+          D3b is configuration-dependent and cannot in principle be absorbed by
+          a per-embodiment constant. A ratio far below one on D3b means the
+          caliber is doing something other than absorption, and the whole row is
+          then read as a re-scaling effect.
+    requires_measurements:
+      - key: "defect.observable.{defect}.{level}.{family}"
+        stages: [diagnose]
+        expand: {level: ["0", "1", "2", "3", "4"]}
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+    notes: >-
+      X7's designated design. Together with A1 it supplies the two numbers of
+      the 10.9.2 mechanism figure; 10.6.3 rule 2 names both rows explicitly as
+      findings that are reported as they come out.
+
+  # -------------------------------------------------------------------------
+  A4:
+    title: "Model capacity"
+    phase: ablation
+    zero_gpu: false
+    dimension: "model capacity"
+    question: >-
+      Is the measured leakage an artefact of underfitting? If a larger network
+      closes it, the finding is about the 10.4.0 arm's budget rather than about
+      pooling.
+    independent_variables:
+      - "visual trunk and head depth: ResNet-18 + 4 layers (main) / ResNet-34 + 4 / ViT-S + 6"
+      - "everything else held at 10.4.0, including d_model, the token layout and the action space"
+    state_distribution: "rho^off"
+    null_distribution: >-
+      surrogate defect distribution, 8 preregistered surrogates, recomputed
+      inside each level's own model because the nuisance basis is projected out
+      there
+    primary_test: "crossed random-effects mixed model over the six S6 cells, capacity as a fixed effect"
+    bootstrap: "paired, resampling shared initial-state indices within a level"
+    arms: [B2, A4_resnet34, A4_vits]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [2, 6, 13, 14, 15]
+    n_runs: 12
+    gpu_hours: 60
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.ablations.capacity:CapacitySpec"
+      - "portal_trace.ablations.capacity_nets:build_capacity_policy"
+    confounders_closed: []
+    levels:
+      - level_id: resnet18_4
+        label: "ResNet-18 + 4 layers (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters:
+          architecture: resnet18_transformer4
+          backbone: resnet18
+          n_layers: 4
+          d_model: 512
+          n_heads: 8
+          ffn_dim: 2048
+        rationale: >-
+          10.4.0's arm, 40.1 M parameters. Read off B2's checkpoints; the
+          architecture string is the one 11.4's model card already carries.
+      - level_id: resnet34_4
+        label: "ResNet-34 + 4 layers"
+        is_main: false
+        arm: A4_resnet34
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters:
+          architecture: resnet34_transformer4
+          backbone: resnet34
+          n_layers: 4
+          d_model: 512
+          n_heads: 8
+          ffn_dim: 2048
+        rationale: >-
+          Depth alone. torchvision's resnet34 truncated where robomimic
+          truncates its ResNet-18, so the trunk output stays 512 x 3 x 3, the
+          token count stays 96, and the arm differs from the main one in 20 M
+          parameters of visual depth and in nothing else.
+      - level_id: vits_6
+        label: "ViT-S + 6 layers"
+        is_main: false
+        arm: A4_vits
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters:
+          architecture: vits_transformer6
+          backbone: vit_s
+          n_layers: 6
+          d_model: 512
+          n_heads: 8
+          ffn_dim: 2048
+          patch_size: 12
+        rationale: >-
+          A different inductive bias as well as more capacity, which is what
+          makes the level worth its 30 GPU-h: if the leakage were a
+          convolutional artefact it would not survive here. 84 = 7 x 12 exactly,
+          so the patch grid is 7 x 7 with no padding and no border token.
+    endpoints:
+      - name: a4_lambda_by_capacity
+        kind: secondary
+        estimator: "Lambda^part per capacity level against the same B7 Oracle"
+        statistic: >-
+          point estimate and 95% CI per level, and the slope of Lambda^part
+          against log parameter count
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          The underfitting explanation is supported only if Lambda^part falls
+          monotonically with capacity and the largest level's CI covers zero.
+          A flat profile is the predicted outcome and is reported as such;
+          10.6.3 rule 1 forbids reading a favourable single level as the result.
+      - name: a4_training_loss_at_convergence
+        kind: design_diagnostic
+        estimator: "final training loss per level, on the level's own pool"
+        statistic: "loss, and the fraction of the main level's value"
+        dimension: dimensionless
+        verdict_rule: >-
+          The row's premise. If the larger levels do not reach a lower training
+          loss, they are not more capacious in the way the question assumes and
+          the flat Lambda profile carries no information about underfitting.
+    requires_measurements:
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        expand:
+          arch: [resnet18_transformer4, resnet34_transformer4, vits_transformer6]
+    notes: >-
+      The three levels are 40.1 M, 60.3 M and 69.1 M parameters. Weights are
+      randomly initialised on all three, as 10.4.0 requires of the main arm:
+      9.1.1 asks for bit-exact reproduction and pretrained weights are an
+      unpinned downloaded artefact, so a pretrained level would turn the
+      capacity comparison into a comparison of initialisations. The throughput
+      of the two new architectures is a measurement and has no default: the
+      training stage is refused until `scripts/measure_constants.py --what
+      train_throughput` has produced it for each.
+
+  # -------------------------------------------------------------------------
+  A5:
+    title: "Data volume"
+    phase: ablation
+    zero_gpu: false
+    dimension: "demonstrations per (config, task)"
+    question: >-
+      Which way does the leakage go as the training data grow? A quantity that
+      is an estimation error shrinks with data; the framework predicts this one
+      does not, because it is a property of what the pool contains rather than
+      of how well it is estimated.
+    independent_variables:
+      - "demonstrations per (config, task): 200 (main) / 400 / 800"
+      - "alpha held: the target and every source scale together, so the source share stays 0.857"
+    state_distribution: "rho^off"
+    null_distribution: >-
+      surrogate defect distribution, 8 preregistered surrogates, recomputed per
+      level
+    primary_test: >-
+      crossed random-effects mixed model over the six S6 cells with log data
+      volume as a continuous fixed effect
+    bootstrap: "paired, resampling shared initial-state indices within a level"
+    arms: [B2, A5_x2, A5_x4]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [2, 6, 10, 14, 15]
+    n_runs: 12
+    gpu_hours: 60
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.ablations.data_volume:DataVolumeSpec"
+      - "portal_trace.ablations.data_volume:check_pool_matches_level"
+    confounders_closed: [X2]
+    levels:
+      - level_id: demos_200
+        label: "200 per (config, task) (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {n_target_demos: 200, n_source_demos: 200, k_sources: 6, factor: 1}
+        rationale: >-
+          10.4.0's data ratio table: 200 target and 6 x 200 source, a pool of
+          1400 at alpha = 0.857. Read off B2's checkpoints.
+      - level_id: demos_400
+        label: "400 per (config, task)"
+        is_main: false
+        arm: A5_x2
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {n_target_demos: 400, n_source_demos: 400, k_sources: 6, factor: 2}
+        rationale: >-
+          Both columns doubled, so alpha is unmoved. Scaling the target alone
+          would move the source share, which is E3's second dose axis and not
+          this one; the loader cross-checks the level against the arm's pool
+          block for exactly that reason.
+      - level_id: demos_800
+        label: "800 per (config, task)"
+        is_main: false
+        arm: A5_x4
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters: {n_target_demos: 800, n_source_demos: 800, k_sources: 6, factor: 4}
+        rationale: >-
+          Four times the main budget, a pool of 5600. Two points would give a
+          slope with no curvature; three make "not decreasing" a statement about
+          a shape rather than about a single comparison. Shares its levels with
+          W1's "are 200 enough" learning curve, so the demonstrations are
+          collected once.
+    endpoints:
+      - name: a5_lambda_volume_slope
+        kind: secondary
+        estimator: >-
+          the coefficient on log2(demonstrations per cell) in the mixed model
+          for Lambda^part, each level's Lambda^part taken against the same B7
+        statistic: "slope, 95% CI, and the three per-level point estimates"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          The prediction is a slope whose CI covers zero or is positive. A
+          significantly negative slope is the outcome that would make the
+          leakage look like an estimation error, and it is then reported as a
+          stated condition on the main conclusion rather than as a footnote.
+      - name: a5_success_rate_volume_slope
+        kind: descriptive
+        estimator: "the same slope for the success-rate paired difference"
+        statistic: "slope in percentage points per doubling, with 95% CI"
+        dimension: probability
+        reference_arm: B7
+        verdict_rule: >-
+          Reported beside the amplitude slope. X2 is that a data-volume
+          difference produces a shrinkage difference that is read as leakage;
+          this row is where the two are separated, because here the volume moves
+          and the pool composition does not.
+    requires_measurements:
+      - key: "sim.tau_frame.{family}.{task}"
+        stages: [collect]
+      - key: "storage.gzip_ratio.{modality}"
+        stages: [materialise]
+        fixed_scope: {modality: obs}
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+    notes: >-
+      The collection cost is not free and is not hidden: 4200 extra
+      demonstrations per S6 cell at the fixed 400-step horizon of 9.6.1, whose
+      CPU cost is the tau_frame measurement this row declares. The 60 GPU-h is
+      the training side only, as 10.6.1's column is.
+
+  # -------------------------------------------------------------------------
+  A6:
+    title: "Regime granularity"
+    phase: ablation
+    zero_gpu: true
+    dimension: "number of regimes"
+    question: >-
+      How sensitive is proposition 1(e')'s stratified estimate to the regime
+      partition? A finer partition makes per-regime connectivity harder to
+      satisfy, and a coarser one hides heterogeneity inside a stratum.
+    independent_variables:
+      - "regime partition: 3 / 5 (main) / 8 regimes"
+      - "the frames, the policies and N_0 = 200 all held"
+    state_distribution: >-
+      the pooled state marginal, re-stratified per level; the frames are the
+      same on all three levels and only their labels change
+    null_distribution: >-
+      surrogate defect distribution as in E1, re-stratified under each partition
+    primary_test: "no new test: the E8 stratified estimate recomputed under each partition"
+    bootstrap: "paired, resampling shared initial-state indices; strata resampled with the frames"
+    arms: [B2, B7]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [9, 14, 15]
+    n_runs: 0
+    gpu_hours: 0
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.ablations.granularity:RegimePartition"
+      - "portal_trace.types:Regime"
+    confounders_closed: []
+    levels:
+      - level_id: regimes_3
+        label: "3 regimes"
+        is_main: false
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters:
+          merge:
+            contact: [r4]
+            transitional: [r1, r2]
+            free: [r0, r3]
+          refine: []
+        rationale: >-
+          The coarsening that keeps the contact regime intact, because the
+          safety endpoints live there. r1 and r2 merge because both are
+          load-carrying and slow; r0 and r3 merge because neither is. Every base
+          regime appears exactly once, so the occupancy masses still sum to one.
+      - level_id: regimes_5
+        label: "5 regimes (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {merge: {}, refine: []}
+        rationale: >-
+          9.7.1's partition, r0 to r4, under the exclusivity order of
+          REGIME_PRIORITY. The identity partition, and still written out as a
+          level so that the main caliber is one row of the same table.
+      - level_id: regimes_8
+        label: "8 regimes"
+        is_main: false
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters:
+          merge: {}
+          refine: [r2, r3, r4]
+        rationale: >-
+          Three of the five split by the sign of the along-axis velocity
+          component: 5 - 3 + 6 = 8. r1 is not among them and cannot be, because
+          it is defined by a velocity zero crossing and splitting it by that
+          same sign would put its halves on either side of the event that
+          defines it. r0 is the residual class and has no approach direction.
+    endpoints:
+      - name: a6_stratified_estimate_by_granularity
+        kind: secondary
+        estimator: >-
+          the proposition 1(e') stratified Lambda estimate recomputed under each
+          partition, against the same B7 Oracle
+        statistic: "point estimate and 95% CI per partition"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Stable when the three CIs overlap pairwise. A partition on which the
+          estimate moves outside the main level's CI makes the granularity a
+          stated condition of the per-regime conclusions.
+      - name: a6_per_regime_connectivity
+        kind: design_diagnostic
+        estimator: >-
+          the per-regime observed cell set E_r of preregistration item 9 at
+          N_0 = 200, and its design graph's connectivity, per partition
+        statistic: "number of connected regimes out of the partition's total"
+        dimension: count
+        verdict_rule: >-
+          Item 9 governs: a regime that is disconnected has its conclusion
+          withheld, on that partition. The eight-regime level is expected to
+          lose regimes this way, and that loss is the answer to the question
+          rather than a failure of the level.
+    requires_measurements:
+      - key: "regime.threshold.{name}.{task}.{family}"
+        stages: [diagnose]
+        fixed_scope: {name: contact_force}
+      - key: "stats.tau_corr.{task}.{defect}.{regime}"
+        stages: [diagnose]
+        expand: {regime: [r0, r1, r2, r3, r4]}
+    notes: >-
+      Zero new training and zero new rollouts: the three partitions are three
+      labelings of frames that already exist. The CPU cost is inside the
+      diagnostics stage of 9.8.2 and is not charged again here.
+
+  # -------------------------------------------------------------------------
+  A7:
+    title: "Surrogate defect count"
+    phase: ablation
+    zero_gpu: true
+    dimension: "number of surrogate defects"
+    question: >-
+      Is the surrogate null stable at the preregistered cardinality? Eight is the
+      floor item 5 fixes; this row is the evidence that the quantile it produces
+      is not an artefact of that choice.
+    independent_variables:
+      - "surrogate set size: 4 / 8 (main) / 16"
+      - "the four matching dimensions and their measured tolerances held"
+    state_distribution: "rho^off, as for the endpoint whose null this is"
+    null_distribution: >-
+      the surrogate defect distribution itself: this row's independent variable
+      is the null's own cardinality
+    primary_test: "no new test: E1's quantile statistic recomputed against each surrogate set"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [B2, B7]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [5, 6, 14, 15]
+    n_runs: 0
+    gpu_hours: 0
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.defects.surrogate:build_surrogate_set"
+    confounders_closed: [X9]
+    levels:
+      - level_id: surrogates_4
+        label: "4 surrogates"
+        is_main: false
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {n_surrogates: 4}
+        rationale: >-
+          Below item 5's floor of 8 and below the per-cell effective floor of 6,
+          deliberately: the level exists to show what the quantile does when the
+          null is too small to resolve it, and its own Lambda^exc is exploratory
+          by the same rule that governs a cell with effective cardinality below
+          six.
+      - level_id: surrogates_8
+        label: "8 surrogates (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {n_surrogates: 8}
+        rationale: >-
+          Item 5's preregistered set: 8 surrogates matched on amplitude, regime
+          support, spatial frequency and acting joint or direction, with the
+          8 x 4 measured tolerance table.
+      - level_id: surrogates_16
+        label: "16 surrogates"
+        is_main: false
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {n_surrogates: 16}
+        rationale: >-
+          Double the main set. If the quantile is unchanged, 8 is enough and the
+          E1 verdict rule's "rank 8 of the surrogate null" is not sitting on a
+          boundary; the extra eight cost forward passes over frames that already
+          exist.
+    endpoints:
+      - name: a7_null_quantile_stability
+        kind: secondary
+        estimator: >-
+          Lambda^exc = Lambda^part minus the surrogate mean, recomputed against
+          each surrogate set, against the same B7 Oracle
+        statistic: "point estimate per set size, and the rank of Lambda^part within each null"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Stable when the 8-surrogate and 16-surrogate estimates agree within
+          the 8-surrogate CI. Disagreement makes the cardinality a stated
+          condition and raises the preregistered set for future work; it does
+          not licence swapping in the more favourable set here.
+      - name: a7_effective_cardinality_per_cell
+        kind: design_diagnostic
+        estimator: >-
+          the per-cell effective cardinality after the four-dimensional matching
+          tolerance is applied, per set size
+        statistic: "count per cell, and the fraction of cells at or above 6"
+        dimension: count
+        verdict_rule: >-
+          Item 5: a cell whose effective cardinality falls below 6 has its
+          Lambda^exc reported as exploratory. The count is the reason the 4-
+          surrogate level cannot carry a confirmatory reading.
+    requires_measurements:
+      - key: "task.tol.{task}.{geom_variant}"
+        stages: [diagnose]
+    notes: >-
+      X9 is that the true compensation field may fit the policy class better
+      than a surrogate does, so the null is not exchangeable with it. The
+      cardinality sweep does not remove that, and does not claim to: it bounds
+      how much of the quantile is a small-sample artefact, which is the part of
+      X9 a count can address. Zero new rollouts -- the surrogate alignments are
+      recomputed on stored frames.
+
+  # -------------------------------------------------------------------------
+  A8:
+    title: "Contact solver parameters (solref / solimp)"
+    phase: ablation
+    zero_gpu: true
+    dimension: "contact solver parameters"
+    question: >-
+      Do the safety conclusions survive the solver's freedom? MuJoCo contacts are
+      soft constraints, so "environment stiffness" is a solver parameter and not
+      a physical constant, and every number a safety endpoint produces inherits
+      that knob.
+    independent_variables:
+      - "solref time constant and solimp impedance gap: default (main) / hard / soft"
+      - "the policies, the defects and the initial states all held"
+    state_distribution: >-
+      rho^on: the endpoint is a property of the rollout the evaluated policy
+      generates, and the solver group changes that rollout, which is the point
+    null_distribution: >-
+      surrogate defect distribution for the amplitude endpoint; the safety
+      endpoints are read as paired differences against the clean twin under the
+      same solver group
+    primary_test: >-
+      no new test: E3's safety endpoints and the primary paired difference
+      recomputed under each group, with the sign compared across groups
+    bootstrap: "paired, resampling shared initial-state indices within a group"
+    arms: [B2, B7, A8_hard, A8_soft]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [11, 13, 14, 15]
+    n_runs: 0
+    gpu_hours: 0
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.ablations.solver:SolverGroup"
+      - "portal_trace.ablations.solver:apply_solver_group"
+      - "portal_trace.ablations.solver:build_with_solver_group"
+    confounders_closed: [X10]
+    zero_result_exit: >-
+      If the peak cfrc_ext difference changes sign across the three groups, every
+      safety endpoint is demoted to supplementary reporting and the main decision
+      endpoints are the success-rate paired difference and Lambda^part only
+      (10.6.3 rule 3). This is a gate, not an appendix.
+    levels:
+      - level_id: default
+        label: "default (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters:
+          group_id: default
+          solref_timeconst_scale: 1.0
+          solimp_gap_scale: 1.0
+          rationale: "the model as robosuite 1.5.2 compiles it"
+        rationale: >-
+          The compiled model, expressed as the identity pair rather than as
+          absolute numbers. robosuite does not compile a single stiffness -- the
+          arm and table geoms carry one solref row and the gripper pads and
+          objects another -- so writing one absolute triple over all of them
+          would make the default group a different environment from the one
+          every other chapter ran in. The identity is still applied, so the
+          three groups differ by the value of the scale and not by whether the
+          code path ran.
+      - level_id: hard
+        label: "hard contacts"
+        is_main: false
+        arm: A8_hard
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters:
+          group_id: hard
+          solref_timeconst_scale: 0.5
+          solimp_gap_scale: 0.5
+          rationale: "half the contact time constant, half the impedance gap to one"
+        rationale: >-
+          Stiffer in both parameters at once, because they are two descriptions
+          of the same softness and moving one alone would produce a mixed
+          contact model that is neither group. The time constant floor is two
+          simulation steps -- 4 ms at 9.1.1's 2 ms timestep -- and the softest
+          compiled row is 10 ms, so 0.5 clears it with room; the injector
+          refuses the write rather than integrating an unresolvable contact.
+      - level_id: soft
+        label: "soft contacts"
+        is_main: false
+        arm: A8_soft
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters:
+          group_id: soft
+          solref_timeconst_scale: 2.0
+          solimp_gap_scale: 2.0
+          rationale: "twice the contact time constant, twice the impedance gap to one"
+        rationale: >-
+          The other side, chosen symmetric in the same two factors so that the
+          three groups are one ladder. The impedance is moved by scaling its gap
+          to one, d' = 1 - s (1 - d), which cannot leave the open interval for
+          any positive s; a clipped impedance would silently make two groups
+          equal at whichever geoms clipped.
+    endpoints:
+      - name: a8_safety_sign_agreement
+        kind: secondary
+        estimator: >-
+          the sign of the peak cfrc_ext paired difference (pooled arm minus
+          Oracle) under each of the three solver groups
+        statistic: "the three signs, and the fraction of S6 cells on which all three agree"
+        dimension: dimensionless
+        reference_arm: B7
+        verdict_rule: >-
+          The gate of 10.6.3 rule 3. The safety conclusion stands only if all
+          three groups point the same way; one group of opposite sign demotes
+          every safety endpoint to supplementary reporting, and no group may be
+          selected as the reported one.
+      - name: a8_peak_cfrc_ext_by_group
+        kind: descriptive
+        estimator: "peak cfrc_ext per cell per group, pooled arm and Oracle separately"
+        statistic: "median and interquartile range over the S6 cells, per group"
+        dimension: energy
+        verdict_rule: >-
+          Reported for all three groups always, including when they agree: the
+          magnitude is what inherits the solver's freedom, so a single number
+          would be a claim the design does not support. Only the sign is
+          compared across groups.
+      - name: a8_force_calibration_by_group
+        kind: design_diagnostic
+        estimator: >-
+          the force calibration curve of 9.x measured once per group, on the
+          clean twin
+        statistic: "curve, and the fitted slope per group"
+        dimension: energy
+        verdict_rule: >-
+          10.6.2's X10 row requires the calibration to be remeasured on each
+          group rather than carried over. A group whose calibration is missing
+          has its safety numbers withheld: they would be quoted in units
+          established under a different contact model.
+      - name: a8_success_rate_by_group
+        kind: descriptive
+        estimator: "the success-rate paired difference under each group"
+        statistic: "percentage points per group, with 95% CI"
+        dimension: probability
+        reference_arm: B7
+        verdict_rule: >-
+          The main decision endpoint, recomputed per group. It is reported here
+          so that a safety disagreement can be told apart from a group in which
+          the whole task became harder.
+    requires_measurements:
+      - key: "sim.hard_reset_default"
+        stages: [evaluate, diagnose]
+      - key: "task.tol.{task}.{geom_variant}"
+        stages: [evaluate]
+      - key: "regime.threshold.{name}.{task}.{family}"
+        stages: [diagnose]
+        fixed_scope: {name: contact_force}
+    notes: >-
+      X10's designated design, and the only one: `closes_confounder("X10")`
+      returns this row and nothing else. Zero new training -- the three groups
+      evaluate the checkpoints B2 and B7 already produced -- and the rollouts
+      run on the evaluation harness's own CPU budget (9.8.2, stages S7 and S8),
+      which is why 10.6.1 charges the row nothing. The hard_reset measurement is
+      declared because robosuite rebuilds the model on reset when it is true,
+      and a solver write made once in a constructor would then disappear
+      mid-session; `build_with_solver_group` re-applies the group after every
+      reset for that reason, and the arm's `solver_group` field is what carries
+      the level into the environment builder.
+
+  # -------------------------------------------------------------------------
+  A9:
+    title: "ILC iteration count"
+    phase: ablation
+    zero_gpu: true
+    dimension: "teacher ILC iteration count k"
+    question: >-
+      How does the inherited compensation vary with how hard the teacher worked
+      to compensate? k = 0 is a teacher that does not compensate at all, and
+      k_conv is one that has converged.
+    independent_variables:
+      - "ILC iterations k in {0, 2, 5, 10, k_conv (main)}"
+      - "the defect amplitude and the pool composition held at E3's dose design"
+    state_distribution: "rho^off"
+    null_distribution: >-
+      surrogate defect distribution, 8 preregistered surrogates, recomputed per
+      iteration level
+    primary_test: "E3's dose model, with k as the third dose axis"
+    bootstrap: "paired, resampling shared initial-state indices within a level"
+    arms: [E3_dose, B7]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [6, 12, 14, 15]
+    n_runs: 0
+    gpu_hours: 0
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.teacher.ilc:DOSE_LADDER"
+      - "portal_trace.teacher.ilc:run_ilc"
+    confounders_closed: []
+    levels:
+      - level_id: k0
+        label: "k = 0"
+        is_main: false
+        arm: E3_dose
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {ilc_iterations: 0}
+        rationale: >-
+          The uncompensated teacher: the demonstrations carry the defect's
+          effect and no correction for it. The zero of the dose axis, and the
+          level at which the leakage has nothing to inherit.
+      - level_id: k2
+        label: "k = 2"
+        is_main: false
+        arm: E3_dose
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {ilc_iterations: 2}
+        rationale: "The first rung: partial compensation, well short of convergence."
+      - level_id: k5
+        label: "k = 5"
+        is_main: false
+        arm: E3_dose
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {ilc_iterations: 5}
+        rationale: "The middle rung, so the dose curve has an interior point."
+      - level_id: k10
+        label: "k = 10"
+        is_main: false
+        arm: E3_dose
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {ilc_iterations: 10}
+        rationale: >-
+          The last fixed rung of DOSE_LADDER, and the one that separates "more
+          iterations" from "converged": a cell that has converged before k = 10
+          gives the same demonstrations here as at k_conv.
+      - level_id: k_conv
+        label: "k = k_conv (main)"
+        is_main: true
+        arm: E3_dose
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {ilc_iterations: null, run_to_convergence: true}
+        rationale: >-
+          The main teacher: ILC run to its convergence criterion, which is what
+          every other chapter's demonstrations were produced with. The iteration
+          count is per cell and is therefore not a number in this file; it is
+          recorded per cell by the teacher and reported with the balanced panel.
+    endpoints:
+      - name: a9_lambda_by_ilc_iterations
+        kind: secondary
+        estimator: >-
+          Lambda^part per iteration level against the same B7 Oracle, as E3's
+          third dose axis
+        statistic: "point estimate and 95% CI per level, and the slope in k"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Read on the balanced panel of preregistration item 12 -- the cells
+          whose five levels are all judged converged -- with the all-cells curve
+          and a worst-case imputation bound reported alongside. A monotone rise
+          from k = 0 is the prediction; the level at k = 0 is what makes the
+          rise a dose response rather than a correlation.
+      - name: a9_convergence_outcome_profile
+        kind: design_diagnostic
+        estimator: >-
+          the three ILC outcomes (converged, iteration-limited, diverged) per
+          cell per level
+        statistic: "counts, listed separately and never merged into one exclusion rate"
+        dimension: count
+        verdict_rule: >-
+          X13: exclusion probability rises with the defect amplitude, so a
+          curve read on surviving cells only is partly a selection effect. The
+          three outcomes are reported separately, as 10.6.2's X13 row requires.
+    requires_measurements:
+      - key: "defect.observable.{defect}.{level}.{family}"
+        stages: [diagnose]
+        expand: {level: ["0", "1", "2", "3", "4"]}
+    notes: >-
+      Shares E3's third dose axis run for run: 10.6.1 charges the row zero
+      because those 20 runs are already counted inside E3's 76. Listing it here
+      is not double counting -- it is what makes the iteration count a
+      preregistered ablation level set rather than a curve E3 happens to
+      produce.
+
+  # -------------------------------------------------------------------------
+  A10:
+    title: "The choice of the phi basis"
+    phase: ablation
+    zero_gpu: true
+    dimension: "the function basis phi is expanded in"
+    question: >-
+      How much of E_phi depends on the basis it is measured in? The metric is
+      only as meaningful as its invariance to that choice, which is assumption
+      (A4)'s robustness stated as a measurement.
+    independent_variables:
+      - "basis: psi alone / psi + random features (main) / psi + polynomial / a learned basis"
+      - "the frames, the policies and the projection procedure held"
+    state_distribution: >-
+      the pooled state marginal, in the L^2(rho) sense the projection is defined
+      in
+    null_distribution: >-
+      surrogate defect distribution, projected into each basis in turn
+    primary_test: "no new test: E4's projection recomputed in each basis"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [B2, B7]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [6, 7, 14, 15]
+    n_runs: 0
+    gpu_hours: 0
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.policies.physics_basis:PSI_GROUPS"
+    confounders_closed: []
+    levels:
+      - level_id: psi_only
+        label: "psi alone"
+        is_main: false
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {use_psi: true, use_random_features: false, use_polynomial: false, learned: false}
+        rationale: >-
+          The physical groups of PSI_GROUPS and nothing else. The narrowest
+          basis, and the one whose effective rank is smallest: it bounds how
+          much of the projection is carried by the physics terms alone.
+      - level_id: psi_random
+        label: "psi + random features (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {use_psi: true, use_random_features: true, use_polynomial: false, learned: false}
+        rationale: >-
+          The main basis. The random features are what keep the basis from being
+          exactly the space the ground truth was constructed in, which would
+          make the projection residual zero by construction.
+      - level_id: psi_polynomial
+        label: "psi + polynomial"
+        is_main: false
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {use_psi: true, use_random_features: false, use_polynomial: true, learned: false}
+        rationale: >-
+          A structured alternative to the random features, with the same role
+          and a different spectrum. If E_phi agrees here, the metric is not
+          reading the randomisation.
+      - level_id: learned
+        label: "a learned basis"
+        is_main: false
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {use_psi: false, use_random_features: false, use_polynomial: false, learned: true}
+        rationale: >-
+          The upper bound on what any basis of this size could capture, fitted
+          on the training split only. It is reported as an upper bound and never
+          as the main caliber: a basis fitted on the same frames the projection
+          is evaluated on would make the residual share an in-sample quantity.
+    endpoints:
+      - name: a10_e_phi_by_basis
+        kind: secondary
+        estimator: "E_phi, the phi projection residual share, recomputed in each basis"
+        statistic: "share in [0, 1] per basis, with 95% CI"
+        dimension: dimensionless
+        reference_arm: B7
+        verdict_rule: >-
+          Robust when the three non-learned bases agree within the main basis's
+          CI. The learned basis is read only as the bound: a large gap between
+          it and the main basis means the basis family is the binding constraint
+          and E_phi is reported with that stated.
+      - name: a10_effective_rank_by_basis
+        kind: design_diagnostic
+        estimator: "the effective rank of the Gram matrix of each basis on the pooled frames"
+        statistic: "effective rank, reported per basis as 10.6.1 requires"
+        dimension: count
+        verdict_rule: >-
+          Reported for every basis without exception. A basis whose effective
+          rank collapses explains an E_phi difference without any appeal to the
+          basis family's expressiveness, and 10.6.1 asks for the number
+          alongside for exactly that reason.
+    requires_measurements:
+      - key: "phi.effective_rank"
+        stages: [diagnose]
+    notes: >-
+      Zero GPU and zero new rollouts: four projections of stored frames. Appendix
+      A-24 keeps Q_div and Lambda_res out of the endpoint list here as
+      everywhere -- they are built from the injected ground truth alone and carry
+      no policy quantity.
+
+  # -------------------------------------------------------------------------
+  A11:
+    title: "Seed count"
+    phase: ablation
+    zero_gpu: false
+    dimension: "number of training seeds"
+    question: >-
+      How large is the seed-layer variance component, and is S = 3 enough for the
+      primary endpoint's MDE? The answer has to arrive before the main arms run,
+      because a post-hoc check cannot change an arm that is already trained.
+    independent_variables:
+      - "training seeds per cell: 3 (main) / 5 / 8"
+      - "the arm, the pool and the subset held at B2's setting on S6"
+    state_distribution: "rho^off"
+    null_distribution: >-
+      not applicable to the variance decomposition itself; the MDE it feeds is
+      read against the surrogate null of the endpoint it bounds
+    primary_test: >-
+      variance-component decomposition (family, defect, seed) by REML on the six
+      S6 cells
+    bootstrap: "nonparametric bootstrap over seeds, within cell"
+    arms: [B2, A11_s5, A11_s8]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 8}
+    prereg_items: [13, 14, 15]
+    n_runs: 30
+    gpu_hours: 150
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.configs.schema:SeedTable"
+    confounders_closed: []
+    zero_result_exit: >-
+      If sigma_seed makes the success-rate paired difference's MDE exceed 7.5 pp
+      at (M, D, S) = (6, 6, 3), B2 and B7 each gain two seeds -- 72 further runs
+      and 360 GPU-h, from the 15% GPU reserve of 9.8. Otherwise S = 3 stands.
+      The rule is preregistered here because it is a decision about the main
+      arms taken on this row's number.
+    levels:
+      - level_id: seeds_3
+        label: "3 seeds (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {n_seeds: 3}
+        rationale: >-
+          B2's allocation, and the setting the whole design is costed at. The 18
+          runs it contributes on S6 already exist, which is why this row's
+          increment is 30 and not 48.
+      - level_id: seeds_5
+        label: "5 seeds"
+        is_main: false
+        arm: A11_s5
+        incremental_runs: 12
+        gpu_hours: 60
+        parameters: {n_seeds: 5}
+        rationale: >-
+          Two further seeds on each of the six cells. Five is the count the exit
+          rule above would move to, so the estimate has to be resolvable there
+          rather than extrapolated to it.
+      - level_id: seeds_8
+        label: "8 seeds"
+        is_main: false
+        arm: A11_s8
+        incremental_runs: 18
+        gpu_hours: 90
+        parameters: {n_seeds: 8}
+        rationale: >-
+          Three further seeds again. Eight is where a variance component over
+          seeds stops being an estimate with a wider CI than the quantity it is
+          meant to bound; the pilot is worth its 150 GPU-h only if its own
+          answer is precise.
+    endpoints:
+      - name: a11_sigma_seed_share
+        kind: secondary
+        estimator: >-
+          the seed-layer variance component as a share of the total, from the
+          REML decomposition over (family, defect, seed)
+        statistic: "share in [0, 1] with a 95% CI, per seed count"
+        dimension: dimensionless
+        reference_arm: B2
+        verdict_rule: >-
+          The estimate is read at the 8-seed level; the 3- and 5-seed levels
+          show how the estimate itself converges. A share of 25-35% is the
+          working assumption of 10.6.1 and is not assumed here -- it is what the
+          row measures.
+      - name: a11_mde_at_s3
+        kind: design_diagnostic
+        estimator: >-
+          the MDE of the success-rate paired difference at (M, D, S) = (6, 6, 3),
+          derived from the measured variance components
+        statistic: "percentage points"
+        dimension: probability
+        reference_arm: B7
+        verdict_rule: >-
+          Above 7.5 pp triggers the exit rule above. Preregistration item 13
+          fixes the primary MDE at 7.3 pp after the seed term, so this number
+          decides whether the design as costed can carry the primary claim.
+    requires_measurements:
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+    notes: >-
+      Scheduled in W5, not at the end: 10.6.1 is explicit that this is the one
+      ablation whose result changes the main arms, and it can only do so before
+      they are trained. `SeedTable.seed_pilot_values` is [3, 5, 8] and is the
+      allocation this row's three levels draw from.
+
+  # -------------------------------------------------------------------------
+  A12:
+    title: "The rho and c evaluation calibers"
+    phase: ablation
+    zero_gpu: true
+    dimension: "the state distribution and the action the compensation field is evaluated on"
+    question: >-
+      How much does the main leakage number depend on where it is evaluated?
+      Two choices are open: the state distribution (off-policy or on-policy) and
+      the action c is evaluated at (the clean reference policy's, or the
+      evaluated policy's).
+    independent_variables:
+      - "state distribution: rho^off (main) / rho^on"
+      - "the action c is evaluated on: the clean reference policy's (main) / the evaluated policy's"
+    state_distribution: >-
+      both, one per level: this row's independent variable is the state
+      distribution itself
+    null_distribution: >-
+      surrogate defect distribution, recomputed under each caliber so that the
+      null is evaluated where the statistic is
+    primary_test: "no new test: E1's Lambda^part recomputed under each caliber"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [B2, B7]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [6, 8, 14, 15]
+    n_runs: 0
+    gpu_hours: 0
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.diagnostics.leakage:LeakageAccumulator"
+    confounders_closed: [X8]
+    levels:
+      - level_id: rho_off_c_clean
+        label: "rho^off, c on the clean reference action (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {state_distribution: rho_off, c_evaluated_on: clean_reference}
+        rationale: >-
+          The main caliber. The clean reference action is the one the
+          compensation field is defined against, so c is evaluated where its
+          construction places it.
+      - level_id: rho_on_c_clean
+        label: "rho^on, c on the clean reference action"
+        is_main: false
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {state_distribution: rho_on, c_evaluated_on: clean_reference}
+        rationale: >-
+          X8 is that the defective embodiment visits different states, so a
+          leakage reading could be covariate shift. Moving only the state
+          distribution is what separates the two; both calibers are already
+          reported separately for the primary endpoint, and this level is that
+          comparison written as an ablation level.
+      - level_id: rho_off_c_policy
+        label: "rho^off, c on the evaluated policy's action"
+        is_main: false
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {state_distribution: rho_off, c_evaluated_on: evaluated_policy}
+        rationale: >-
+          Moving only the action c is evaluated at. It is the caliber a reader
+          would reach for if the field were treated as a property of the state
+          alone, and the difference from the main level is how much the field's
+          dependence on the action matters at the amplitudes under test.
+    endpoints:
+      - name: a12_lambda_by_caliber
+        kind: secondary
+        estimator: "Lambda^part recomputed under each of the three calibers, against the same B7"
+        statistic: "point estimate and 95% CI per caliber, and each caliber's difference from the main one"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Robust when all three CIs overlap the main caliber's point estimate.
+          A caliber on which the sign flips makes the evaluation caliber a
+          stated condition of the main conclusion (10.6.3 rule 1); the main
+          caliber does not move.
+      - name: a12_covariate_shift_diagnostics
+        kind: design_diagnostic
+        estimator: >-
+          the three covariate-shift diagnostics of the rho^off caliber, computed
+          between the two state distributions
+        statistic: "the three diagnostics, per cell"
+        dimension: dimensionless
+        verdict_rule: >-
+          A cell whose distributions are close makes the rho^off / rho^on
+          comparison uninformative for that cell, and it is reported as such
+          rather than as agreement.
+    requires_measurements:
+      - key: "stats.tau_corr.{task}.{defect}.{regime}"
+        stages: [diagnose]
+        expand: {regime: [r0, r1, r2, r3, r4]}
+    notes: >-
+      Zero GPU: three recomputations over frames the primary endpoint already
+      produced. The row is why B8's per-demonstration pairing is not the only
+      answer to X8 -- pairing removes the shift by construction, and this row
+      measures what is left when it is not removed.
+
+  # -------------------------------------------------------------------------
+  A13:
+    title: "Teacher family"
+    phase: ablation
+    zero_gpu: false
+    dimension: "the family of demonstrator the compensation comes from"
+    question: >-
+      External validity: does a demonstrator that is not ILC compensate in the
+      same *direction*? If an RL expert trained on the defective embodiment
+      arrives at a compensation whose direction agrees with the ILC teacher's,
+      the field the whole design is built on is not an artefact of one
+      demonstrator.
+    independent_variables:
+      - "teacher family: ILC (main) / analytic compensation script / RL expert on the defective embodiment"
+      - "the defect, the pool composition and the policy architecture held"
+    state_distribution: >-
+      rho^off for the leakage columns; the agreement cosine is evaluated on the
+      ILC teacher's own visited states, so the two demonstrators are compared
+      where at least one of them actually is
+    null_distribution: >-
+      surrogate defect distribution for the leakage columns. The agreement
+      cosine has no surrogate null: it is a direction comparison between two
+      measured fields and is read against the preregistered floor instead
+    primary_test: >-
+      the agreement cosine against the preregistered floor
+      `analytic_vs_ilc_cosine_floor`; no new confirmatory test on the leakage
+      columns
+    bootstrap: "paired, resampling shared initial-state indices within a family"
+    arms: [B2, A13_analytic, A13_rl_expert]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [2, 6, 14, 15]
+    n_runs: 12
+    gpu_hours: 60
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.ablations.teacher_family:TeacherFamilySpec"
+      - "portal_trace.ablations.teacher_family:AnalyticScriptTeacher"
+      - "portal_trace.ablations.teacher_family:RLExpertTeacher"
+      - "portal_trace.ablations.teacher_family:direction_cosine"
+      - "portal_trace.ablations.teacher_family_rl:train_rl_expert"
+    confounders_closed: []
+    levels:
+      - level_id: ilc
+        label: "ILC (main)"
+        is_main: true
+        arm: B2
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {family: ilc, demonstrator: "portal_trace.teacher.ilc:run_ilc"}
+        rationale: >-
+          The teacher every other chapter's demonstrations come from. Read off
+          B2's checkpoints on the six S6 cells.
+      - level_id: analytic_script
+        label: "analytic compensation script"
+        is_main: false
+        arm: A13_analytic
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters:
+          family: analytic_script
+          demonstrator: "portal_trace.defects.fields:field_for"
+        rationale: >-
+          The closed-form field of `defects.fields` used as a feedforward, built
+          from the injector's own joint indices and OSC gains rather than a
+          second transcription of them. It is the demonstrator with the least in
+          common with ILC that still compensates the same defect, so agreement
+          here is the strongest evidence the row can produce. Defects whose
+          ground truth is numerical only have no analytic teacher, and those
+          cells are reported as absent rather than filled in.
+      - level_id: rl_expert
+        label: "RL expert on the defective embodiment"
+        is_main: false
+        arm: A13_rl_expert
+        incremental_runs: 6
+        gpu_hours: 30
+        parameters:
+          family: rl_expert
+          demonstrator: "portal_trace.ablations.teacher_family:RLExpertTeacher"
+          trained_by: "portal_trace.ablations.teacher_family_rl:train_rl_expert"
+          # Keyed by the whole cell including the dose level: two levels of one
+          # defect are two different bodies, so an expert trained on either is a
+          # different agent, and a name they shared would make the second run
+          # refuse to overwrite the first and read as "already produced".
+          checkpoint: "artifacts/teachers/rl_expert/{task}_{family}_{defect}_L{level}.pt"
+          deterministic: true
+          algorithm: sac
+          # Dense. robosuite's task reward is sparse unless reward_shaping=True,
+          # and sparse over a 400-step horizon is identically zero until a success
+          # lands in the buffer, which leaves SAC's critic no gradient and the run
+          # measuring nothing. The shaping term is a function of the
+          # gripper-to-object geometry and is bit-identical on the clean twin, so
+          # it carries no information about the defect and cannot tell the agent
+          # which way to compensate -- it cannot bias the row towards agreement.
+          reward_caliber: dense_shaped
+          # The order the observation vector is concatenated in. Recorded because
+          # it is arbitrary and the reading side has to make the same choice: two
+          # orders of these keys have the same width, so a swap is a silent
+          # permutation of the policy's input and the cosine would not show it.
+          # These are the environment's own keys, not the 70-column stored
+          # proprioceptive vector of 9.6.3, because the expert has to be able to
+          # run in the loop it was trained in.
+          observation_keys: ["robot0_proprio-state", "object-state"]
+          horizon: 400
+          # 300k environment steps, i.e. 750 episodes. Measured at 65 steps/s on
+          # the CPU MuJoCo path with one gradient step per environment step, so
+          # about 1.3 h per cell and 8 h for the level's six -- which fits inside
+          # the 30 GPU-h this level is budgeted with the six behaviour-cloning
+          # runs it also pays for. It is a modest RL budget and the row is written
+          # so that it can be: A13 reads a compensation *direction*, reports no
+          # endpoint of the primary or secondary family, and an expert that
+          # compensates weakly gives a weak cosine rather than a wrong number.
+          total_timesteps: 300000
+          # SB3's own 100 is a quarter of one episode, so the critic's first
+          # update would see a buffer holding a single autocorrelated fragment.
+          # 25 episodes instead. The remaining SAC hyperparameters are stated in
+          # `teacher_family_rl:SACSettings` and travel in the checkpoint's
+          # metadata in full, so the artefact records the values it ran under even
+          # where this block does not name them.
+          learning_starts: 10000
+        rationale: >-
+          10.6.1 specifies this level precisely: frozen weights, the mean action
+          and a fixed seed. All three are required and none is a default -- a
+          sampling policy is not the deterministic operator assumption (A2)
+          needs, and a per-frame ground truth that is not reproducible cannot be
+          a demonstration label. The checkpoint is an artefact of its own
+          training run and has to exist before the level runs:
+          `teacher_family_rl` produces it with `portal-trace teacher`, on the
+          defective embodiment through `defects.inject.DefectWrapper` rather than
+          on a plain robosuite env, and `RLExpertTeacher` raises
+          `TeacherFamilyUnavailable` naming the missing path rather than
+          substituting a demonstrator or training one on the way past -- a
+          substitute would make the agreement true by construction, and an
+          unrecorded training run inside the evaluation of a cosine would leave
+          the number depending on when it was first asked for.
+    endpoints:
+      - name: a13_direction_cosine
+        kind: secondary
+        estimator: >-
+          cos(c_family, c_ilc), the cosine between each family's measured
+          compensation field and the ILC teacher's, on shared states
+        statistic: "cosine per family per cell, and the median over the S6 cells"
+        dimension: dimensionless
+        reference_arm: B2
+        verdict_rule: >-
+          Agreement when the median cosine is at or above the preregistered
+          `analytic_vs_ilc_cosine_floor`. Direction only: 10.6.1 says the row
+          asks neither about magnitude nor about whether the leakage agrees, and
+          reading a magnitude off this endpoint would import the ILC teacher's
+          gain schedule into a claim about physics.
+      - name: a13_lambda_by_teacher
+        kind: descriptive
+        estimator: "Lambda^part per teacher family, each against the same B7 Oracle"
+        statistic: "point estimate and 95% CI per family"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Reported for scope, not as a test of agreement. Two teachers can
+          compensate in the same direction and leak different amounts, because
+          the amount also depends on the magnitude schedule; conflating the two
+          is what the cosine endpoint's direction-only rule exists to prevent.
+      - name: a13_teacher_availability
+        kind: design_diagnostic
+        estimator: >-
+          the per-cell availability of each non-ILC family: the analytic field's
+          existence, and the RL checkpoint's presence and determinism check
+        statistic: "count of available cells out of 6, per family"
+        dimension: count
+        verdict_rule: >-
+          A family available on fewer than 4 of the 6 cells has its cosine
+          reported as exploratory: a median over three cells is not a median.
+          Unavailability is recorded as unavailability and never imputed.
+    requires_measurements:
+      - key: "defect.observable.{defect}.{level}.{family}"
+        stages: [collect]
+        expand: {level: ["0", "1", "2", "3", "4"]}
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+    notes: >-
+      The row 10.6.1 states as external validity. Its 12 runs are the two
+      non-ILC families' demonstrations re-trained into policies on the six S6
+      cells; the cosine endpoint itself needs no training and is measured on the
+      demonstrations. `analytic_vs_ilc_cosine_floor` is read from the
+      preregistration and has no default -- `Preregistration.threshold` refuses
+      an unregistered key rather than returning one.
+
+  # -------------------------------------------------------------------------
+  A14:
+    title: "B4's decoupling objective and MI estimator"
+    phase: ablation
+    zero_gpu: true
+    dimension: "the mutual-information estimator and the decoupling weight"
+    question: >-
+      Is B4 being given the strongest configuration it can have? A baseline that
+      loses under one estimator and one lambda has not been shown to lose.
+    independent_variables:
+      - "MI estimator: CLUB (main) / MINE"
+      - "decoupling weight lambda: three levels, 0.1 / 1.0 (main) / 10.0"
+    state_distribution: "rho^off, as for the leakage endpoint the variants are compared on"
+    null_distribution: >-
+      surrogate defect distribution, 8 preregistered surrogates; each variant is
+      read against its own recomputed null
+    primary_test: "no new test: each variant is scored on B4's own endpoints and the best is taken"
+    bootstrap: "paired, resampling shared initial-state indices within a variant"
+    arms: [B4, B7]
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    prereg_items: [2, 14, 15]
+    n_runs: 0
+    gpu_hours: 0
+    cpu_hours: 0
+    implemented_by:
+      - "portal_trace.policies.losses:CLUBEstimator"
+      - "portal_trace.policies.losses:MINEEstimator"
+    confounders_closed: []
+    levels:
+      - level_id: club_lambda_0p1
+        label: "CLUB, lambda = 0.1"
+        is_main: false
+        arm: B4
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {estimator: club, decoupling_weight: 0.1}
+        rationale: "The weak end: the decoupling term is present but does not bind."
+      - level_id: club_lambda_1
+        label: "CLUB, lambda = 1.0 (main)"
+        is_main: true
+        arm: B4
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {estimator: club, decoupling_weight: 1.0}
+        rationale: >-
+          B4's main configuration: CLUB with the decoupling term at parity with
+          the behaviour-cloning loss, which is where 10.5's description of the
+          baseline places it.
+      - level_id: club_lambda_10
+        label: "CLUB, lambda = 10.0"
+        is_main: false
+        arm: B4
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {estimator: club, decoupling_weight: 10.0}
+        rationale: >-
+          The strong end, where the decoupling term dominates. If B4's leakage
+          does not fall here it is not falling for want of pressure.
+      - level_id: mine_lambda_0p1
+        label: "MINE, lambda = 0.1"
+        is_main: false
+        arm: B4
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {estimator: mine, decoupling_weight: 0.1}
+        rationale: "The second estimator at the weak end, so the two ladders are comparable."
+      - level_id: mine_lambda_1
+        label: "MINE, lambda = 1.0"
+        is_main: false
+        arm: B4
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {estimator: mine, decoupling_weight: 1.0}
+        rationale: >-
+          MINE at the main weight. CLUB is an upper bound on the mutual
+          information and MINE a lower one, so the pair brackets the estimator
+          choice rather than sampling it.
+      - level_id: mine_lambda_10
+        label: "MINE, lambda = 10.0"
+        is_main: false
+        arm: B4
+        incremental_runs: 0
+        gpu_hours: 0
+        parameters: {estimator: mine, decoupling_weight: 10.0}
+        rationale: >-
+          The strong end of the second ladder, and the variant most likely to
+          destabilise: MINE's gradient is known to be high variance at large
+          weights, and a diverged variant is reported as diverged rather than
+          dropped.
+    endpoints:
+      - name: a14_best_variant_leakage
+        kind: secondary
+        estimator: >-
+          Lambda^part of the best of the six variants, selected on B4's own
+          endpoint and against the same B7 Oracle
+        statistic: "point estimate and 95% CI of the selected variant, and the full six-variant table"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          10.5.7: the stronger the baseline, the more a win means. The selected
+          variant is B4's number in every table that compares it with the
+          pooled arm, and the other five are reported alongside so that the
+          selection is visible.
+      - name: a14_variant_stability
+        kind: design_diagnostic
+        estimator: "the training outcome of each variant: converged, or diverged with the step it diverged at"
+        statistic: "outcome per variant"
+        dimension: count
+        verdict_rule: >-
+          A diverged variant is reported as diverged. Excluding it silently
+          would make the selection over the survivors, which is a different and
+          weaker statement about the baseline's best configuration.
+    requires_measurements:
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+    notes: >-
+      Zero runs of its own: 10.6.1 charges the row zero because B4's 48 runs are
+      the six variants' training, counted in the baseline block. The row exists
+      to preregister the variant list, so that "B4's best configuration" is a
+      set fixed in advance rather than the one that turned out to lose by the
+      least.

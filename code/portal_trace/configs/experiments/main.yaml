@@ -1,0 +1,987 @@
+# The main experiments E1-E12 (proposal 10.4).
+#
+# E6 is void and is not reused (10.4.0), so the chapter has eleven sections:
+# E1, E2prime, E3, E4, E4b, E5, E7, E8, E9, E10, E12 plus E11. Each entry names
+# the preregistration items it depends on; `configs.validator` refuses to start
+# a run whose items are not all present in the tagged preregistration file.
+
+schema_version: 1
+
+experiments:
+  E1:
+    title: "Leakage existence"
+    phase: main
+    zero_gpu: false
+    question: >-
+      After pooling defective embodiments' demonstrations into the training set,
+      is part of the deployed policy's action error parallel to the sources'
+      known compensation field, and is that part unexplained by a general
+      performance loss?
+    independent_variables:
+      - "data composition: B2 naive pooling vs B7 Oracle, over all 36 configs x 3 seeds"
+      - "defect amplitude fixed at the P0-selected (family, defect) decision level"
+    state_distribution: >-
+      rho^off for the primary endpoint; the covariance term is always reported
+      on the pooled state marginal
+    null_distribution: >-
+      surrogate defect distribution, 8 preregistered surrogates matched on
+      amplitude, regime support, spatial frequency and acting joint/direction;
+      random rotation is a zero-cost first screen only
+    primary_test: "crossed random-effects mixed model over the 36 cells"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [B2, B7]
+    subset: S36
+    design: {n_families: 6, n_defects: 6, n_seeds: 3}
+    prereg_items: [1, 2, 3, 4, 5, 6, 8, 10, 13, 15]
+    gpu_hours: 14
+    cpu_hours: 0
+    zero_result_exit: >-
+      F1: Lambda^exc's 95% CI covers zero. The mechanism figure becomes the
+      deliverable; if P1 passed and E1 did not, compensation is present in the
+      demonstrations but is not inherited by the policy, which is itself a
+      quantitative finding.
+    endpoints:
+      - name: lambda_part_excess
+        kind: primary
+        estimator: >-
+          Lambda^exc_delta = Lambda^part_delta - E_{delta_tilde ~ S}[
+          Lambda^part_delta_tilde], where Lambda^part is the coefficient on
+          c_delta after partial regression on the mandatory nuisance basis
+        statistic: "quantile of Lambda^part in the 8-surrogate null distribution"
+        dimension: amplitude
+        reference_arm: B7
+        mde: 0.052
+        holm_bonferroni_rank: 2
+        verdict_rule: >-
+          Significant when Lambda^exc > 0 with a point estimate of at least 0.10
+          on 4 of 6 defect classes, Lambda^part lands at rank 8 of the surrogate
+          null, and Lambda^part - E_rho_hat[w] stays positive after subtracting
+          the reference-arm alignment term.
+      - name: lambda_orc_three_term
+        kind: secondary
+        estimator: >-
+          alpha_bar_rho + Cov_rho(w, ||c||^2)/E||c||^2 - E<u_orc, c>/E||c||^2,
+          each term reported
+        statistic: "the three terms, and their sum"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          The third term's sign is unknown, so the sign of Lambda - E_rho_hat[w]
+          is read only after subtracting it. Zero new training: B7's output as
+          pi_hat, the teacher's clean policy as reference point.
+      - name: lambda_naive
+        kind: descriptive
+        estimator: "Lambda without the nuisance-basis partial regression"
+        statistic: "point estimate and CI, in the column adjacent to Lambda^part"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Reported alongside, never instead. The difference from Lambda^part is
+          read as the share of the leakage reading carried by the shrinkage
+          channel.
+      - name: lambda_clean_control_two_budgets
+        kind: descriptive
+        estimator: >-
+          Lambda^part of the capacity-matched clean control pi_hat_clean, under
+          both budget calibers: fixed target token budget (the pooled arm's 200
+          target demonstrations per core task, no source data) and fixed total
+          token budget (the pooled arm's 1400 per core task, from the matched
+          clean twins of the same seven pool cells)
+        statistic: "the two point estimates, side by side, with their token accounting"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Both calibers are reported or neither is (6.4 layer 3). Matched on the
+          target's own tokens the control sees a seventh of the total and its
+          reading invites "it was trained on less"; matched on the total it sees
+          seven times the target data and invites "it saw more of the body it is
+          evaluated on". The pair brackets confounder X2's alternative
+          explanation, that the leakage reading is target-data dilution, and one
+          caliber alone leaves it open in the direction the other closes. The
+          clean control is a control and never a reference point: appendix A-4
+          rules an independently trained clean policy out, so B7 stays the
+          reference arm of both rows.
+      - name: phi_leakage_share
+        kind: descriptive
+        estimator: "Phi = rho_dir squared"
+        statistic: "energy share"
+        dimension: energy
+        reference_arm: B7
+        verdict_rule: >-
+          Obtained only as the square of rho_dir (appendix A-14: the identity is
+          algebraic, so Phi and rho_dir are one piece of evidence, not two), and
+          only in the L^2(rho) sense.
+      - name: lambda_part_regime_occupancy_slope
+        kind: secondary
+        estimator: >-
+          regression of per-task Lambda^part on the occupancy of the regimes in
+          which the defect is active, over the 8 tasks x 6 defects
+        statistic: "beta_hat, plus Spearman rho over the 48 task-defect pairs"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          T5 holds when the slope is significantly positive and Spearman rho is
+          at least 0.6 (10.10). It carries T5, which was otherwise a registered
+          hypothesis with no endpoint reading it. It lives on E1 rather than on
+          P1 because the response is the deployed policy's leakage and only E1
+          has trained policies, while the regressor is P1's already-measured
+          occupancy mass -- so the row adds no training and no rollouts, which
+          is what 10.10 means by "read on rollouts that already exist". The
+          occupancy is read through the lock file, never recomputed here: P1's
+          1440-row table is the single copy, and a second computation of the
+          same quantity is how the two come to disagree.
+    requires_measurements:
+      - key: "phi.effective_rank"
+        stages: [diagnose]
+      - key: "stats.tau_corr.{task}.{defect}.{regime}"
+        stages: [diagnose]
+        expand: {regime: [r0, r1, r2, r3, r4]}
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+    notes: >-
+      Zero full training runs of its own: it reuses B2 and B7's 216 runs and
+      spends 14 GPU-h on the source discriminator. The discriminator's
+      three-part error budget (w_ece / w_alpha_recovery / w_support_gap, 0.05
+      absolute) and rho^off's three covariate-shift diagnostics appear in the
+      same table.
+
+  E2prime:
+    title: "The similarity-gradient bridge breaks"
+    phase: main
+    zero_gpu: false
+    question: >-
+      Does the empirical bridge from morphology similarity to gradient
+      alignment, which morphology clustering leans on, still hold along the
+      defect axis?
+    independent_variables:
+      - "source-pair morphology distance: twin pair (FGW 0) / same DoF different reach / cross DoF"
+      - "checkpoint: final, plus 25% and 50% of training"
+    state_distribution: "training split frames"
+    null_distribution: >-
+      the no-conflict upper anchor: gradient cosine between two disjoint
+      minibatches from the same source
+    primary_test: "two-sample comparison of the gradient-cosine distributions"
+    bootstrap: "200 minibatches, bootstrapped"
+    arms: [B2, B3]
+    subset: S36
+    design: {n_families: 6, n_defects: 6, n_seeds: 3}
+    prereg_items: [1, 2, 3, 4, 15]
+    gpu_hours: 90
+    cpu_hours: 0
+    zero_result_exit: >-
+      F3: if the gradient signal does separate the twin pairs, the thesis
+      becomes "the defect is a hidden dimension of embodiment similarity that
+      the gradient signal sees and the geometric descriptor does not".
+    endpoints:
+      - name: gradient_cosine_two_sample
+        kind: secondary
+        estimator: >-
+          per-parameter-tensor cosine cos(g_k, g_k'), weighted by parameter
+          count, on the trained pooled model
+        statistic: "|delta cos| between the twin-pair and cross-DoF distributions"
+        dimension: dimensionless
+        reference_arm: B2
+        verdict_rule: >-
+          T12 holds when |delta cos| < 0.15 and both distributions are
+          significantly below the upper anchor (twin pairs' 95% CI upper bound
+          below 0.85). The wording is "morphology distance has no predictive
+          power for gradient cosine along the defect axis", not "we
+          experimentally show morphology clustering does not work".
+      - name: p7_positive_control_gain
+        kind: secondary
+        estimator: >-
+          J(B3) - J(B2) on a real morphology difference, Panda against UR5e
+        statistic: "pp"
+        dimension: probability
+        reference_arm: B7
+        verdict_rule: >-
+          Mandatory (10.4.2). Preregistered at >= 3 pp. Without it, "morphology
+          clustering does nothing on the twin pairs" is equally consistent with
+          the baseline having been run badly, so a failing control makes the
+          twin-pair reading inconclusive rather than negative. The reading is an
+          arm-versus-arm difference and B7 is named as the reference point for
+          the same reason every other success-rate endpoint names it (appendix
+          A-4): the absolute rates on both sides are read against one and the
+          same Oracle, so the difference carries no reference-point drift.
+      - name: defect_axis_variance_share
+        kind: secondary
+        estimator: >-
+          variance decomposition of J(B3) - J(B2) over the non-trivial pool
+          (10 clean families with a defect injected in each) into cross-family
+          pairs and same-family cross-defect pairs
+        statistic: "the second source's share of the total"
+        dimension: dimensionless
+        reference_arm: B7
+        verdict_rule: >-
+          Mandatory (10.4.2). On the non-trivial pool the clustering forms a
+          genuine partition and may use whatever signal it likes, so the
+          question becomes empirical: of the negative transfer it recovers, how
+          much comes from the defect axis? Reported as a share with the contrast
+          number from arXiv 2602.18025 (IQL+EG over IQL, 34% on its
+          70%-suboptimal datasets) beside it, quoted and not compared: different
+          domain, different metric.
+      - name: own_regression_line_r
+        kind: descriptive
+        estimator: >-
+          our own morphology-distance / gradient-cosine regression refitted on
+          the non-trivial pool, with a Fisher z band on r
+        statistic: "Pearson r with CI, plus the twin pair's residual at the origin"
+        dimension: dimensionless
+        verdict_rule: >-
+          Descriptive. The published r = 0.63 is cited to establish that this
+          class of claim exists and is never a comparison baseline: it is fitted
+          on legged platforms, offline RL, another node feature set and another
+          gradient-cosine caliber, so the two x axes are not on one scale. The
+          row carries the same non-independence caveat we require of the
+          published p value: C(n, 2) source pairs come from n sources.
+      - name: fgw_twin_matrix
+        kind: design_diagnostic
+        estimator: "FGW distance matrix over the twin pairs, under both node feature sets"
+        statistic: "fgw_ours and fgw_baseline, both into the results table"
+        dimension: dimensionless
+        verdict_rule: >-
+          A construction, not an experimental finding, and therefore not tested
+          (appendix A-2): FGW = 0 gives a single cluster, so the group-wise
+          update rule is bit-for-bit naive pooling and the paired difference has
+          a true value of zero. The deliverable is the two matrices and the
+          actual partition.
+    requires_measurements:
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+    notes: >-
+      The primary criterion needs zero new training: only per-source gradients
+      on the already-trained pooled model. The 18 runs are the non-trivial pool
+      and P7 positive-control arms plus B3's PCGrad and GradNorm variants.
+
+  E3:
+    title: "Dose-response"
+    phase: main
+    zero_gpu: false
+    question: "When does leakage start to appear, and when does it start to do harm?"
+    independent_variables:
+      - "||delta||: 5 levels (M=2, D=2, S=2, 40 runs)"
+      - "alpha: 0.10 / 0.25 / 0.50 / 0.857 (M=2, D=1, S=2, 16 runs)"
+      - "ILC iteration count k in {0, 2, 5, 10, k_conv} (M=2, D=1, S=2, 20 runs)"
+    state_distribution: >-
+      rho^off for T2's descending segment; the pooled state marginal for the
+      covariance term of T1
+    null_distribution: >-
+      8 surrogate readings and a random-rotation reading at every level, both
+      expected flat on all three axes
+    primary_test: "mixed-model slope per axis"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [E3_dose, B9]
+    subset: S6
+    design: {n_families: 2, n_defects: 2, n_seeds: 2}
+    prereg_items: [1, 2, 3, 4, 6, 8, 10, 12, 15]
+    gpu_hours: 380
+    cpu_hours: 0
+    zero_result_exit: >-
+      All three axes flat -> merge with E1's null result and take F1. If only
+      the ||delta|| descent is absent while the absolute alignment error grows,
+      quantify source identifiability with B9's control reading and report T2 as
+      partially supported, verdict inconclusive.
+    endpoints:
+      - name: lambda_part_dose_slope
+        kind: secondary
+        estimator: "mixed-model slope of Lambda^part along each dose axis"
+        statistic: "beta_hat with CI, on the balanced panel"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          The main narrative uses the balanced panel B (cells whose five levels
+          are all judged converged); the all-cell curves are reported alongside,
+          with a worst-case imputation bound. If the bound does not preserve the
+          sign, E3's dose conclusion is demoted to exploratory.
+      - name: absolute_alignment_error
+        kind: secondary
+        estimator: "Lambda_delta * ||c_delta||"
+        statistic: "Spearman rho against ||delta||, predicted at or above 0.8"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Reported together with Lambda^part: T2 predicts Lambda flat then
+          falling while the absolute error grows, and only the pair
+          distinguishes "identifiability rose" from "nothing happened".
+      - name: x13_three_curves
+        kind: descriptive
+        estimator: >-
+          the same dose slope read three ways: on the balanced panel B, on all
+          admitted cells, and on the worst-case fill in which every excluded
+          cell above the level centroid takes that defect's lowest-level mean
+          and every one below it takes the highest-level mean
+        statistic: >-
+          three slopes, |B| with the per-defect panel retention rate, the
+          per-level ILC outcome counts kept apart, and the width of the bound
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          X13 is dose-dependent cell exclusion: the ILC teacher stops converging
+          and the demonstrator switches contact mode more often as the dose
+          rises, so the high levels keep only the cells that could still be
+          taught and T2's predicted descent is partly manufactured by that
+          selection. The three curves are reported together, never one of them.
+          If the worst-case bound does not preserve the sign of the
+          balanced-panel slope, E3's dose conclusion is demoted to exploratory.
+      - name: t2_turning_point_level
+        kind: secondary
+        estimator: "the level at which Lambda's ||delta|| slope changes sign"
+        statistic: "level index"
+        dimension: count
+        reference_arm: B7
+        verdict_rule: "A mandatory reported quantity, not an incidental observation."
+    requires_measurements:
+      - key: "defect.observable.{defect}.{level}.{family}"
+        stages: [collect, diagnose]
+        expand: {level: ["0", "1", "2", "3", "4"]}
+      - key: "task.tol.{task}.{geom_variant}"
+        stages: [diagnose]
+    notes: >-
+      The three axes are orthogonal by construction: ||delta|| changes the body,
+      alpha changes only the data ratio table, k changes only how much the
+      teacher actually compensated. The k axis is this setting's own knob --
+      defect amplitude fixed, compensation varying -- and k = 0 may not be
+      dropped, since it is the "compensation zero, defect present" anchor.
+
+  E4:
+    title: "Two-way decomposition (an instrument)"
+    phase: main
+    zero_gpu: false
+    question: >-
+      With ground truth available, how close is an explicit intent/compensation
+      decomposition head's compensation component to the true field's direction?
+    independent_variables:
+      - "head form: low-rank W_delta phi(x) / physical basis span{psi_j} / unconstrained MLP"
+    state_distribution: "rho^off"
+    null_distribution: "the same cosine against the 8 surrogate fields"
+    primary_test: "difference of two head forms"
+    bootstrap: "trajectory-level block bootstrap"
+    arms: [E4_head]
+    subset: S9
+    design: {n_families: 3, n_defects: 3, n_seeds: 2}
+    prereg_items: [1, 2, 3, 4, 5, 15]
+    gpu_hours: 27
+    cpu_hours: 6
+    zero_result_exit: >-
+      Every form's cosine near the null level -- the number is itself the
+      deliverable ("even given per-frame ground truth, the decomposition cannot
+      do it") and it strengthens the mechanism figure. No claim hangs on it.
+    endpoints:
+      - name: cos_g_phi_c_true
+        kind: secondary
+        estimator: "cos(g_phi, c_true_delta) in the L^2(rho^off) sense"
+        statistic: "cosine"
+        dimension: dimensionless
+        reference_arm: B7
+        mde: 0.11
+        verdict_rule: >-
+          At least 0.6 under the physical basis and at most 0.35 under the
+          unconstrained MLP; the 0.25 gap exceeds the endpoint's MDE of 0.11 at
+          (M, D, S) = (3, 3, 2). Identifiability is not a question of fitting
+          capacity.
+    requires_measurements:
+      - key: "phi.effective_rank"
+        stages: [diagnose]
+    notes: >-
+      Explicitly not an algorithmic contribution. E4 exists to supply a number
+      nobody else can supply, because nobody else has per-frame c_true. All its
+      ablations are instrument calibration, not method comparison.
+
+  E4b:
+    title: "Narrative inversion: is embodiment diversity poison or cure?"
+    phase: main
+    zero_gpu: false
+    question: "Is embodiment diversity poison or cure?"
+    independent_variables:
+      - "K in {1, 2, 4, 6}, each source carrying a different defect, total added data fixed"
+      - "the K = 4 all-identical-defect control arm at matched data volume"
+    state_distribution: "rho^off"
+    null_distribution: "the surrogate defect distribution"
+    primary_test: "trend test over K"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [E4b, B1]
+    subset: S4fam
+    design: {n_families: 4, n_defects: 1, n_seeds: 3}
+    prereg_items: [1, 2, 3, 4, 10, 13, 14, 15, 16]
+    gpu_hours: 300
+    cpu_hours: 0
+    zero_result_exit: >-
+      A flat or non-monotone K curve means the inversion fails and diversity is
+      not the cure; the surviving conclusion is "leakage exists and diversity
+      does not mitigate it", and B10 becomes the recommended remedy.
+    endpoints:
+      - name: success_rate_K_trend
+        kind: secondary
+        estimator: "success rate against K, trend test"
+        statistic: "monotone increase; at K >= 4, at least 5 pp above B1"
+        dimension: probability
+        reference_arm: B7
+        verdict_rule: "In the secondary family; its power exceeds the two-point paired difference."
+      - name: t3_two_point_paired_difference
+        kind: exploratory
+        estimator: "success-rate paired difference at two K levels"
+        statistic: "pp"
+        dimension: probability
+        reference_arm: B7
+        mde: 9.4
+        verdict_rule: >-
+          Registered as exploratory (preregistration item 16). E4b's real design
+          is M = 4, one defect setting, S = 3, giving an MDE of 9.4 pp after the
+          t correction; raising S to 5 only reaches 9.1 pp because the
+          morphology-layer variance is divided by M alone. The minimum effect
+          that would make it confirmatory, 9.5 pp, is registered too.
+      - name: q_div
+        kind: design_diagnostic
+        estimator: "the orthogonal energy share of the injected ground-truth fields"
+        statistic: "energy share, under the uniform-mean convention"
+        dimension: energy
+        verdict_rule: >-
+          A design diagnostic, never a preregistered endpoint (appendix A-24):
+          it contains no policy quantity and can be computed before training. It
+          answers "is this set of bodies spread out enough", not "how much did
+          the learner strip". Read only under the uniform mean, since that is
+          the only measure making the identifiable and unidentifiable components
+          orthogonal (appendix A-20), and never compared directly with Lambda.
+    requires_measurements:
+      - key: "defect.observable.{defect}.{level}.{family}"
+        stages: [collect]
+        expand: {level: ["0", "1", "2", "3", "4"]}
+    notes: >-
+      The control arm must match the distinct-defect arms' morphology diversity:
+      four families with identical defect parameters. Otherwise "K identical
+      defects" with identical morphology is one embodiment and the experiment
+      degenerates into "4x data from one body vs 4 different defective bodies".
+
+  E5:
+    title: "Real-data observation arm (DROID, 13 institutions)"
+    phase: main
+    zero_gpu: false
+    question: >-
+      In a real large-scale cross-institution dataset, do the commanded actions
+      carry each laboratory's own compensation?
+    independent_variables:
+      - "institution identity (DROID's 13), with task category as a crossed factor"
+    state_distribution: "the DROID trajectories themselves"
+    null_distribution: "held-out laboratory check for endpoint B"
+    primary_test: "crossed random-effects model for the between-institution variance component"
+    bootstrap: "trajectory-level block bootstrap"
+    arms: []
+    subset: null
+    design: {n_families: 13, n_defects: 1, n_seeds: 1}
+    prereg_items: [1, 2, 3, 4, 15]
+    gpu_hours: 9
+    cpu_hours: 0
+    zero_result_exit: >-
+      F5: no between-institution component in the pre-latency window -> the real
+      data do not show feed-forward compensation, and the simulation claim keeps
+      its scope without external instantiation. Carries 10.9's exit F5, whose
+      three-tier form is in 10.4.6: the simulation-side conclusions are
+      untouched and E5 becomes an appendix plus a recommendation on the minimum
+      calibration metadata a released dataset should report.
+    endpoints:
+      - name: t_comp_pre_latency_window
+        kind: secondary
+        estimator: >-
+          T_comp = sigma^2_lab(cmd) / sigma^2_lab(ach), computed only on the
+          first 200 ms of each motion segment (after a velocity zero crossing)
+        statistic: "ratio"
+        dimension: dimensionless
+        verdict_rule: >-
+          The primary reading, preregistered at T_comp > 1.3 on at least 8 of
+          the 13 institutions. Human visuomotor latency is 200-300 ms, so
+          commands inside this window cannot be a reaction to the lag they would
+          be compensating; what is left is the feed-forward component. The
+          full-segment reading alone is excluded by appendix A-26, because a
+          purely reactive operator also produces T_comp > 1. The count is over
+          the roster of the pinned DROID release, read from the lock file rather
+          than taken as 13 from the proposal: a release exposing a different set
+          of institutions changes the denominator this prediction is read
+          against.
+      - name: t_comp_full_segment
+        kind: descriptive
+        estimator: "T_comp over all frames"
+        statistic: "ratio"
+        dimension: dimensionless
+        verdict_rule: "Reported alongside; the difference from the window reading is the reactive/feed-forward decomposition."
+      - name: t_comp_reactive_feedforward_difference
+        kind: secondary
+        estimator: "the pre-latency window reading minus the full-segment reading"
+        statistic: "difference of two ratios"
+        dimension: dimensionless
+        verdict_rule: >-
+          The second half of endpoint A's preregistered prediction, and 10.4.6
+          notes it is a quantity nobody has reported: the window reading carries
+          the feed-forward component alone and the full-segment reading carries
+          feed-forward plus reactive, so their difference is the decomposition.
+          Predicted > 0, which reads as "a reactive component exists but is not
+          all of it". A difference at or below zero says the two readings did
+          not separate, which is a statement about the decomposition and not
+          about the operators.
+      - name: t_comp_regressed_out
+        kind: descriptive
+        estimator: >-
+          per-institution projection of cmd_t on 300 ms of achieved history, then
+          the between-institution variance component of the residual
+        statistic: "ratio"
+        dimension: dimensionless
+        verdict_rule: "The second independent caliber for the feed-forward side."
+      - name: held_out_lab_variance_drop
+        kind: secondary
+        estimator: >-
+          endpoint B: per-institution delta_hat (delay, transmission gain,
+          static bias; 3-6 parameters), a subtractable compensation model
+          psi_j(delta_hat) on the physical basis, and the fall in the
+          between-institution variance component on the held-out institutions
+        statistic: "relative drop, median over the 9.6.6 folds"
+        dimension: dimensionless
+        verdict_rule: >-
+          Preregistered at >= 15% on the held-out institutions. This is route
+          (S), not route (P): identification comes from widening the observation
+          from (x, a) to (x, a, Delta x^ach) and uses no (ER)-type exclusion
+          restriction, which makes it the only identification route in the plan
+          that runs on real hardware data without one. It also bounds the
+          pessimism about the common mode -- the common mode is unidentifiable
+          only without an anchor, and the execution signature is one. The split
+          is keyed on the institution id and never on the trajectory id (9.6.6),
+          or the same institution's trajectories leak across the split and the
+          held-out check is void. This endpoint is what E5's 9 GPU-h buys; the
+          rest of the arm is zero GPU.
+    requires_measurements:
+      - key: "real.droid.institution_roster"
+        stages: [diagnose]
+    notes: >-
+      Institutions are defined inside DROID only. Splicing an institution layer
+      across datasets is excluded (appendix A-27): the collections keep their
+      original control schemes, so a cross-dataset command variance mixes in
+      action-space convention differences on the same scale as the quantity
+      being extracted. The pairing is fixed as
+      action_dict/cartesian_position (commanded pose) against
+      observation/cartesian_position (achieved pose) -- pose against pose, never
+      commanded velocity against a differentiated achieved velocity, which puts
+      differentiation noise only in the denominator.
+
+      The empty arm list is 10.4.6's cost line read literally: "0 complete runs
+      + 9 GPU-h". E5 trains no policy. Endpoint A is zero GPU -- download,
+      alignment and the variance components are booked on 10.8.4's
+      post-processing row -- and the 9 GPU-h is endpoint B's 13 per-institution
+      delta_hat fits and their held-out check, which are small physical-basis
+      regressions rather than a policy. With no training arm there is also no B7
+      Oracle to be a reference point, so every endpoint here carries a null
+      reference arm (appendix A-4).
+
+  E7:
+    title: "The common mode cannot be removed (crown)"
+    phase: main
+    zero_gpu: false
+    question: >-
+      Multi-embodiment pooling strips the contrast component of the
+      compensation; what about the common mode?
+    independent_variables:
+      - "K in {2, 4, 6, 8}, nested so the K rungs share demonstrations"
+      - "common-mode rung: endogenous (main) / zero common mode (control)"
+    state_distribution: "rho^off"
+    null_distribution: "the zero-common-mode control arm"
+    primary_test: "mixed-model slope against log2 K"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [E7, B6, B13]
+    subset: S36
+    design: {n_families: 6, n_defects: 2, n_seeds: 2}
+    prereg_items: [1, 2, 3, 4, 7, 9, 10, 13, 15]
+    gpu_hours: 480
+    cpu_hours: 0
+    zero_result_exit: >-
+      F4: lambda_emp_res falls significantly with K, so the common mode can be
+      stripped after all, embodiment tokens suffice, and the claim retreats to
+      diagnostics plus benchmark plus harm asymmetry.
+    endpoints:
+      - name: lambda_emp_slope_pair
+        kind: primary
+        estimator: >-
+          intersection-union of the two component slope tests: the pair is
+          declared only if lambda_emp_res is flat in log2 K AND lambda_emp_con
+          falls in K, so the pair's p value is max(p_res, p_con)
+        statistic: "max(p_res, p_con) over the two component slopes"
+        dimension: amplitude
+        reference_arm: B7
+        mde: 0.033
+        holm_bonferroni_rank: 3
+        verdict_rule: >-
+          10.7.6 counts the res/con slope pair as one member of the primary
+          family, and T9 is the conjunction of the two directional claims. An
+          intersection-union test is what makes that one number: its size is at
+          most alpha without any correction between the two components, because
+          the conjunction can only be declared when the worse component clears
+          alpha on its own. The two components are reported individually as
+          well -- 10.7.6 requires both curves printed -- but they are not tested
+          separately, which would test T9 twice under two names and inflate the
+          family from five members to six.
+      - name: lambda_emp_res
+        kind: descriptive
+        estimator: >-
+          sum_r m_r E[<eps_cond, c_bar>] / sum_r m_r E[||c_bar||^2], with
+          c_bar the common-mode field and eps_cond the deployment error of the
+          most strongly conditioned arm
+        statistic: "slope against log2 K"
+        dimension: amplitude
+        reference_arm: B7
+        mde: 0.033
+        verdict_rule: >-
+          Predicted flat: the 95% CI must lie inside +-0.033. The registered
+          distinguishable alternative is a K^(-1/2) decay with slope about
+          -0.075, which is 2.3x the MDE, so the two are separable in power.
+          Numerator and denominator are weighted by occupancy mass separately
+          and only then divided -- an occupancy-weighted average of slopes is
+          not the slope on merged data.
+      - name: lambda_emp_con
+        kind: descriptive
+        estimator: >-
+          projection of eps_cond onto span{c_k - c_bar}, orthogonalised in
+          L^2(rho^off) and normalised by the subspace dimension
+        statistic: "slope against K"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: "Predicted to fall, beta_hat at most -0.08. The control arm uses the same pair."
+    requires_measurements:
+      - key: "stats.tau_corr.{task}.{defect}.{regime}"
+        stages: [diagnose]
+        expand: {regime: [r0, r1, r2, r3, r4]}
+    notes: >-
+      The endogenous rung is the main setting because it turns "a common mode
+      exists" from a construction into a physical fact: gravity points the same
+      way for every body, so under-compensated gravity is same-signed on every
+      machine, and a reader cannot say the shared bias was put there by us.
+
+  E8:
+    title: "Design-graph connectivity (crown)"
+    phase: main
+    zero_gpu: false
+    question: "Do the design graph's connectivity and effective resistance predict leakage?"
+    independent_variables:
+      - "6 design-graph rungs, all realised by the data ratio table: A, C1, C2, C3, C4, B"
+    state_distribution: "rho^off"
+    null_distribution: >-
+      rung B as an upper anchor; its task and defect marginals match rung A word
+      for word, so only the support structure differs
+    primary_test: "mixed-model slope of Lambda^part against ln R_eff, on the five connected rungs"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [E8]
+    subset: S4fam
+    design: {n_families: 4, n_defects: 2, n_seeds: 3}
+    prereg_items: [1, 2, 3, 4, 6, 9, 10, 13, 15]
+    gpu_hours: 360
+    cpu_hours: 0
+    zero_result_exit: >-
+      A non-significant slope with no A-B difference reads as "empirical bridge
+      T11 broke", not as proposition 3 being falsified. With E12 already
+      confirming proposition 3, that is the important negative result of F9.
+    endpoints:
+      - name: connectivity_slope
+        kind: primary
+        estimator: "mixed-model slope of Lambda^part against ln R_eff"
+        statistic: "beta_hat with CI, on rungs A and C1-C4"
+        dimension: amplitude
+        reference_arm: B7
+        mde: 0.042
+        holm_bonferroni_rank: 4
+        verdict_rule: >-
+          Significant when beta_hat >= 0.045 and the 95% CI excludes zero.
+          Estimated on the five connected rungs only. Rung B is an upper anchor,
+          reported as approximately true by construction, and enters neither the
+          primary criterion nor the Holm-Bonferroni family.
+      - name: r_eff_ladder
+        kind: design_diagnostic
+        estimator: >-
+          R_eff(D4, D3b) and lambda_2 per rung, off the Laplacian of the rung's
+          own (task, defect) allocation with EffectiveSampleCount edge weights
+        statistic: >-
+          the six rungs at the normalised caliber (a bridge task's 100
+          demonstrations per defect is w = 1), with ln R_eff and the realised
+          sum of squared deviations beside the registered 1.88
+        dimension: dimensionless
+        verdict_rule: >-
+          Computable before collection, which is what makes E8 a data-subset
+          choice at zero collection cost. Rung B is disconnected, so its R_eff
+          is infinite and it carries no ln R_eff; its task and defect marginals
+          match rung A's word for word and that identity is checked rather than
+          asserted. The normalised column is reported next to the absolute one
+          recomputed per cell from W2's measured tau_corr, never instead of it.
+      - name: xi_g
+        kind: design_diagnostic
+        estimator: "max_tau ||h_tau||_1 / (2(1 - 1/n_T)) with h_tau = (L_G^+ M^T W)_tau"
+        statistic: "numerically computed per rung"
+        dimension: dimensionless
+        verdict_rule: >-
+          A pure design quantity, computable before collection. It is a
+          numerical computation, not a theorem, and no general Xi_G >= 1 claim
+          is made (the L1 norm is not monotone in the edge weights). Every place
+          proposition 1(e)'s deviation bound is reported carries that rung's
+          Xi_G.
+    requires_measurements:
+      - key: "stats.tau_corr.{task}.{defect}.{regime}"
+        stages: [diagnose]
+        expand: {regime: [r0, r1, r2, r3, r4]}
+      - key: "regime.threshold.{name}.{task}.{family}"
+        stages: [diagnose]
+        fixed_scope: {name: contact_force}
+    notes: >-
+      Edge weights are effective frame counts n / tau_corr, never demonstration
+      counts and never raw frames (11.4, appendix A-8); R_eff, lambda_2 and
+      Xi_G all inherit that caliber. The whole experiment is a data-subset
+      choice over existing demonstrations, which is why it costs no collection.
+
+  E9:
+    title: "Parameter isolation (crown)"
+    phase: main
+    zero_gpu: false
+    question: >-
+      If embodiment heterogeneity is "handled" by parameter isolation, does
+      identifiability get handled along with it?
+    independent_variables:
+      - "parameter disjointness I as a continuous regressor, over rungs I0-I3"
+      - "the decisive control I3', at I3's isolation with a random pooled split"
+    state_distribution: "rho^off"
+    null_distribution: "I3' as the fragmentation control"
+    primary_test: "mixed-model slope of Lambda^part against I, with log(total parameters) as a covariate"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [I0, I1, I2, I3, I3prime]
+    subset: S4fam
+    design: {n_families: 4, n_defects: 1, n_seeds: 3}
+    prereg_items: [1, 2, 3, 4, 6, 10, 13, 14, 15]
+    gpu_hours: 300
+    cpu_hours: 0
+    zero_result_exit: >-
+      No response of Lambda to I -> bridge T6 broke and the criticism of
+      per-instance isolation has no support at the learner level. I3 equal to
+      I3' -> what was measured is data fragmentation, and it must be reported
+      that way.
+    endpoints:
+      - name: isolation_slope
+        kind: primary
+        estimator: "mixed-model slope of Lambda^part against I over I0-I3"
+        statistic: "beta_hat, plus Spearman rho over the four rungs"
+        dimension: amplitude
+        reference_arm: B7
+        mde: 0.078
+        holm_bonferroni_rank: 5
+        verdict_rule: >-
+          T6 holds when Lambda^part rises monotonically (Spearman rho = 1 over
+          I0-I3), beta_hat >= 0.12, and I3 - I0 >= 0.12. The regressor is
+          measured, not assigned: 10.4.9 defines s_{k,p} as an expectation under
+          rho_k, so the rung values are read off the trained routers and the
+          realised I of every rung must be reported next to the slope. 0.078 is
+          the value 10.7.5's table registers, computed on the ladder
+          0 / 0.28 / 0.42 / 1.00 whose sum of squared deviations is 0.532: the
+          architecture puts I2 near 0.42 rather than the nominal 0.71 because the
+          shared visual trunk is 56% of the parameters and 10.4.9's formula sums
+          over all blocks. The nominal ladder's 0.593 and its MDE of 0.074 are
+          the parenthetical comparison in that table, not the registered number
+          -- 0.074 is the MDE of a ladder this experiment does not run. The
+          registered effect 0.12 clears the measured value at 1.5x and the
+          nominal one at 1.6x, so the correction does not change the verdict
+          rule; the MDE is recomputed again on the realised ladder and reported
+          beside this one, since I is measured rather than assigned.
+      - name: i3_vs_i3prime_paired_difference
+        kind: secondary
+        estimator: "paired difference in Lambda^part between I3 and I3'"
+        statistic: "difference"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          At least 0.06, or the slope cannot be attributed. Parameter count,
+          activated count and per-module data volume are identical between the
+          two; only the split rule differs.
+    requires_measurements: []
+    notes: >-
+      Only the activated parameter count is matched, to +-10% (appendix A-25);
+      the total count is a reported covariate entering the regression as
+      log(total). The main setting keeps the action space literally identical,
+      so the AS-MoE branch carries no action-space difference and the whole
+      isolation range comes from HB-MoE and the head structure.
+
+  E10:
+    title: "Route (P): no diversity, only a physical prior"
+    phase: main
+    zero_gpu: false
+    question: >-
+      With no diversity and only a physical prior, can a single embodiment
+      identify the compensation?
+    independent_variables:
+      - "four function-class rungs for the mu head and the compensation head"
+    state_distribution: "the single-embodiment pool's own distribution"
+    null_distribution: "the surrogate defect distribution"
+    primary_test: "recovery error of delta_hat against the stored ground truth"
+    bootstrap: "trajectory-level block bootstrap"
+    arms: [E10]
+    subset: S6
+    design: {n_families: 2, n_defects: 2, n_seeds: 2}
+    prereg_items: [1, 2, 3, 4, 10, 15]
+    gpu_hours: 160
+    cpu_hours: 0
+    zero_result_exit: >-
+      No function class recovers delta -> route (P) is not instantiable at this
+      scale, and the identifiability inversion keeps route (D) and route (A) as
+      its only realised routes.
+    endpoints:
+      - name: delta_recovery_error
+        kind: secondary
+        estimator: "||delta_hat - delta|| against the per-trajectory stored ground truth"
+        statistic: "error, per function class"
+        dimension: dimensionless
+        reference_arm: B7
+        verdict_rule: >-
+          The comparison object is the stored delta vector, which exists only
+          because the simulator provides ground truth; this endpoint has no
+          real-data counterpart and says so. Rung (ii), the (ER) input-channel
+          excision, is predicted at 0.25 or better; rungs (i) and (iii) at 0.80
+          or worse and within 0.10 of each other. Rung (iv) is handed delta, so
+          it has no recovery error at all -- it is a success-rate upper bound
+          and not route (P). If rung (i) succeeds without the excision, what
+          worked is the inductive bias of span psi_j: that is reported as an
+          algorithm-layer finding and may not be counted as information-layer
+          evidence for route (P).
+      - name: mu_head_lambda_ref
+        kind: secondary
+        estimator: >-
+          Lambda^ref of the learned mu head evaluated as a policy on the clean
+          twin
+        statistic: "residual task-intent cleanliness, per rung"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          At most 0.20 at rung (ii). The mu head is what (ER) restricts, so a
+          low recovery error with a contaminated mu head would mean the split
+          moved compensation into the intent branch rather than identified it.
+      - name: route_p_success_rate_gap
+        kind: descriptive
+        estimator: >-
+          success rate on the target body, per rung, and the gap between rung
+          (ii) and the ground-truth rung (iv)
+        statistic: "pp"
+        dimension: probability
+        reference_arm: B7
+        verdict_rule: >-
+          At most 5 pp between rung (ii) and rung (iv). Rung (iv) is the upper
+          bound the four rungs are read against and is not itself route (P)
+          evidence.
+    requires_measurements:
+      - key: "defect.observable.{defect}.{level}.{family}"
+        stages: [collect, diagnose]
+        expand: {level: ["0", "1", "2", "3", "4"]}
+    notes: >-
+      The pool is K = 1 and contains no clean twin. With the clean twin in it
+      the question would be route A again.
+
+  E11:
+    title: "Mismatch evaluation arm"
+    phase: main
+    zero_gpu: true
+    question: >-
+      How does a policy trained on one target defect behave when deployed on a
+      different one?
+    independent_variables:
+      - "the 6x6 cross matrix of training defect against deployment defect"
+    state_distribution: "the deployment embodiment's own rollout distribution"
+    null_distribution: "the diagonal cells, which reuse B2"
+    primary_test: "partial regression coefficient over the cross matrix"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [E11]
+    subset: S36
+    design: {n_families: 6, n_defects: 6, n_seeds: 3}
+    prereg_items: [1, 2, 3, 4, 10, 13, 15]
+    gpu_hours: 0
+    cpu_hours: 180
+    zero_result_exit: >-
+      A flat cross matrix means the mismatch field Delta c has no behavioural
+      consequence at these levels; the failure profile is still reported.
+    endpoints:
+      - name: mismatch_partial_regression
+        kind: secondary
+        estimator: "regression of the paired success-rate difference on ||Delta c||"
+        statistic: "coefficient with CI"
+        dimension: dimensionless
+        reference_arm: B7
+        verdict_rule: >-
+          The object is the mismatch field Delta c = c_{delta_src} -
+          c_{delta_tgt}, which is defined for any pair of real embodiments; harm
+          is never defined on transfer to a delta = 0 target (appendix A-1).
+      - name: failure_type_profile
+        kind: secondary
+        estimator: "constraint-violation rate against task-failure rate, both directions"
+        statistic: "two rates per direction"
+        dimension: probability
+        reference_arm: B7
+        verdict_rule: >-
+          Appendix A-17: harm asymmetry needs a trained C->D arm, not open-loop
+          replay alone. Promoting the existing single-embodiment and Oracle
+          policies to that arm costs no new training.
+    requires_measurements: []
+    notes: >-
+      Zero training: the S36 policies are cross-evaluated. Off-diagonal cells
+      are the ones where the target embodiment's data are outside the pool.
+
+  E12:
+    title: "Direct fit of the two-way additive model"
+    phase: gate
+    zero_gpu: true
+    question: >-
+      Does the two-way additive model's variance scale, as predicted by
+      proposition 3, hold on this data?
+    independent_variables:
+      - "fitting caliber: direct eta_tau_delta and twin-paired-difference delta-eta"
+    state_distribution: "the collected demonstrations"
+    null_distribution: >-
+      none: this is a fit, and the comparison object is proposition 3's
+      predicted sigma^2 R_eff
+    primary_test: "ratio of the measured Var(theta_hat_tau - theta_hat_tau') to sigma^2 R_eff"
+    bootstrap: "resampling seed_env"
+    arms: []
+    subset: S36
+    design: null
+    prereg_items: [1, 2, 3, 4, 9, 15]
+    gpu_hours: 0
+    cpu_hours: 12
+    zero_result_exit: >-
+      A ratio far from 1 means proposition 3's variance scale does not apply
+      under this data's independence and homoscedasticity calibers; report the
+      deviation and demote E8's slope prediction to a pure empirical regression.
+    endpoints:
+      - name: theta_gamma_two_calibers
+        kind: secondary
+        estimator: >-
+          weighted least squares fit of theta_hat_tau and gamma_hat_delta under
+          both calibers, with the residual interaction share
+        statistic: "the two fits and the residual share"
+        dimension: dimensionless
+        verdict_rule: >-
+          Both calibers are mandatory outputs: the direct one and the twin
+          paired difference delta-eta = eta_tau_delta - eta_tau_0 at the same
+          seed_env and the same reference trajectory.
+      - name: variance_ratio_vs_proposition3
+        kind: secondary
+        estimator: >-
+          measured Var(theta_hat_tau - theta_hat_tau') from resampling seed_env,
+          divided by the predicted sigma^2 R_eff, pairwise
+        statistic: "ratio, pairwise"
+        dimension: dimensionless
+        verdict_rule: >-
+          The only measured check on proposition 3 anywhere in the plan. It
+          costs no GPU, so 11.3 unblinds it immediately after the three gates
+          and before any training arm.
+      - name: xi_g_numerical
+        kind: design_diagnostic
+        estimator: "Xi_G computed numerically per rung"
+        statistic: "value per rung"
+        dimension: dimensionless
+        verdict_rule: "Third mandatory output. A design quantity; no general inequality is claimed."
+    requires_measurements:
+      - key: "stats.tau_corr.{task}.{defect}.{regime}"
+        stages: [diagnose]
+        expand: {regime: [r0, r1, r2, r3, r4]}
+    notes: >-
+      diagnostics/two_way_fit.py is the only module producing theta_hat and
+      gamma_hat; design_graph.py computes design quantities only and
+      common_mode.py computes gamma and gamma_bar from the ground truth only,
+      so neither is an estimator and without E12 propositions 1(e)(e') and 3
+      have no measured counterpart at all.

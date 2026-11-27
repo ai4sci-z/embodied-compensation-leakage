@@ -1,0 +1,21 @@
+{
+  "schema": "portal_trace.b1_offline_rollout_gate/1",
+  "marker": "PORTAL_TRACE_ENGINEERING_B1_OFFLINE_GATE_NOT_PAPER_RESULT",
+  "thresholds": {
+    "overall_action_mse_max": 0.05,
+    "first_step_continuous_action_mse_per_dim_max": 0.05,
+    "first_step_gripper_action_mse_max": 0.1,
+    "gripper_sign_accuracy_min": 0.99,
+    "rotation_prediction_to_target_rms_ratio_max": 2.0
+  },
+  "policy": {
+    "arm": "B1-target-only",
+    "loss_kind": "continuous-rms-mse+gripper-bce-v1",
+    "rotation_dims": [
+      3,
+      4,
+      5
+    ],
+    "require_every_seed": true
+  }
+}

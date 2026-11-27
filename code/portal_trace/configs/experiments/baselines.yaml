@@ -1,0 +1,104 @@
+# The baseline block B1-B13 (proposal 10.5).
+#
+# The arms themselves are declared in `arms.yaml`; this file is the experiment
+# entry that owns them, so that a baseline can be trained and evaluated on its
+# own rather than only as a side effect of the experiment that reads it. The
+# endpoints here are the ones every baseline row reports.
+
+schema_version: 1
+
+experiments:
+  B:
+    title: "Baselines B1-B13"
+    phase: baseline
+    zero_gpu: false
+    question: >-
+      Which of the thirteen standing positions -- do not use other people's
+      data, more data is better, group by morphology, decouple task from
+      embodiment, randomise it away, one token per embodiment, the Oracle,
+      counterfactual de-compensation, the leakage lives in the embodiment cue,
+      curate the data, patch it with a residual head at deployment, one decoder
+      per embodiment, learn the embodiment representation -- survives contact
+      with a compensation field that is measured rather than inferred?
+    independent_variables:
+      - "arm identity B1-B13"
+    state_distribution: >-
+      rho^off for the Lambda family; the target embodiment's own rollout
+      distribution for the success rate
+    null_distribution: "surrogate defect distribution"
+    primary_test: "crossed random-effects mixed model, or within-family restricted permutation"
+    bootstrap: "paired, resampling shared initial-state indices"
+    arms: [B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12, B13]
+    subset: null
+    design: null
+    prereg_items: [1, 2, 3, 4, 6, 10, 13, 14, 15]
+    gpu_hours: 2190
+    cpu_hours: 0
+    zero_result_exit: >-
+      F4 if B6 alone closes the gap: embodiment tokens are already standard
+      practice in RT-X / Octo / OpenVLA-class models, so "B6 suffices" means no
+      algorithmic novelty and an existing remedy. The framework then relocates
+      onto the common mode, which no token can reach.
+    endpoints:
+      - name: success_rate_paired_difference
+        kind: primary
+        estimator: "J(Oracle) - J(pooled) on the shared 50 evaluation initial states"
+        statistic: "percentage points"
+        dimension: probability
+        reference_arm: B7
+        mde: 7.3
+        holm_bonferroni_rank: 1
+        verdict_rule: >-
+          The main decision endpoint: it has a unit and no heavy-tailed
+          denominator. MDE 7.3 pp after the t correction at (M, D, S) =
+          (6, 6, 3). Absolute success rates carry a binomial plus
+          finite-population CI; the roughly 7 pp common offset from evaluating
+          on 50 fixed initial states enters no paired CI.
+      - name: safety_peak_cfrc_ext
+        kind: secondary
+        estimator: "peak cfrc_ext during the collision transient"
+        statistic: "newtons, against P0's calibration curve"
+        dimension: dimensionless
+        reference_arm: B7
+        verdict_rule: >-
+          One of 10.7.6's four safety endpoints, which take Benjamini-Hochberg
+          at FDR 0.10 and are not members of the Holm-Bonferroni family. Read on
+          the collision transient, dominated by approach speed rather than
+          penetration depth (appendix A-11). Every safety number inherits the
+          solref/solimp degree of freedom and carries A8's three-group
+          sensitivity ablation.
+      - name: leak_beh
+        kind: descriptive
+        estimator: "(J(Oracle) - J(pooled)) / (J(Oracle) - J(single embodiment))"
+        statistic: "ratio"
+        dimension: dimensionless
+        reference_arm: B7
+        verdict_rule: >-
+          Descriptive companion only, and it carries a preregistered effect size
+          -- without one, "not significant" has no boundary to be read against.
+          Inconclusive when the denominator falls below its preregistered floor.
+      - name: lambda_part
+        kind: secondary
+        estimator: "the coefficient on c_delta after nuisance-basis partial regression"
+        statistic: "point estimate with CI, per cell"
+        dimension: amplitude
+        reference_arm: B7
+        verdict_rule: >-
+          Always against the same B7 Oracle (appendix A-4). Naive Lambda is
+          reported in the adjacent column.
+    requires_measurements:
+      - key: "train.throughput.{arch}"
+        stages: [train]
+        fixed_scope: {arch: resnet18_transformer4}
+      - key: "storage.gzip_ratio.{modality}"
+        stages: [materialise]
+        expand: {modality: [rgb, proprio]}
+      - key: "obs.proprio_native_dim.{family}"
+        stages: [materialise]
+      - key: "mjcf.agentview_pose.{task}"
+        stages: [materialise]
+    notes: >-
+      B3 and B12 have zero runs of their own: B3's twin-pair equivalence with B2
+      is a construction (appendix A-2) and its variant runs are counted in E2';
+      B12 is E9's I3 rung. B11 trains heads only, so its 18 GPU-h sits in the
+      head-training table rather than the run column.
