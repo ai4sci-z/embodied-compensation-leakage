@@ -1,0 +1,50 @@
+services:
+  portal-trace:
+    build:
+      context: ..
+      dockerfile: environment/Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+        GROUP_ID: ${GROUP_ID:-1000}
+        TORCH_VERSION: ${TORCH_VERSION:-2.7.1}
+        TORCHVISION_VERSION: ${TORCHVISION_VERSION:-0.22.1}
+    image: portal-trace:local
+    gpus: all
+    shm_size: 8gb
+    environment:
+      MUJOCO_GL: egl
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility,graphics
+      PORTAL_DATA_ROOT: /data
+      PORTAL_RESULTS_ROOT: /results
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ..:/workspace/PORTAL-Trace
+      - ${PORTAL_DATA_ROOT:-../data}:/data
+      - ${PORTAL_RESULTS_ROOT:-../results}:/results
+      - ${PORTAL_CACHE_ROOT:-../.cache}:/cache
+    working_dir: /workspace/PORTAL-Trace
+    stdin_open: true
+    tty: true
+
+  portal-trace-p0:
+    build:
+      context: ..
+      dockerfile: environment/Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+        GROUP_ID: ${GROUP_ID:-1000}
+        TORCH_VERSION: ${TORCH_VERSION:-2.7.1}
+        TORCHVISION_VERSION: ${TORCHVISION_VERSION:-0.22.1}
+    image: portal-trace:local
+    shm_size: 8gb
+    environment:
+      MUJOCO_GL: osmesa
+      PORTAL_DATA_ROOT: /data
+      PORTAL_RESULTS_ROOT: /results
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ..:/workspace/PORTAL-Trace
+      - ${PORTAL_DATA_ROOT:-../data}:/data
+      - ${PORTAL_RESULTS_ROOT:-../results}:/results
+      - ${PORTAL_CACHE_ROOT:-../.cache}:/cache
+    working_dir: /workspace/PORTAL-Trace
