@@ -1,0 +1,89 @@
+# Three-layer seed allocation (proposal 11.3).
+#
+# Three independent seeds control, respectively, the environment (initial-state
+# randomisation, object poses, textures), training (initialisation, data order,
+# augmentation) and evaluation (rollout initial states). They are allocated
+# explicitly here; no part of the package reads a global seed.
+#
+# Cross-arm comparisons align the environment and evaluation layers and vary the
+# training layer. That is why `env_scope` and `eval_scope` do not contain `arm`
+# and `train_scope` does: an arm-to-arm difference then carries no initial-state
+# difference, and the training seed's variance lands in the third layer of the
+# variance decomposition, Var(D_bar) = sigma_m^2/M + sigma_d^2/D +
+# sigma_e^2/(MD) + sigma_seed^2/(MDS).
+#
+# `env_scope` also has no `defect_id` (9.1.6). The same (task, family, demo
+# index) therefore produces bit-identical initial states across the six core
+# defects, which is what lets one clean-twin demonstration serve all six defects
+# of a family and what makes the eval_init list reusable on defective targets.
+#
+# The three bases are arbitrary but fixed and distinct: distinct so that no two
+# layers can collide into one effective seed, fixed so that a rerun reproduces
+# the same demonstrations byte for byte.
+
+schema_version: 1
+
+bases:
+  env: 20260201
+  train: 71000003
+  eval: 40770001
+
+scopes:
+  env: [task, family, demo_index]
+  eval: [task, family]
+  train: [arm, seed_index]
+
+# 10.4.0: 50 evaluation initial states, one shared set across all arms, so that
+# the paired difference is paired on the initial state. 11.3 adds that the
+# resulting binomial + finite-population offset (about 7 pp at p = 0.5) is a
+# common shift that enters no paired CI.
+n_eval_init_states: 50
+
+# 11.3 item 14: S is fixed by a seed-layer variance pilot over these values,
+# run on S6 before the main arms.
+seed_pilot_values: [3, 5, 8]
+
+# Per-arm training seed indices. The count is the S of that arm's design, and
+# `configs.validator` cross-checks the two: a mismatch means the summary row's
+# MDE would be derived from a design the arm did not run.
+train_seed_index_by_arm:
+  B1: [0, 1]
+  B2: [0, 1, 2]
+  B3: []
+  B4: [0, 1]
+  B5: [0]
+  B6: [0, 1]
+  B7: [0, 1, 2]
+  B8: [0, 1, 2]
+  B9: [0, 1]
+  B10: [0]
+  B11: [0, 1]
+  B12: []
+  B13: [0, 1]
+  I0: [0, 1, 2]
+  I1: [0, 1, 2]
+  I2: [0, 1, 2]
+  I3: [0, 1, 2]
+  I3prime: [0, 1, 2]
+  E3_dose: [0, 1]
+  E4_head: [0, 1]
+  E4b: [0, 1, 2]
+  E7: [0, 1]
+  E8: [0, 1, 2]
+  E10: [0, 1]
+  E11: [0, 1, 2]
+  # A13's RL level trains an agent, so it is the one ablation arm that consumes a
+  # training seed of its own before any policy is fitted: SAC's initialisation,
+  # its warm-up actions and its replay order all come from it. 10.6.1 requires
+  # that seed to be fixed and 11.3 requires it to be allocated here rather than
+  # derived at the call site, so it is. One index, because A13's design is S = 1.
+  # The arm's `design` stays null: its six runs are counted in A13's twelve and
+  # the row owns the (M, D, S) arithmetic, which is why `cross_check` asks for an
+  # allocation only from the arms that declare a design.
+  A13_rl_expert: [0]
+
+notes: >-
+  B3 and B12 carry no training seeds because their run counts are zero: B3 is
+  bit-for-bit equivalent to B2 on the structurally aligned twin pairs (a
+  construction, not a measurement -- appendix A-2), and B12's runs are the I3
+  rung of E9 and are counted there.

@@ -1,0 +1,639 @@
+# Training arms: the thirteen baselines of 10.5, the E9 ladder rungs and the
+# experiment-local arms.
+#
+# Every arm carries its named subset, its design (M, D, S) and its pool
+# composition. 11.4's model card makes all three mandatory on every summary row:
+# without them the row's MDE and its inconclusive rule cannot be derived.
+#
+# `reference_arm` is B7 wherever a Lambda-family number is produced. Appendix
+# A-4: an independently trained clean policy is not an admissible reference
+# point (there is no upper anchor, and the reading is contaminated by a
+# data-volume-induced shrinkage difference), and every share decomposition must
+# subtract Lambda^part values computed against one and the same B7, or the
+# unexplained term absorbs the whole reference-point drift.
+
+schema_version: 1
+
+arms:
+  B1:
+    role: single_embodiment
+    subset: S9
+    design: {n_families: 3, n_defects: 3, n_seeds: 2}
+    n_runs: 18
+    gpu_hours: 90
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      "Do not use anybody else's data". Wins on leakage (Lambda -> 0), loses on
+      data volume. Supplies the Leak_beh denominator.
+
+  B2:
+    role: pooled
+    subset: S36
+    design: {n_families: 6, n_defects: 6, n_seeds: 3}
+    n_runs: 108
+    gpu_hours: 540
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      "More data is better": naive pooling, no embodiment conditioning. The
+      evaluated arm of the primary endpoint.
+
+  B3:
+    role: grouped
+    subset: S36
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    notes: >-
+      FGW distance over the full node feature set, hierarchical clustering,
+      global critic with group-wise actor updates, in PCGrad and GradNorm
+      variants. On the structurally aligned twin pairs FGW is zero, so the
+      clustering returns one group and the update rule is bit-for-bit B2. No
+      design is declared because no run is attributed to this arm: the variant
+      training runs are counted inside E2's 18, and the twin-pair equivalence is
+      a construction rather than a measurement (appendix A-2).
+
+  B4:
+    role: decoupling
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 2}
+    n_runs: 48
+    gpu_hours: 240
+    reference_arm: B7
+    notes: >-
+      Four task/embodiment decoupling variants (CLUB + InfoNCE transported to
+      the action layer, DisDP reworked, domain-adversarial, style token). The
+      most dangerous collision; scheduled in week 5. Expected to suppress the
+      contrast component and to miss the common mode.
+
+  B5:
+    role: randomisation
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    n_runs: 6
+    gpu_hours: 30
+    reference_arm: B7
+    notes: >-
+      Training-time domain randomisation over the defect parameters. It
+      randomises the environment, not the teacher's body defect.
+
+  B6:
+    role: conditioned
+    subset: S18
+    design: {n_families: 3, n_defects: 6, n_seeds: 2}
+    n_runs: 36
+    gpu_hours: 180
+    reference_arm: B7
+    notes: >-
+      Embodiment one-hot and learned embedding, with a token-permutation
+      ablation at inference. Already standard practice in RT-X / Octo /
+      OpenVLA-class models, so "B6 suffices" is not a friendly result. It
+      absorbs the contrast component and cannot touch the common mode.
+
+  B7:
+    role: oracle
+    subset: S36
+    design: {n_families: 6, n_defects: 6, n_seeds: 3}
+    n_runs: 108
+    gpu_hours: 540
+    reference_arm: null
+    notes: >-
+      Oracle: the defect-free twins of the defective embodiments, the same
+      reference trajectories, the same 1400 demonstrations. The only difference
+      is the defect. It is the reference point of the primary endpoint and, by
+      appendix A-4, of every share decomposition; it has no reference arm of its
+      own.
+
+  B8:
+    role: counterfactual
+    subset: S18
+    design: {n_families: 3, n_defects: 6, n_seeds: 3}
+    n_runs: 54
+    gpu_hours: 270
+    reference_arm: B7
+    notes: >-
+      Counterfactual de-compensation: the same defective demonstrations with the
+      actions replaced by a - c_true_delta. Same state distribution, same data
+      volume as B2; only the labels differ.
+
+  B9:
+    role: ablation
+    subset: S9
+    design: {n_families: 3, n_defects: 3, n_seeds: 2}
+    n_runs: 18
+    gpu_hours: 90
+    reference_arm: B7
+    notes: >-
+      Proprioception channels masked (RGB and the task instruction only). The
+      interventional check on Lambda -> E_rho_hat[w].
+
+  B10:
+    role: curation
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 1}
+    n_runs: 18
+    gpu_hours: 90
+    reference_arm: B7
+    notes: >-
+      Lambda-guided source weighting in three rungs: down-weight by per-source
+      Lambda^part / drop the top 20% of frames by ||c_delta|| / drop the whole
+      high-Lambda source.
+
+  B11:
+    role: residual_head
+    subset: S9
+    design: {n_families: 3, n_defects: 3, n_seeds: 2}
+    n_runs: 0
+    gpu_hours: 18
+    reference_arm: B7
+    notes: >-
+      Frozen backbone plus a shared residual calibrator conditioned on an
+      implicit joint-fault regime inferred from recent joint dynamics and
+      execution history; the residual is added only to the translational arm
+      action dimensions. The N in {0, 5, 20, 50, 100} curve is mandatory. Its
+      run column is zero because only heads are trained; the 18 GPU-h is
+      recorded in the head-training table so that it is not counted twice.
+
+  B12:
+    role: per_embodiment
+    subset: S4fam
+    defect_axis: [D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    notes: >-
+      Embodiment-agnostic latent actions with a per-embodiment decoder. It is
+      the I3 rung of E9 and its 12 runs are counted there, so it declares no
+      design of its own.
+
+  B13:
+    role: latent
+    subset: S6
+    design: {n_families: 2, n_defects: 3, n_seeds: 2}
+    n_runs: 24
+    gpu_hours: 120
+    reference_arm: B7
+    notes: >-
+      Latent-extrinsics style embodiment representation learned from data, two
+      latent rungs. It fixes the contrast component and not the common mode: a
+      latent inferred from proprioceptive history can only reflect differences
+      between embodiments, and a bias shared by all sources is a constant in any
+      such latent.
+
+  # -- E9 isolation ladder (10.4.9). 60 runs = 5 rungs x 4 families x 3 seeds,
+  # which is what fixes D = 1: one P0-selected decision level per family.
+  I0:
+    role: pooled
+    subset: S4fam
+    defect_axis: [D4hi]
+    design: {n_families: 4, n_defects: 1, n_seeds: 3}
+    n_runs: 12
+    gpu_hours: 60
+    reference_arm: B7
+    notes: "Fully shared dense; the lower end of the ladder, I = 0."
+
+  I1:
+    role: conditioned
+    subset: S4fam
+    defect_axis: [D4hi]
+    design: {n_families: 4, n_defects: 1, n_seeds: 3}
+    n_runs: 12
+    gpu_hours: 60
+    reference_arm: B7
+    notes: "HB-MoE soft routing, expected I = 0.28."
+
+  I2:
+    role: per_embodiment
+    subset: S4fam
+    defect_axis: [D4hi]
+    design: {n_families: 4, n_defects: 1, n_seeds: 3}
+    n_runs: 12
+    gpu_hours: 60
+    reference_arm: B7
+    notes: "Hard-routed disjoint action heads, expected I = 0.71."
+
+  I3:
+    role: per_embodiment
+    subset: S4fam
+    defect_axis: [D4hi]
+    design: {n_families: 4, n_defects: 1, n_seeds: 3}
+    n_runs: 12
+    gpu_hours: 60
+    reference_arm: B7
+    notes: "Per-embodiment fine-tuning; this is B12. Expected I = 1.00."
+
+  I3prime:
+    role: decisive_control
+    subset: S4fam
+    defect_axis: [D4hi]
+    design: {n_families: 4, n_defects: 1, n_seeds: 3}
+    n_runs: 12
+    gpu_hours: 60
+    reference_arm: B7
+    notes: >-
+      The decisive control. Same parameter count, same activated count, same
+      per-module data volume as I3; the split is a random pooled subset instead
+      of embodiment identity. 9.8.4 keeps it out of the first degradation step
+      because without it the surviving comparison cannot be separated from data
+      fragmentation.
+
+  # -- experiment-local arms -------------------------------------------------
+  E3_dose:
+    role: pooled
+    subset: S6
+    defect_axis: [D2, D4hi]
+    design: {n_families: 2, n_defects: 2, n_seeds: 2}
+    n_runs: 76
+    gpu_hours: 380
+    reference_arm: B7
+    notes: >-
+      Three orthogonal dose axes: ||delta|| (5 levels, 40 runs), alpha (4
+      levels, 16 runs) and the ILC iteration count k (5 levels including k = 0,
+      20 runs). The sixth source is the same family's clean twin, because T2's
+      descending segment needs pool data covering rho^off with a clean
+      embodiment.
+
+  E4_head:
+    role: ablation
+    subset: S9
+    design: {n_families: 3, n_defects: 3, n_seeds: 2}
+    n_runs: 0
+    gpu_hours: 27
+    reference_arm: B7
+    notes: >-
+      Three decomposition-head forms fitted on a frozen pooled backbone: 54 head
+      trainings at 0.5 GPU-h. Zero full runs. E4 is an instrument, not a
+      contribution.
+
+  E4b:
+    role: pooled
+    subset: S4fam
+    defect_axis: [D4hi]
+    design: {n_families: 4, n_defects: 1, n_seeds: 3}
+    n_runs: 60
+    gpu_hours: 300
+    reference_arm: B7
+    notes: >-
+      Four K rungs plus the all-identical-defect control, 5 arms x 4 families x
+      3 seeds. The control arm must match the morphology diversity of the
+      distinct-defect arms, or "K identical defects" would collapse into one
+      embodiment and confound defect diversity with morphology diversity.
+
+  E7:
+    role: pooled
+    subset: S36
+    defect_axis: [common_mode_endogenous, common_mode_zero]
+    defect_axis_kind: experiment_local
+    defect_axis_rationale: >-
+      E7's sources are the eight new (family, delta) instances reserved in
+      9.6.5, not core defects: the combination of a same-signed +z common-mode
+      component with per-source idiosyncratic components is a new delta vector,
+      neither a single core defect nor one of their levels. The two levels of
+      the axis are the endogenous common mode (the main setting) and the
+      zero-common-mode control.
+    design: {n_families: 6, n_defects: 2, n_seeds: 2}
+    n_runs: 96
+    gpu_hours: 480
+    reference_arm: B7
+    notes: >-
+      2 common-mode rungs x 4 K rungs x 6 families x 2 seeds. D = 2 counts the
+      two common-mode rungs (endogenous, and the zero-common-mode control),
+      which are the defect-axis levels here because the sources are new delta
+      instances rather than core defects; 10.7.5 quotes the slope design as
+      M = 6, S = 2.
+
+  E8:
+    role: pooled
+    subset: S4fam
+    defect_axis: [D3b, D4hi]
+    design: {n_families: 4, n_defects: 2, n_seeds: 3}
+    n_runs: 72
+    gpu_hours: 360
+    reference_arm: B7
+    notes: >-
+      6 design-graph rungs x 4 families x 3 seeds; the two defects are D4 and
+      D3b. Pure data-ratio selection over existing demonstrations, zero new
+      collection.
+
+  E10:
+    role: single_embodiment
+    subset: S6
+    defect_axis: [D2, D4hi]
+    design: {n_families: 2, n_defects: 2, n_seeds: 2}
+    n_runs: 32
+    gpu_hours: 160
+    reference_arm: B7
+    notes: >-
+      Route (P): a single-embodiment pool with K = 1 and no clean twin, four
+      function-class rungs for the compensation head and the task-intent head.
+
+  E11:
+    role: pooled
+    subset: S36
+    design: {n_families: 6, n_defects: 6, n_seeds: 3}
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    notes: >-
+      Mismatch evaluation: the S36 policies cross-evaluated on 6 target defects.
+      Zero training; the cost is 180 CPU-h of rollouts. Off-diagonal cells have
+      the target embodiment's data outside the pool, which is what makes them
+      mismatch cells; the diagonal reuses B2.
+
+  # -- ablation arms (10.6.1) ------------------------------------------------
+  #
+  # Every one of them runs S6 -- Panda / UR5e x D2 / D3b / D4hi -- at one seed,
+  # which is 10.6.1's opening sentence. None declares a design or a run budget,
+  # and the reason is the same one B3 and B12 give: the runs belong to the row
+  # that budgets them. 10.6.1's table is organised by row, its subtotal of 114
+  # runs and 570 GPU-h is what 9.8.1 quotes, and counting the same run under an
+  # arm as well would overstate both. `ablation` names the owning row, so the
+  # accounting is followable in one step and the validator's refusal to train
+  # can quote it.
+  #
+  # A consequence, stated rather than worked around: seeds.yaml allocates no
+  # training seeds to these arms, so `train --arm A2_k1` is refused with a
+  # message naming the allocation that has to be added first. 11.3 requires the
+  # three seed layers to be allocated explicitly and never derived, so an
+  # ablation arm may not borrow the parent arm's index.
+
+  A1_rgb:
+    role: ablation
+    ablation: A1
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head, no proprioception pathway"
+    notes: >-
+      A1's RGB-only level. The proprioception encoder is absent rather than fed
+      zeros, which is B9's intervention and for B9's reason: a zeroed input
+      still lets the first layer's bias carry a per-embodiment offset. 6 runs,
+      counted in A1's 12.
+
+  A1_proprio:
+    role: ablation
+    ablation: A1
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "no vision tower + 4-layer Transformer decoder head over 70-dim proprioception"
+    notes: >-
+      A1's proprioception-only level, the one with no counterpart elsewhere in
+      the design. No visual trunk at all; the camera names stay in the ObsSpec
+      because they name the streams collection recorded. 6 runs, counted in
+      A1's 12.
+
+  A2_k1:
+    role: ablation
+    ablation: A2
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head, K_hist = 1"
+    notes: "A2's single-frame level, T7's arm. 6 runs, counted in A2's 18."
+
+  A2_k2:
+    role: ablation
+    ablation: A2
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head, K_hist = 2"
+    notes: >-
+      A2's two-frame level: the shortest window that admits a velocity sign,
+      which is what the r1 predicate is built from. 6 runs, counted in A2's 18.
+
+  A2_k10:
+    role: ablation
+    ablation: A2
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head, K_hist = 10"
+    notes: "A2's long-window level. 6 runs, counted in A2's 18."
+
+  A3_per_embodiment:
+    role: ablation
+    ablation: A3
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A3's per-embodiment normalisation level, which is confounder X7 run
+      deliberately: statistics keyed by (family, defect) subtract exactly the
+      constant offset a D1-type compensation field produces. 6 runs, counted in
+      A3's 18.
+
+  A3_per_task:
+    role: ablation
+    ablation: A3
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A3's per-task level, the control that tells absorption apart from
+      re-scaling: its groups pool all embodiments, so a per-embodiment offset
+      survives inside a group. 6 runs, counted in A3's 18.
+
+  A3_none:
+    role: ablation
+    ablation: A3
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A3's unnormalised level: the identity transform, distinct from the global
+      caliber, which has one statistics block rather than none. 6 runs, counted
+      in A3's 18.
+
+  A4_resnet34:
+    role: ablation
+    ablation: A4
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-34 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A4's middle capacity level, 60.3 M parameters against the main arm's
+      40.1 M. The architecture string is the key the model card and the
+      train.throughput lock entry are both written under, and the loader
+      cross-checks it against the level block. 6 runs, counted in A4's 12.
+
+  A4_vits:
+    role: ablation
+    ablation: A4
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ViT-S/12 vision tower x2 + 6-layer Transformer decoder head"
+    notes: >-
+      A4's largest level, a ViT-S/12 trunk over the 84 x 84 frame with a 6-layer
+      head, 69.1 M parameters. A different inductive bias as well as more
+      capacity. 6 runs, counted in A4's 12.
+
+  A5_x2:
+    role: ablation
+    ablation: A5
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A5's doubled data budget: 400 target and 6 x 400 source demonstrations, a
+      pool of 2800 at the main arm's alpha of 0.857. Both columns scale
+      together, so the source share does not move. 6 runs, counted in A5's 12.
+
+  A5_x4:
+    role: ablation
+    ablation: A5
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A5's quadrupled data budget: 800 and 6 x 800, a pool of 5600 at the same
+      alpha. The third point is what makes "not decreasing" a statement about a
+      shape. 6 runs, counted in A5's 12.
+
+  A8_hard:
+    role: ablation
+    ablation: A8
+    solver_group: hard
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    notes: >-
+      A8's hard contact group: half the compiled solref time constant and half
+      the solimp gap to one, applied to the compiled mjModel after every reset.
+      An evaluation arm, not a training one -- it rolls out B2's and B7's own
+      checkpoints, which is why 10.6.1 charges A8 zero GPU-h. The
+      `solver_group` field is what carries the level into the environment
+      builder, and it is the mechanism by which A8 discharges X10.
+
+  A8_soft:
+    role: ablation
+    ablation: A8
+    solver_group: soft
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    notes: >-
+      A8's soft contact group, symmetric to the hard one in the same two
+      factors: twice the time constant and twice the impedance gap. Evaluation
+      only, on the same checkpoints and the same initial states, so the three
+      groups differ in the contact model and in nothing else.
+
+  A11_s5:
+    role: ablation
+    ablation: A11
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A11's fourth and fifth training seeds on each of the six S6 cells: 12
+      runs, counted in A11's 30. The first three come from B2 and are not rerun.
+
+  A11_s8:
+    role: ablation
+    ablation: A11
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A11's sixth, seventh and eighth seeds: 18 runs, counted in A11's 30. The
+      three arms are nested, so the 8-seed estimate is read on all 48 runs and
+      not on these 18 alone.
+
+  A13_analytic:
+    role: ablation
+    ablation: A13
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A13's analytic-script teacher: the closed-form field of defects.fields
+      used as a feedforward, built from the injector's own joint indices and OSC
+      gains. Defects whose ground truth is numerical only have no analytic
+      teacher and those cells are reported absent, never imputed. 6 runs,
+      counted in A13's 12.
+
+  A13_rl_expert:
+    role: ablation
+    ablation: A13
+    subset: S6
+    defect_axis: [D2, D3b, D4hi]
+    design: null
+    n_runs: 0
+    gpu_hours: 0
+    reference_arm: B7
+    architecture: "ResNet-18 vision tower x2 + 4-layer Transformer decoder head"
+    notes: >-
+      A13's RL expert: frozen weights, mean action, fixed seed, exactly as
+      10.6.1 specifies. The checkpoint is an artefact of its own training run --
+      `ablations.teacher_family_rl` trains it on the defective embodiment and
+      `portal-trace teacher` is the command -- and TeacherFamilySpec refuses the
+      level without it rather than substituting a demonstrator, because a
+      substitute would make the direction agreement true by construction. This
+      is the one ablation arm holding a training seed of its own: the agent's
+      initialisation and replay order need one and 10.6.1 requires it fixed.
+      6 runs, counted in A13's 12.

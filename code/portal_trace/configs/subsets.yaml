@@ -1,0 +1,564 @@
+# The five named subsets (10.4.0) and the per-arm pool composition (10.4.0,
+# preregistration item 10).
+#
+# Every summary row carries its subset name and its design (M, D, S); 11.3 makes
+# the MDE and the inconclusive rule underivable without them.
+#
+# `includes_delta_zero` is required on every pool block, not optional. 11.3
+# spells out why: with the clean twin in the pool, route A's anchoring holds by
+# construction, so a leakage reading means "the algorithm did not use the
+# available anchor" rather than "there was not enough information". That
+# substantively changes the meaning of a null result in E7 and E8, and a config
+# that leaves the flag unset is rejected by the loader rather than defaulted.
+
+schema_version: 1
+
+# 9.8: the statistical unit is (morphology family x defect configuration).
+families: [Panda, Kinova3, UR5e, IIWA, XArm7, Sawyer]
+# 9.2.6's contingency rule put D8 in the sixth slot in place of D6; the count is
+# still six and `defects.params.CORE_DEFECTS` is the source of truth the loader
+# checks this line against.
+core_defects: [D1, D2, D3b, D4hi, D5, D8]
+
+subsets:
+  S36:
+    families: [Panda, Kinova3, UR5e, IIWA, XArm7, Sawyer]
+    defects: [D1, D2, D3b, D4hi, D5, D8]
+    rationale: "Full set: 6 families x 6 core defects = n = 36."
+
+  S18:
+    families: [Panda, UR5e, IIWA]
+    defects: [D1, D2, D3b, D4hi, D5, D8]
+    rationale: >-
+      All six defects kept -- the defect axis is the main independent variable
+      and may not be thinned. Three families spanning 7 / 6 / 7 DoF and
+      0.85 / 0.85 / 0.82 m reach.
+
+  S9:
+    families: [Panda, UR5e, IIWA]
+    defects: [D2, D3b, D4hi]
+    rationale: >-
+      One defect from each of the three classes -- undertravel, obstacle drift,
+      memory-carrying -- and all three are candidates for the T8 verdict set.
+
+  S6:
+    families: [Panda, UR5e]
+    defects: [D2, D3b, D4hi]
+    rationale: "The shared ablation and pilot subset; G4 / G5 / A11 pilots all run it."
+
+  S4fam:
+    families: [Panda, UR5e, IIWA, XArm7]
+    defects: []
+    family_level_only: true
+    rationale: >-
+      A family-level subset shared by the three crowns and E4b so that their
+      sigma_m is comparable. The defect axis is set by the arm, not here.
+
+# 10.4.0 main-arm data ratio table, used by the pool blocks below.
+main_arm_ratio:
+  n_target_demos: 200
+  n_source_demos: 200
+  k_sources: 6
+  source_set: >-
+    5 sources are "the other five families carrying the same defect d"
+    (cross-morphology, same defect); the sixth is "the same family m carrying
+    defect d_dagger" (same morphology, different defect), where d -> d_dagger is
+    a preregistered cyclic assignment. The design graph then has edges on both
+    axes and K = 6 needs no extra collection.
+  pool_size: 1400
+  alpha_demo: 0.857
+  eval_embodiment: >-
+    the target embodiment (m, d) itself -- the diagonal cell of the E11 cross
+    matrix, never a delta = 0 deployment target (appendix A-1).
+
+# --------------------------------------------------------------------------
+# Per-arm pool composition. Preregistration item 10.
+# --------------------------------------------------------------------------
+
+pools:
+  B1:
+    sources: ["(m, d) target only, 200 demonstrations"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 0
+    k_sources: 0
+    reading_consequence: >-
+      No-leakage baseline; one seventh of the pooled arm's data volume. It also
+      supplies the Leak_beh denominator.
+
+  B2:
+    sources: ["(m, d) target 200", "6 sources x 200"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      Route A's anchoring does NOT hold by construction, so the correct reading
+      of a leakage number here is "there was not enough information", not "the
+      algorithm ignored an available anchor". This is the evaluated arm of the
+      primary endpoint.
+
+  B7:
+    sources: ["the evaluated target embodiment's clean twin, 1400 demonstrations per core task"]
+    includes_delta_zero: true
+    target_in_pool: false
+    n_target_demos: 0
+    n_source_demos: 1400
+    k_sources: 1
+    reading_consequence: >-
+      The primary endpoint's reference point, and by appendix A-4 the reference
+      point for every share decomposition. Matched on demonstration count,
+      reference trajectories, teacher operator and training budget for the
+      evaluated target embodiment; the only difference is the defect. The
+      1400-demonstration-per-task match is excluded from the degradation ladder
+      (9.8.4).
+
+  B8:
+    sources: ["identical to B2, paired demonstration by demonstration"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      Same state distribution, same data volume as B2; only the action labels
+      differ (a - c_true_delta). Counterfactual de-compensation.
+
+  B4:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2."
+
+  B5:
+    sources: ["identical to B2, with training-time domain randomisation of the defect parameters"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2. What it randomises is the environment, not the teacher's body
+      defect, which is the reason it is expected to miss.
+
+  B6:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2."
+
+  B9:
+    sources: ["identical to B2, proprioception channels masked"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2. The interventional check on Lambda -> E_rho_hat[w]: masking the
+      embodiment cue flattens the source posterior.
+
+  B10:
+    sources: ["identical to B2, reweighted by the curation rule of the rung"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2."
+
+  B11:
+    sources: ["frozen backbone; N in {0, 5, 20, 50, 100} target demonstrations for the head"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 100
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      Route (I) of proposition 1(d). Effective from N >= 20; that is a branch of
+      the framework, not a refutation of it.
+
+  B13:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2. Fixes the contrast component, not the common mode."
+
+  B3:
+    sources: ["identical to B2; group-wise update over the FGW clustering"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      On the structurally aligned twin pairs FGW is zero, the clustering returns
+      one group and the group-wise rule is bit-for-bit the naive pooling of B2.
+      That is a construction, so no paired-difference test is run on it
+      (appendix A-2); the deliverable is the two FGW matrices and the partition.
+
+  B12:
+    sources: ["identical to B2; per-embodiment decoder over embodiment-agnostic latent actions"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2. Its runs are the I3 rung of E9 and are counted there."
+
+  E3_dose:
+    sources: ["(m, d) target 200", "5 sources x 200", "the same family's clean twin x 200"]
+    includes_delta_zero: true
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      The sixth source is replaced by the same family's clean twin, because T2's
+      descending-segment argument needs pool data that cover rho^off with a
+      clean embodiment. The difference between this arm and B2 is itself the
+      reading of "did the algorithm use route A's anchor"; zero extra collection.
+
+  E7:
+    sources: ["the first K of 8 reserved new delta instances (common mode + idiosyncratic)"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 8
+    reading_consequence: >-
+      The common mode has no anchor in the pool. This is what makes the K sweep
+      a test of removability rather than of data volume.
+
+  E8:
+    sources: ["rearranged by the design-graph rung: 6 tasks x 2 defects"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      The null space of a disconnected rung must not be reconnected by the extra
+      node a clean embodiment would provide, so delta = 0 is excluded.
+
+  E4_head:
+    sources: ["identical to B2; the decomposition head trains on a frozen backbone"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2. E4 is an instrument, not a contribution: its only retained endpoint
+      is cos(g_phi, c_true).
+
+  E4b:
+    sources: ["identical to B2, plus the all-identical-defect control arm"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2."
+
+  E10:
+    sources: ["single-embodiment pool, K = 1, no clean twin"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 0
+    k_sources: 0
+    reading_consequence: >-
+      Route (P): no diversity, only a physical prior. delta = 0 is excluded by
+      design -- if the clean twin were in the pool the question would be route A
+      again.
+
+  E11:
+    sources: ["the S36 policies, cross-evaluated on 6 target defects"]
+    includes_delta_zero: false
+    target_in_pool: false
+    n_target_demos: 0
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      The mismatch evaluation arm: the target embodiment's own data are NOT in
+      the pool, which is the definition of the off-diagonal cells of the cross
+      matrix. Diagonal cells reuse B2.
+
+  I0:
+    sources: ["identical to B2, fully shared dense"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2; the lower end of the isolation ladder."
+
+  I1:
+    sources: ["identical to B2, HB-MoE soft routing"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2."
+
+  I2:
+    sources: ["identical to B2, hard-routed disjoint action heads"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2, but each module sees 1/K of the data. That confound runs in the
+      same direction as the tested prediction, which is why I3' exists.
+
+  I3:
+    sources: ["identical to B2, per-embodiment fine-tuning / per-embodiment decoder"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As I2, at full isolation."
+
+  I3prime:
+    sources: ["identical to I3, but the K disjoint modules are split by a random pooled subset"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      Same parameter count, same activated count, same per-module data volume as
+      I3; the only difference is that the split is not by embodiment identity.
+      If I3' and I3 do not differ, E9 measured data fragmentation and the T6
+      bridge has no support -- and it must be reported that way.
+
+  # -- ablation arms (10.6.1) ------------------------------------------------
+  #
+  # Twelve of the eighteen have B2's pool verbatim, because their row moves
+  # something that is not the pool and a pool difference would be a second
+  # intervention. The two A5 arms are the exception: the data budget *is* their
+  # independent variable, and both columns scale together so that alpha stays at
+  # the main arm's 0.857. The two A8 arms carry B2's pool because they evaluate
+  # B2's own checkpoints under a different contact model and train nothing.
+
+  A1_rgb:
+    sources: ["identical to B2, no proprioception pathway"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2. The intervention is on the policy input, not on the pool, so the
+      "not enough information" reading of a leakage number carries over
+      unchanged.
+
+  A1_proprio:
+    sources: ["identical to B2, images dropped at the data layer"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2. The same demonstrations, with the image streams not loaded; the
+      demonstration count is unchanged, so this level is not also a data-volume
+      level.
+
+  A2_k1:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2."
+
+  A2_k2:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2."
+
+  A2_k10:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2."
+
+  A3_per_embodiment:
+    sources: ["identical to B2; normalisation statistics keyed by (family, defect)"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2 for the pool, but the action labels have had a per-embodiment
+      constant removed before the policy ever saw them. A small leakage number
+      from this arm may mean the pipeline removed the quantity rather than that
+      the learner did not inherit it, which is X7 and is why the row reports the
+      D3b anchor beside it.
+
+  A3_per_task:
+    sources: ["identical to B2; normalisation statistics keyed by task"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2. The groups pool all embodiments, so a per-embodiment offset
+      survives as a within-group difference and the absorption reading does not
+      apply here.
+
+  A3_none:
+    sources: ["identical to B2; no action normalisation"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2, with the identity transform on the action labels."
+
+  A4_resnet34:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2. A4 moves the network, never the data."
+
+  A4_vits:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As B2. A4 moves the network, never the data."
+
+  A5_x2:
+    sources: ["(m, d) target 400", "6 sources x 400"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 400
+    n_source_demos: 400
+    k_sources: 6
+    reading_consequence: >-
+      As B2, at twice the budget. Both columns are doubled so that alpha_demo
+      stays at 0.857: scaling the target alone would move the source share,
+      which is E3's dose axis and not A5's, and the loader refuses a level whose
+      alpha has drifted from the main arm's.
+
+  A5_x4:
+    sources: ["(m, d) target 800", "6 sources x 800"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 800
+    n_source_demos: 800
+    k_sources: 6
+    reading_consequence: "As A5_x2, at four times the main arm's budget; pool of 5600."
+
+  A8_hard:
+    sources: ["B2's checkpoints, evaluated under the hard contact group"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      An evaluation arm: no policy is trained here, so the pool block records
+      the composition of the checkpoints being rolled out. The reading of a
+      leakage number is B2's, under a stiffer contact model.
+
+  A8_soft:
+    sources: ["B2's checkpoints, evaluated under the soft contact group"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As A8_hard, under a softer contact model."
+
+  A11_s5:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2. A11 moves the seed count and nothing else, which is what makes the
+      variance decomposition attributable to the seed layer.
+
+  A11_s8:
+    sources: ["identical to B2"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: "As A11_s5."
+
+  A13_analytic:
+    sources: ["(m, d) target 200", "6 sources x 200, demonstrated by the analytic script"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As B2 in composition; the demonstrations themselves come from a different
+      teacher. A leakage number from this arm is about what an analytic
+      compensator's demonstrations transmit, and is comparable with B2's only
+      because the pool and the defect are identical.
+
+  A13_rl_expert:
+    sources: ["(m, d) target 200", "6 sources x 200, demonstrated by the frozen RL expert"]
+    includes_delta_zero: false
+    target_in_pool: true
+    n_target_demos: 200
+    n_source_demos: 200
+    k_sources: 6
+    reading_consequence: >-
+      As A13_analytic. The expert is frozen and emits its mean action under a
+      fixed seed, so the demonstrations are reproducible per frame; without all
+      three the labels would not be a deterministic operator and assumption (A2)
+      would not hold for this arm.
+
+# 10.4.0, closing sentence: per-arm and per-experiment subset assignment.
+subset_assignment:
+  S36: [B2, B7, E11]
+  S18: [B6, B8]
+  S9: [B1, B9, B11, E4_head]
+  S6: [B4, B5, B10, B13,
+       A1_rgb, A1_proprio, A2_k1, A2_k2, A2_k10,
+       A3_per_embodiment, A3_per_task, A3_none, A4_resnet34, A4_vits,
+       A5_x2, A5_x4, A8_hard, A8_soft, A11_s5, A11_s8,
+       A13_analytic, A13_rl_expert]
+  S4fam: [E4b, E8, I0, I1, I2, I3, I3prime]
+  all_six_families: [E7]
+  two_family_Panda_UR5e: [E3_dose, E10]
