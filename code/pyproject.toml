@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "portal-trace"
+version = "0.1.0"
+description = "Compensation leakage in cross-embodiment imitation learning: defect injection, ILC teacher, leakage diagnostics, and the preregistered experiment suite."
+requires-python = ">=3.11,<3.13"
+license = { text = "MIT" }
+
+dependencies = [
+    "mujoco==3.3.2",
+    "robosuite==1.5.2",
+    "robomimic @ git+https://github.com/ARISE-Initiative/robomimic.git@v0.5.0",
+    "numpy>=1.26,<2.0",
+    "scipy>=1.11",
+    "scikit-learn>=1.4",
+    "POT>=0.9.3",
+    "h5py>=3.10",
+    "pyyaml>=6.0",
+    "networkx>=3.2",
+    "statsmodels>=0.14",
+    "torch>=2.2",
+    "torchvision>=0.17",
+    "tqdm>=4.66",
+    "transformers==4.48.1",
+    "diffusers==0.31.0",
+    "stable-baselines3>=2.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.4"]
+
+[project.scripts]
+portal-trace = "portal_trace.runners.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["portal_trace*"]
+
+[tool.setuptools.package-data]
+portal_trace = ["registry/families/**/*", "configs/**/*.yaml", "teacher/refs/*.json"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["third_party", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E741", "UP042"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "requires_mujoco: needs a working MuJoCo install",
+    "requires_robosuite: needs a working robosuite install",
+    "slow: takes more than a few seconds",
+]
