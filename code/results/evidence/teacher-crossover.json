@@ -1,0 +1,1744 @@
+{
+  "cells": [
+    {
+      "cell": "seed-82028131__body-clean__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.2450947029938106,
+      "final_cube_a_xyz_m": [
+        0.03951955902502781,
+        -0.018161050267404364,
+        0.8693595100360315
+      ],
+      "final_cube_b_xyz_m": [
+        0.03910706922744216,
+        -0.018075151014105235,
+        0.8246797700248315
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-82028131__body-clean__ff-clean.hdf5",
+      "position_rms_m": 0.0005215081788529195,
+      "rotation_rms_rad": 0.0018141321460968963,
+      "seed": 82028131,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0005059660243652514,
+          "rotation_rms_rad": 0.0008016757242657327
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 9.452416418285043e-05,
+          "rotation_rms_rad": 0.00020395345513003944
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0002953855534988054,
+          "rotation_rms_rad": 0.0002665067784053482
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0005677770526194446,
+          "rotation_rms_rad": 0.0005149134858947984
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0011344203887373775,
+          "rotation_rms_rad": 0.0009634090097633615
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 6.880774514044194e-05,
+          "rotation_rms_rad": 0.00025384335421663553
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.00045180000392670616,
+          "rotation_rms_rad": 0.004487738295191913
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 3.641226478654775e-05,
+          "rotation_rms_rad": 0.0001926829259532663
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.00044755996937169396,
+          "rotation_rms_rad": 0.00039759372821259977
+        }
+      }
+    },
+    {
+      "cell": "seed-82028131__body-clean__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.2663053469950682,
+      "final_cube_a_xyz_m": [
+        0.03969853436597628,
+        -0.018210034480826982,
+        0.8693594797385569
+      ],
+      "final_cube_b_xyz_m": [
+        0.03910780077952224,
+        -0.0180753514673655,
+        0.824679770901731
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-82028131__body-clean__ff-defective.hdf5",
+      "position_rms_m": 0.0006025740104246555,
+      "rotation_rms_rad": 0.0017463329942455457,
+      "seed": 82028131,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0005868840649427009,
+          "rotation_rms_rad": 0.0009975369673424523
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.0002953339994912267,
+          "rotation_rms_rad": 0.000313893441535794
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.00035050297013946734,
+          "rotation_rms_rad": 0.000348158504321934
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0006770347003235544,
+          "rotation_rms_rad": 0.0006503508318744333
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0012794332356854039,
+          "rotation_rms_rad": 0.0008510981128989667
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00010186538240197452,
+          "rotation_rms_rad": 0.0002657347457182648
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0005407539211477747,
+          "rotation_rms_rad": 0.004251162513981267
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 4.6501984703639965e-05,
+          "rotation_rms_rad": 0.0001948776501090246
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.00048522812565319725,
+          "rotation_rms_rad": 0.0004203764730695688
+        }
+      }
+    },
+    {
+      "cell": "seed-82028131__body-defective__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.23671789799846,
+      "final_cube_a_xyz_m": [
+        0.03963137318361365,
+        -0.018185668484129013,
+        0.8693594926033529
+      ],
+      "final_cube_b_xyz_m": [
+        0.0391075264028777,
+        -0.018075251757705614,
+        0.824679770529384
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-82028131__body-defective__ff-clean.hdf5",
+      "position_rms_m": 0.00110757786539197,
+      "rotation_rms_rad": 0.0020724060449578236,
+      "seed": 82028131,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0008620539426988044,
+          "rotation_rms_rad": 0.0010362302177480437
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.0002114123651818405,
+          "rotation_rms_rad": 0.00046491567493243626
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0006128248539790303,
+          "rotation_rms_rad": 0.00026784092361848447
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0012275251203138012,
+          "rotation_rms_rad": 0.0008825886103568872
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0026262604690386816,
+          "rotation_rms_rad": 0.0014465679916505995
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00014229205609189515,
+          "rotation_rms_rad": 0.00026965831086752984
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0007979886189138866,
+          "rotation_rms_rad": 0.005008075178141404
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 7.662811963791424e-05,
+          "rotation_rms_rad": 0.00020010104382992548
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0009485574355086413,
+          "rotation_rms_rad": 0.00046380708912875456
+        }
+      }
+    },
+    {
+      "cell": "seed-82028131__body-defective__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.2603010490056477,
+      "final_cube_a_xyz_m": [
+        0.03973381993871815,
+        -0.018213736147788283,
+        0.8693594727451748
+      ],
+      "final_cube_b_xyz_m": [
+        0.03910794533442408,
+        -0.018075366643011292,
+        0.8246797711041365
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-82028131__body-defective__ff-defective.hdf5",
+      "position_rms_m": 0.0005404020773923529,
+      "rotation_rms_rad": 0.001862715169489679,
+      "seed": 82028131,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0005425006664729228,
+          "rotation_rms_rad": 0.000995365340785999
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00027347117717863153,
+          "rotation_rms_rad": 0.0005572009590942748
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.00029796348577690974,
+          "rotation_rms_rad": 0.000392765576048012
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0005879959659719519,
+          "rotation_rms_rad": 0.0008148736571447691
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0011229353144450477,
+          "rotation_rms_rad": 0.0012054473814468477
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 7.322719106699467e-05,
+          "rotation_rms_rad": 0.00025775246766254783
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0005253998763624429,
+          "rotation_rms_rad": 0.004481722156894045
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 4.093026960832004e-05,
+          "rotation_rms_rad": 0.00018925368239355712
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0004394015231875639,
+          "rotation_rms_rad": 0.00047601678903158947
+        }
+      }
+    },
+    {
+      "cell": "seed-887105991__body-clean__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.28862041800312,
+      "final_cube_a_xyz_m": [
+        -0.0036098014019862123,
+        -0.0506428713006857,
+        0.8695977696288926
+      ],
+      "final_cube_b_xyz_m": [
+        -0.004011819355863614,
+        -0.05061538461315007,
+        0.8246797699547428
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-887105991__body-clean__ff-clean.hdf5",
+      "position_rms_m": 0.0004979889890783248,
+      "rotation_rms_rad": 0.0011414631731039757,
+      "seed": 887105991,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00035871585454610864,
+          "rotation_rms_rad": 0.000494756840512746
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 7.214158916039155e-05,
+          "rotation_rms_rad": 0.00019733173703856993
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.00029780511899879747,
+          "rotation_rms_rad": 0.0003136943656990643
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0005629640627448179,
+          "rotation_rms_rad": 0.0004472182586476969
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0011408570270346851,
+          "rotation_rms_rad": 0.0009855136539271031
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 7.01811916672373e-05,
+          "rotation_rms_rad": 0.000267289932845847
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0004255772759238272,
+          "rotation_rms_rad": 0.0027021148458288647
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 3.701093893527955e-05,
+          "rotation_rms_rad": 0.00019724415794090014
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0004499707215905439,
+          "rotation_rms_rad": 0.00043987672716805604
+        }
+      }
+    },
+    {
+      "cell": "seed-887105991__body-clean__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.3190641239998513,
+      "final_cube_a_xyz_m": [
+        -0.00344187579345619,
+        -0.050664807436355715,
+        0.8695977250984781
+      ],
+      "final_cube_b_xyz_m": [
+        -0.004011132959693353,
+        -0.05061547437828448,
+        0.8246797707138507
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-887105991__body-clean__ff-defective.hdf5",
+      "position_rms_m": 0.0005736873158565827,
+      "rotation_rms_rad": 0.0011447562329216228,
+      "seed": 887105991,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00045531177345725887,
+          "rotation_rms_rad": 0.0009245130177313702
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00023031940813719788,
+          "rotation_rms_rad": 0.00018957638128980217
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0003562240603069024,
+          "rotation_rms_rad": 0.0004159992635666192
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0006674066185265442,
+          "rotation_rms_rad": 0.0004927654103034842
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0012782379460543917,
+          "rotation_rms_rad": 0.0008780067318608059
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 8.827931525682602e-05,
+          "rotation_rms_rad": 0.0002834640499318214
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.00048243233118529054,
+          "rotation_rms_rad": 0.002584571331137171
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 5.674612326381671e-05,
+          "rotation_rms_rad": 0.000203839567779738
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0004994989735773786,
+          "rotation_rms_rad": 0.0004619368547948038
+        }
+      }
+    },
+    {
+      "cell": "seed-887105991__body-defective__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.2815609850003966,
+      "final_cube_a_xyz_m": [
+        -0.0034999008075757023,
+        -0.05065456667655458,
+        0.8695977422869353
+      ],
+      "final_cube_b_xyz_m": [
+        -0.004011369973510086,
+        -0.050615432441450316,
+        0.8246797704207993
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-887105991__body-defective__ff-clean.hdf5",
+      "position_rms_m": 0.0010760599500355297,
+      "rotation_rms_rad": 0.0013453397351444398,
+      "seed": 887105991,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0006232030055181818,
+          "rotation_rms_rad": 0.0007904283440338137
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00019293131503675336,
+          "rotation_rms_rad": 0.0004929147083068591
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0006187256343870776,
+          "rotation_rms_rad": 0.0003484754255551557
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0012222800884069145,
+          "rotation_rms_rad": 0.0006782916547761009
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.002630444997039917,
+          "rotation_rms_rad": 0.001468127916668456
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00014171259478790168,
+          "rotation_rms_rad": 0.0003011886998456175
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0007475488320570753,
+          "rotation_rms_rad": 0.003017345614516029
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 7.799260325637097e-05,
+          "rotation_rms_rad": 0.0001981548140485807
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.000957647086316029,
+          "rotation_rms_rad": 0.0005268969980128128
+        }
+      }
+    },
+    {
+      "cell": "seed-887105991__body-defective__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.2964278430008562,
+      "final_cube_a_xyz_m": [
+        -0.003423203580719839,
+        -0.05066870687983016,
+        0.8695977191523937
+      ],
+      "final_cube_b_xyz_m": [
+        -0.004011056339082543,
+        -0.050615490289942194,
+        0.8246797708152208
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-887105991__body-defective__ff-defective.hdf5",
+      "position_rms_m": 0.0005124835676487364,
+      "rotation_rms_rad": 0.001235114748694085,
+      "seed": 887105991,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0004154365025409021,
+          "rotation_rms_rad": 0.0008241828337217402
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00018759485384191223,
+          "rotation_rms_rad": 0.00046533434730721616
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.00032493351424917435,
+          "rotation_rms_rad": 0.0004959814244422426
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0005725019913200359,
+          "rotation_rms_rad": 0.0006669871134953163
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0011326435975977987,
+          "rotation_rms_rad": 0.0012226197912255084
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 7.892458769117767e-05,
+          "rotation_rms_rad": 0.00028820925934397614
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0004563254733035231,
+          "rotation_rms_rad": 0.0027380146538567803
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 4.06289878037291e-05,
+          "rotation_rms_rad": 0.00017518138761886813
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0004506458883741181,
+          "rotation_rms_rad": 0.0005526536366591254
+        }
+      }
+    },
+    {
+      "cell": "seed-1286713861__body-clean__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.28906974200072,
+      "final_cube_a_xyz_m": [
+        0.04717048862229225,
+        0.054625275012876735,
+        0.8693595280190811
+      ],
+      "final_cube_b_xyz_m": [
+        0.047008825078246726,
+        0.054428128155205285,
+        0.8246797695043436
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1286713861__body-clean__ff-clean.hdf5",
+      "position_rms_m": 0.0001189106041721088,
+      "rotation_rms_rad": 0.0018381775243768274,
+      "seed": 1286713861,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00011633556480701556,
+          "rotation_rms_rad": 0.00036642918619034253
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00011579463584404996,
+          "rotation_rms_rad": 0.0005658756160215817
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 4.651160540453262e-05,
+          "rotation_rms_rad": 0.00012145900348595319
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.00014017805121596856,
+          "rotation_rms_rad": 0.00044834917833243564
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.00021356250703503352,
+          "rotation_rms_rad": 0.0006577076939176974
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 1.3845582078708865e-05,
+          "rotation_rms_rad": 7.163333610279876e-05
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.00015131921012509212,
+          "rotation_rms_rad": 0.004666339564899186
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 2.3399374203369562e-05,
+          "rotation_rms_rad": 3.09189551190844e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 7.964218757176317e-05,
+          "rotation_rms_rad": 0.00023247445208706598
+        }
+      }
+    },
+    {
+      "cell": "seed-1286713861__body-clean__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.323662487004185,
+      "final_cube_a_xyz_m": [
+        0.0470991666253151,
+        0.05454526664163611,
+        0.8693595348894101
+      ],
+      "final_cube_b_xyz_m": [
+        0.04700853295129616,
+        0.054427801093817604,
+        0.8246797693054936
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1286713861__body-clean__ff-defective.hdf5",
+      "position_rms_m": 0.0008409891156710169,
+      "rotation_rms_rad": 0.001927310448384176,
+      "seed": 1286713861,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0006598492607352756,
+          "rotation_rms_rad": 0.001396239393264528
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.0002303238886097447,
+          "rotation_rms_rad": 0.0010157642577400157
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0004038817192711701,
+          "rotation_rms_rad": 0.0003074484936048051
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0009032052895883317,
+          "rotation_rms_rad": 0.0017902473342065292
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.001743641441525365,
+          "rotation_rms_rad": 0.002158779750513651
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00010456302430453775,
+          "rotation_rms_rad": 0.00022122248311282218
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.001088561054064115,
+          "rotation_rms_rad": 0.004067840921334536
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 4.750904630760915e-05,
+          "rotation_rms_rad": 2.0259712476369406e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0005867086262421735,
+          "rotation_rms_rad": 0.00033882818574834244
+        }
+      }
+    },
+    {
+      "cell": "seed-1286713861__body-defective__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.2825257200020133,
+      "final_cube_a_xyz_m": [
+        0.04718672488639284,
+        0.05463557677084806,
+        0.8693595264784488
+      ],
+      "final_cube_b_xyz_m": [
+        0.04700889164747123,
+        0.05442817027792242,
+        0.8246797695489346
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1286713861__body-defective__ff-clean.hdf5",
+      "position_rms_m": 0.0008266531140600152,
+      "rotation_rms_rad": 0.0033816546972266176,
+      "seed": 1286713861,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0005340951136591743,
+          "rotation_rms_rad": 0.00040835054329593285
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00015751969731684894,
+          "rotation_rms_rad": 0.0005081440620575194
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.00043430205377090853,
+          "rotation_rms_rad": 0.0001800648109825192
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0008458884586187243,
+          "rotation_rms_rad": 0.0008213234893216298
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0018230287416096309,
+          "rotation_rms_rad": 0.0009565754999059709
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00010308525401114155,
+          "rotation_rms_rad": 0.000141711225399681
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0009991166860814497,
+          "rotation_rms_rad": 0.008645620002431055
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 5.4692413365036276e-05,
+          "rotation_rms_rad": 9.047487292018656e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.000664440836832719,
+          "rotation_rms_rad": 0.00029388410428470496
+        }
+      }
+    },
+    {
+      "cell": "seed-1286713861__body-defective__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.298784253995109,
+      "final_cube_a_xyz_m": [
+        0.04709062990409318,
+        0.05453533262651535,
+        0.8693595354799734
+      ],
+      "final_cube_b_xyz_m": [
+        0.04700849852397436,
+        0.054427760488594996,
+        0.8246797692884008
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1286713861__body-defective__ff-defective.hdf5",
+      "position_rms_m": 0.0004891224203040655,
+      "rotation_rms_rad": 0.0018810240038933234,
+      "seed": 1286713861,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0005655104625525866,
+          "rotation_rms_rad": 0.0018729183113757842
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.0003619976890697246,
+          "rotation_rms_rad": 0.00155077121121961
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0001612180157133387,
+          "rotation_rms_rad": 0.0003651426150819531
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0006178478192966298,
+          "rotation_rms_rad": 0.0018492304092417387
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.000690353801746703,
+          "rotation_rms_rad": 0.0022740565721645106
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00010086802002772217,
+          "rotation_rms_rad": 0.00028574785123630783
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0007366688582904308,
+          "rotation_rms_rad": 0.0035358729225921193
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 1.3625158039914669e-05,
+          "rotation_rms_rad": 0.00025841404946496267
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.00015718226795560048,
+          "rotation_rms_rad": 0.0004497717845875213
+        }
+      }
+    },
+    {
+      "cell": "seed-1439671736__body-clean__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.269650187001389,
+      "final_cube_a_xyz_m": [
+        0.02070724341500065,
+        -0.05791444741298228,
+        0.8694846255019656
+      ],
+      "final_cube_b_xyz_m": [
+        0.020527852837741507,
+        -0.05772562781270563,
+        0.8246797695174429
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1439671736__body-clean__ff-clean.hdf5",
+      "position_rms_m": 0.00012134590964090727,
+      "rotation_rms_rad": 0.0017376954517730088,
+      "seed": 1439671736,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00010673708385509625,
+          "rotation_rms_rad": 0.00028102224345835696
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 5.7168408465277314e-05,
+          "rotation_rms_rad": 0.00025385972071270316
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 5.6172017870695785e-05,
+          "rotation_rms_rad": 0.00011589904070998685
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.00013011991521418037,
+          "rotation_rms_rad": 0.00030913321593624437
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.00023267265693338157,
+          "rotation_rms_rad": 0.0004427901455815315
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 1.6694914840691462e-05,
+          "rotation_rms_rad": 9.956214023502394e-05
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.00015405504911643783,
+          "rotation_rms_rad": 0.004443226713990193
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 2.5984468824429186e-05,
+          "rotation_rms_rad": 5.6191435910114535e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.00011025566330058057,
+          "rotation_rms_rad": 0.0002750599071880302
+        }
+      }
+    },
+    {
+      "cell": "seed-1439671736__body-clean__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.2500888819995453,
+      "final_cube_a_xyz_m": [
+        0.020812680149257468,
+        -0.05800715363508628,
+        0.8694848755278274
+      ],
+      "final_cube_b_xyz_m": [
+        0.0205282836133564,
+        -0.05772600734174688,
+        0.8246797699434143
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1439671736__body-clean__ff-defective.hdf5",
+      "position_rms_m": 0.0006811938102531273,
+      "rotation_rms_rad": 0.001667387663876411,
+      "seed": 1439671736,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00037227663447637573,
+          "rotation_rms_rad": 0.0006235817260457101
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.0002934486309149251,
+          "rotation_rms_rad": 0.000720574011302371
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.00036918096661146945,
+          "rotation_rms_rad": 0.00022270226358431534
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0007413747863364395,
+          "rotation_rms_rad": 0.0006904209781768037
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0015581572486414177,
+          "rotation_rms_rad": 0.0007820356117803917
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 9.666291208024406e-05,
+          "rotation_rms_rad": 0.0001832592007347557
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0007262347506649513,
+          "rotation_rms_rad": 0.0041209087332439
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 5.2651046752993615e-05,
+          "rotation_rms_rad": 9.433997924245986e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0005720702566552254,
+          "rotation_rms_rad": 0.00038305645737292046
+        }
+      }
+    },
+    {
+      "cell": "seed-1439671736__body-defective__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.2562882530037314,
+      "final_cube_a_xyz_m": [
+        0.020768382098439685,
+        -0.057958167901647636,
+        0.8694847481958887
+      ],
+      "final_cube_b_xyz_m": [
+        0.02052810288058233,
+        -0.05772580666455375,
+        0.8246797697204682
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1439671736__body-defective__ff-clean.hdf5",
+      "position_rms_m": 0.0007956684716112296,
+      "rotation_rms_rad": 0.0026944744102129574,
+      "seed": 1439671736,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0003801124597487144,
+          "rotation_rms_rad": 0.0003747757756194421
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00016574334764167021,
+          "rotation_rms_rad": 0.0005172278298865365
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.00045020645971685685,
+          "rotation_rms_rad": 0.0001321151438377607
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0008925287653713275,
+          "rotation_rms_rad": 0.0006976585732348604
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.001900518751462293,
+          "rotation_rms_rad": 0.0007351112379659699
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00010439809643679888,
+          "rotation_rms_rad": 0.0001726708224639523
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0007271138908821144,
+          "rotation_rms_rad": 0.00687767021145114
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 5.9397137873506754e-05,
+          "rotation_rms_rad": 9.15937586233896e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0006941279925075491,
+          "rotation_rms_rad": 0.0003479721618298064
+        }
+      }
+    },
+    {
+      "cell": "seed-1439671736__body-defective__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.2720593179983553,
+      "final_cube_a_xyz_m": [
+        0.02085678451139775,
+        -0.05799823765856585,
+        0.869438649166004
+      ],
+      "final_cube_b_xyz_m": [
+        0.02052854721362566,
+        -0.05772606749348925,
+        0.8246797700446752
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1439671736__body-defective__ff-defective.hdf5",
+      "position_rms_m": 0.00028696175941636873,
+      "rotation_rms_rad": 0.0018337747635804112,
+      "seed": 1439671736,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0002267095040181317,
+          "rotation_rms_rad": 0.0007755385066529928
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.0003752324101973624,
+          "rotation_rms_rad": 0.0012113656507109494
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.00011492321254125239,
+          "rotation_rms_rad": 0.00027704041187824125
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.00030657540098673504,
+          "rotation_rms_rad": 0.000756291135183727
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.00035839878846226906,
+          "rotation_rms_rad": 0.0008421918395922135
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 6.703562573085055e-05,
+          "rotation_rms_rad": 0.00020013626940918423
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0004953750848803822,
+          "rotation_rms_rad": 0.004480411053241969
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 1.998220619153031e-05,
+          "rotation_rms_rad": 0.00013297874883935808
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.00019868687838726082,
+          "rotation_rms_rad": 0.0004903690781978417
+        }
+      }
+    },
+    {
+      "cell": "seed-1867238683__body-clean__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.2844522279992816,
+      "final_cube_a_xyz_m": [
+        -0.022785803199276998,
+        0.01590991902501811,
+        0.8693595376551498
+      ],
+      "final_cube_b_xyz_m": [
+        -0.022785718066168307,
+        0.015841313737151523,
+        0.8246797692254462
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1867238683__body-clean__ff-clean.hdf5",
+      "position_rms_m": 8.68537869229022e-05,
+      "rotation_rms_rad": 0.001834375592109044,
+      "seed": 1867238683,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 8.351776447711762e-05,
+          "rotation_rms_rad": 0.00029483299673719536
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 7.420566561008045e-05,
+          "rotation_rms_rad": 0.00045542694089898024
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 2.4523452121569413e-05,
+          "rotation_rms_rad": 6.066060309773848e-05
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 8.611623039780646e-05,
+          "rotation_rms_rad": 0.00024540783129830976
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.00012024228279786927,
+          "rotation_rms_rad": 0.00035333092260651674
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 1.36779629102534e-05,
+          "rotation_rms_rad": 6.287329643891442e-05
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.00013668714532503787,
+          "rotation_rms_rad": 0.004699653694220591
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 2.0137915719150617e-05,
+          "rotation_rms_rad": 2.5669730325551734e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 9.044058409294958e-05,
+          "rotation_rms_rad": 0.000245633380815796
+        }
+      }
+    },
+    {
+      "cell": "seed-1867238683__body-clean__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.265015005003079,
+      "final_cube_a_xyz_m": [
+        -0.022855479407061063,
+        0.015898842262760608,
+        0.8693595371061644
+      ],
+      "final_cube_b_xyz_m": [
+        -0.022786003310548173,
+        0.015841266973376903,
+        0.8246797692413346
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1867238683__body-clean__ff-defective.hdf5",
+      "position_rms_m": 0.0007987769668977623,
+      "rotation_rms_rad": 0.0026001740227534534,
+      "seed": 1867238683,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.0005440035392864935,
+          "rotation_rms_rad": 0.0014855416946418858
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.0003011367349258237,
+          "rotation_rms_rad": 0.00043375518147346643
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0004103555703770762,
+          "rotation_rms_rad": 0.0004185861050792846
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0007886451513998448,
+          "rotation_rms_rad": 0.0011769560197968873
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.001636128494165679,
+          "rotation_rms_rad": 0.0010083450510006804
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00013168206381195644,
+          "rotation_rms_rad": 0.0003198696332266974
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.001090297216244045,
+          "rotation_rms_rad": 0.006338425546910666
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 5.3269191080777063e-05,
+          "rotation_rms_rad": 0.00011311630927613566
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0006467022468120046,
+          "rotation_rms_rad": 0.000738238845453789
+        }
+      }
+    },
+    {
+      "cell": "seed-1867238683__body-defective__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.287121538996871,
+      "final_cube_a_xyz_m": [
+        -0.022770028906328448,
+        0.01590137013955939,
+        0.8693595377912432
+      ],
+      "final_cube_b_xyz_m": [
+        -0.022785653186348953,
+        0.01584127846951706,
+        0.8246797692215075
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1867238683__body-defective__ff-clean.hdf5",
+      "position_rms_m": 0.0007605855470482658,
+      "rotation_rms_rad": 0.004916733821252008,
+      "seed": 1867238683,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00033604161866804196,
+          "rotation_rms_rad": 0.00040084561173021064
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00016562438652354474,
+          "rotation_rms_rad": 0.0006912324398359611
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0004261949947646208,
+          "rotation_rms_rad": 0.00010349521345377428
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0008331839176103004,
+          "rotation_rms_rad": 0.0007802992723457147
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0017470750243490083,
+          "rotation_rms_rad": 0.0005396208485998475
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 9.92614348747185e-05,
+          "rotation_rms_rad": 0.00016598483507872914
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0008367561982317234,
+          "rotation_rms_rad": 0.012651429149357962
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 5.202001821777157e-05,
+          "rotation_rms_rad": 8.756361425830923e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0006605590840474465,
+          "rotation_rms_rad": 0.00033907648910029515
+        }
+      }
+    },
+    {
+      "cell": "seed-1867238683__body-defective__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.3023053189972416,
+      "final_cube_a_xyz_m": [
+        -0.022797203770461513,
+        0.015875196334876114,
+        0.8693595382014156
+      ],
+      "final_cube_b_xyz_m": [
+        -0.02278576475939481,
+        0.015841170791629288,
+        0.8246797692096367
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-1867238683__body-defective__ff-defective.hdf5",
+      "position_rms_m": 0.0004965296480701635,
+      "rotation_rms_rad": 0.001822556874514582,
+      "seed": 1867238683,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00058770738888941,
+          "rotation_rms_rad": 0.0018735756816262443
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00035036050869567074,
+          "rotation_rms_rad": 0.0008570642704279008
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0001983319655945615,
+          "rotation_rms_rad": 0.0005709060775089789
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.00046356719120758483,
+          "rotation_rms_rad": 0.0014514299948860687
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0003874092222226051,
+          "rotation_rms_rad": 0.0011305884452850752
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00010153611150380207,
+          "rotation_rms_rad": 0.0002691975749646173
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0009082810139153834,
+          "rotation_rms_rad": 0.0038183014468718174
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 2.6237577444110557e-05,
+          "rotation_rms_rad": 0.0001439191062531359
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0003450282080323549,
+          "rotation_rms_rad": 0.0009119190111147707
+        }
+      }
+    },
+    {
+      "cell": "seed-2051309778__body-clean__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.2832688389971736,
+      "final_cube_a_xyz_m": [
+        0.03770197265064985,
+        0.045152639859553756,
+        0.8693595244353801
+      ],
+      "final_cube_b_xyz_m": [
+        0.037492774311059296,
+        0.04536159477844115,
+        0.8246797696080677
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-2051309778__body-clean__ff-clean.hdf5",
+      "position_rms_m": 0.00010497598345869294,
+      "rotation_rms_rad": 0.001463339214426097,
+      "seed": 2051309778,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 8.38012621100677e-05,
+          "rotation_rms_rad": 0.0002537351045443413
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00010525193876141362,
+          "rotation_rms_rad": 0.0004637131264898204
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 4.491761340035479e-05,
+          "rotation_rms_rad": 0.00015107051234506
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0001282171874919181,
+          "rotation_rms_rad": 0.00037812679156645025
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.00017507509918359145,
+          "rotation_rms_rad": 0.0004924960647062974
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 1.0786117472788558e-05,
+          "rotation_rms_rad": 4.8548474507930395e-05
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.00015608843047496085,
+          "rotation_rms_rad": 0.0037171252647284353
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 2.126679000460631e-05,
+          "rotation_rms_rad": 4.5065971991283464e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 6.488909179241039e-05,
+          "rotation_rms_rad": 0.0001897139685528561
+        }
+      }
+    },
+    {
+      "cell": "seed-2051309778__body-clean__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.277585388997977,
+      "final_cube_a_xyz_m": [
+        0.03771932781776824,
+        0.045131177290819786,
+        0.8693595217313062
+      ],
+      "final_cube_b_xyz_m": [
+        0.03749284499303101,
+        0.04536150685314748,
+        0.8246797696863324
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-2051309778__body-clean__ff-defective.hdf5",
+      "position_rms_m": 0.0007582763660871534,
+      "rotation_rms_rad": 0.0016732865551283814,
+      "seed": 2051309778,
+      "success": true,
+      "success_frames": 59,
+      "t_success": 341,
+      "target_body": "clean",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00036287906386404104,
+          "rotation_rms_rad": 0.000663209469771286
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00029635038375330585,
+          "rotation_rms_rad": 0.001288196419952482
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.0003857550567718317,
+          "rotation_rms_rad": 0.0001890119274503407
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0008870540285343049,
+          "rotation_rms_rad": 0.0014959783070985085
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0016198454097619691,
+          "rotation_rms_rad": 0.001255000325284454
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 9.087287295855559e-05,
+          "rotation_rms_rad": 8.699241513427176e-05
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0009775021876462,
+          "rotation_rms_rad": 0.003851621238453117
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 4.311672429143016e-05,
+          "rotation_rms_rad": 4.610582220830181e-05
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0005786233220495924,
+          "rotation_rms_rad": 0.0002656636318992955
+        }
+      }
+    },
+    {
+      "cell": "seed-2051309778__body-defective__ff-clean",
+      "clipped_frames": 0,
+      "donor_feedforward": "clean",
+      "elapsed_seconds": 2.301738951995503,
+      "final_cube_a_xyz_m": [
+        0.03772591454815076,
+        0.045137899736655766,
+        0.8693595217353066
+      ],
+      "final_cube_b_xyz_m": [
+        0.037492872439870796,
+        0.04536153452382634,
+        0.8246797696862166
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-2051309778__body-defective__ff-clean.hdf5",
+      "position_rms_m": 0.0007962191872855786,
+      "rotation_rms_rad": 0.002689573298525897,
+      "seed": 2051309778,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00033092396621278844,
+          "rotation_rms_rad": 0.0002753062954741736
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.0001672156715989946,
+          "rotation_rms_rad": 0.0005845042679995799
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 0.00043632629865707846,
+          "rotation_rms_rad": 0.00025797970623784157
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0008555915518467169,
+          "rotation_rms_rad": 0.0007285478722644762
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.0018187283567508562,
+          "rotation_rms_rad": 0.0007487962818293475
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 0.00010239387645420134,
+          "rotation_rms_rad": 0.00014832028226970787
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.0009310368337144941,
+          "rotation_rms_rad": 0.006865490012569047
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 5.349248061693247e-05,
+          "rotation_rms_rad": 0.00010566376531686788
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.0006617316499971161,
+          "rotation_rms_rad": 0.0002613648687552123
+        }
+      }
+    },
+    {
+      "cell": "seed-2051309778__body-defective__ff-defective",
+      "clipped_frames": 0,
+      "donor_feedforward": "defective",
+      "elapsed_seconds": 2.3124379599976237,
+      "final_cube_a_xyz_m": [
+        0.03771178734142344,
+        0.04515346997706464,
+        0.8693595238216466
+      ],
+      "final_cube_b_xyz_m": [
+        0.03749281464038991,
+        0.04536159818742751,
+        0.8246797696258311
+      ],
+      "path": "runtime_results/engineering/learning-20261025-v1/teacher-compensation-crossover-v1/cells/seed-2051309778__body-defective__ff-defective.hdf5",
+      "position_rms_m": 0.00035489161849954094,
+      "rotation_rms_rad": 0.0017573330172946822,
+      "seed": 2051309778,
+      "success": true,
+      "success_frames": 58,
+      "t_success": 342,
+      "target_body": "defective",
+      "waypoints": {
+        "align": {
+          "frames": 68,
+          "position_rms_m": 0.00023207264089585702,
+          "rotation_rms_rad": 0.0008585967978179667
+        },
+        "close": {
+          "frames": 20,
+          "position_rms_m": 0.00039194905372778193,
+          "rotation_rms_rad": 0.0014779921582440485
+        },
+        "descend": {
+          "frames": 48,
+          "position_rms_m": 9.350678798488239e-05,
+          "rotation_rms_rad": 0.0002672210089375209
+        },
+        "grasp": {
+          "frames": 44,
+          "position_rms_m": 0.0006094793490793646,
+          "rotation_rms_rad": 0.0016755193441352191
+        },
+        "lift": {
+          "frames": 40,
+          "position_rms_m": 0.000423674416019642,
+          "rotation_rms_rad": 0.001332144314641513
+        },
+        "place": {
+          "frames": 56,
+          "position_rms_m": 4.720533755108299e-05,
+          "rotation_rms_rad": 0.00010566600835413185
+        },
+        "pre_grasp": {
+          "frames": 60,
+          "position_rms_m": 0.00056307822499692,
+          "rotation_rms_rad": 0.0039535869026874676
+        },
+        "release": {
+          "frames": 20,
+          "position_rms_m": 2.146553348760908e-05,
+          "rotation_rms_rad": 0.0001024427987392181
+        },
+        "retreat": {
+          "frames": 44,
+          "position_rms_m": 0.00011107308982958196,
+          "rotation_rms_rad": 0.0003319244439413913
+        }
+      }
+    }
+  ],
+  "completed_rollouts": 24,
+  "expected_rollouts": 24,
+  "failures": [],
+  "groups": [
+    {
+      "donor_feedforward": "clean",
+      "n": 6,
+      "position_rms_m_mean": 0.00024193057535430926,
+      "successes": 6,
+      "target_body": "clean"
+    },
+    {
+      "donor_feedforward": "defective",
+      "n": 6,
+      "position_rms_m_mean": 0.0007092495975317163,
+      "successes": 6,
+      "target_body": "clean"
+    },
+    {
+      "donor_feedforward": "clean",
+      "n": 6,
+      "position_rms_m_mean": 0.0008937940225720981,
+      "successes": 6,
+      "target_body": "defective"
+    },
+    {
+      "donor_feedforward": "defective",
+      "n": 6,
+      "position_rms_m_mean": 0.0004467318485552047,
+      "successes": 6,
+      "target_body": "defective"
+    }
+  ],
+  "schema": "portal_trace.teacher_crossover_summary/1",
+  "student_causal_evidence": false,
+  "success_ceiling": true
+}

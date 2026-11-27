@@ -1,0 +1,1631 @@
+{
+  "closed_loop_rollouts": 0,
+  "csv": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/aggregate-three-seeds.csv",
+  "formal_leakage_metrics_computed": [],
+  "frames_per_cell": 400,
+  "inferential_statistics": "none",
+  "interpretation": "Descriptive learned label-intervention effects on fixed development inputs; not closed-loop success, untouched-test generalization, or calibrated/residualized leakage. Complete describes input coverage only.",
+  "metric_definitions": {
+    "delta": "clipped raw policy minus clipped decompensated policy, first action, continuous coordinates 0:6",
+    "field_cosine": "sum(delta*c_true)/sqrt(sum(delta**2)*sum(c_true**2)), within each scene",
+    "projection_coefficient": "sum(delta*c_true)/sum(c_true**2), within each scene",
+    "rmse": "sqrt(mean squared error across 400 frames and six canonical continuous coordinates), per scene against stored same-state teacher",
+    "rmse_difference": "raw RMSE minus decompensated RMSE; positive means lower decompensated error against the specified teacher, not universal superiority",
+    "sample_sd": "Sample standard deviation of three equal-scene seed means, ddof=1; not a standard error or confidence interval"
+  },
+  "per_training_seed": [
+    {
+      "defined_scene_counts": {
+        "decompensated_rmse_to_clean_teacher": 6,
+        "decompensated_rmse_to_defective_teacher": 6,
+        "field_cosine": 6,
+        "projection_coefficient": 6,
+        "raw_minus_decompensated_rmse_to_clean_teacher": 6,
+        "raw_minus_decompensated_rmse_to_defective_teacher": 6,
+        "raw_rmse_to_clean_teacher": 6,
+        "raw_rmse_to_defective_teacher": 6
+      },
+      "equal_scene_means": {
+        "decompensated_rmse_to_clean_teacher": 0.01472931720517405,
+        "decompensated_rmse_to_defective_teacher": 0.01523359285864601,
+        "field_cosine": 0.5943317362658748,
+        "projection_coefficient": 0.878908394309994,
+        "raw_minus_decompensated_rmse_to_clean_teacher": 0.0016772288937518885,
+        "raw_minus_decompensated_rmse_to_defective_teacher": -0.0010660313436525433,
+        "raw_rmse_to_clean_teacher": 0.016406546098925934,
+        "raw_rmse_to_defective_teacher": 0.014167561514993467
+      },
+      "scene_count": 6,
+      "training_seed": 20261007
+    },
+    {
+      "defined_scene_counts": {
+        "decompensated_rmse_to_clean_teacher": 6,
+        "decompensated_rmse_to_defective_teacher": 6,
+        "field_cosine": 6,
+        "projection_coefficient": 6,
+        "raw_minus_decompensated_rmse_to_clean_teacher": 6,
+        "raw_minus_decompensated_rmse_to_defective_teacher": 6,
+        "raw_rmse_to_clean_teacher": 6,
+        "raw_rmse_to_defective_teacher": 6
+      },
+      "equal_scene_means": {
+        "decompensated_rmse_to_clean_teacher": 0.014999510421825119,
+        "decompensated_rmse_to_defective_teacher": 0.01697136316447714,
+        "field_cosine": 0.624665031094628,
+        "projection_coefficient": 1.385640005005446,
+        "raw_minus_decompensated_rmse_to_clean_teacher": 0.0023161112050542653,
+        "raw_minus_decompensated_rmse_to_defective_teacher": -0.001668017136815977,
+        "raw_rmse_to_clean_teacher": 0.01731562162687938,
+        "raw_rmse_to_defective_teacher": 0.015303346027661166
+      },
+      "scene_count": 6,
+      "training_seed": 20261008
+    },
+    {
+      "defined_scene_counts": {
+        "decompensated_rmse_to_clean_teacher": 6,
+        "decompensated_rmse_to_defective_teacher": 6,
+        "field_cosine": 6,
+        "projection_coefficient": 6,
+        "raw_minus_decompensated_rmse_to_clean_teacher": 6,
+        "raw_minus_decompensated_rmse_to_defective_teacher": 6,
+        "raw_rmse_to_clean_teacher": 6,
+        "raw_rmse_to_defective_teacher": 6
+      },
+      "equal_scene_means": {
+        "decompensated_rmse_to_clean_teacher": 0.016196055426865554,
+        "decompensated_rmse_to_defective_teacher": 0.017184845688386973,
+        "field_cosine": 0.3508982487581849,
+        "projection_coefficient": 0.5626072198354511,
+        "raw_minus_decompensated_rmse_to_clean_teacher": 0.0016406881880162121,
+        "raw_minus_decompensated_rmse_to_defective_teacher": 8.342430590803681e-05,
+        "raw_rmse_to_clean_teacher": 0.01783674361488177,
+        "raw_rmse_to_defective_teacher": 0.01726826999429501
+      },
+      "scene_count": 6,
+      "training_seed": 20261009
+    }
+  ],
+  "physics_steps_executed": 0,
+  "release_status": "engineering_only",
+  "scene_seeds": [
+    82028131,
+    887105991,
+    1286713861,
+    1439671736,
+    1867238683,
+    2051309778
+  ],
+  "schema": "portal_trace.compensation_label_effect_aggregate/1",
+  "seed_scene_cell_count": 18,
+  "seed_scene_rows": [
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.011311115451950368,
+      "decompensated_rmse_to_defective_teacher": 0.011136582961234546,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-82028131.hdf5::data/demo_0",
+      "field_cosine": 0.6397818398560413,
+      "input_file_sha256": "5821b434596965ce35b3396b4f0bae808405173b37a12fe6e53ac9fb4b69cd91",
+      "pair_id": "316cf6b6480bac88e59a2e173b6aee3a340ffa48b655e53f47a93b78e2a510b5",
+      "projection_coefficient": 1.0894636506028517,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.0037017948527272304,
+      "raw_minus_decompensated_rmse_to_defective_teacher": 0.0009480162067478492,
+      "raw_rmse_to_clean_teacher": 0.015012910304677598,
+      "raw_rmse_to_defective_teacher": 0.012084599167982395,
+      "scene_seed": 82028131,
+      "training_seed": 20261007
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.014060595624368389,
+      "decompensated_rmse_to_defective_teacher": 0.013970394895571205,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-887105991.hdf5::data/demo_0",
+      "field_cosine": 0.35598433715225963,
+      "input_file_sha256": "9fc973eddd9e76e73642a962ff4c5cd6097058fb22479e291dadd7ae3a4bb9cd",
+      "pair_id": "acddd0ef008a076c9ae6f03c817ce780482c9c14344a0a21f5e18b9991fc7047",
+      "projection_coefficient": 0.6666983777461623,
+      "raw_minus_decompensated_rmse_to_clean_teacher": -0.002422262973749806,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.004526604445786599,
+      "raw_rmse_to_clean_teacher": 0.011638332650618583,
+      "raw_rmse_to_defective_teacher": 0.009443790449784606,
+      "scene_seed": 887105991,
+      "training_seed": 20261007
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.01977133911617205,
+      "decompensated_rmse_to_defective_teacher": 0.020117209831405147,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1286713861.hdf5::data/demo_0",
+      "field_cosine": 0.6510222700335637,
+      "input_file_sha256": "9adef13a3de34efa54da0ccf25d879d785fc8bb76a0423912fdad6819d08cf9a",
+      "pair_id": "3ff3c41a02f30d0097868a30faa61a7369809be530ae4a007da9e8acbc3df64d",
+      "projection_coefficient": 0.8959606188175807,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.0022915776196096548,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.000512384363941118,
+      "raw_rmse_to_clean_teacher": 0.022062916735781705,
+      "raw_rmse_to_defective_teacher": 0.01960482546746403,
+      "scene_seed": 1286713861,
+      "training_seed": 20261007
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.011139520812873425,
+      "decompensated_rmse_to_defective_teacher": 0.012029723510483883,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1439671736.hdf5::data/demo_0",
+      "field_cosine": 0.6184475923356472,
+      "input_file_sha256": "b731e30bf76296615190bdaf9a4262c50c44d0a411485b0193b68b1a7a244701",
+      "pair_id": "b979101e15899625d783088936201f34a91b7b3f288939ae6ec037001c086941",
+      "projection_coefficient": 0.8777883843568514,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.002780824485370509,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -4.083480825475827e-05,
+      "raw_rmse_to_clean_teacher": 0.013920345298243934,
+      "raw_rmse_to_defective_teacher": 0.011988888702229125,
+      "scene_seed": 1439671736,
+      "training_seed": 20261007
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.01865235964167159,
+      "decompensated_rmse_to_defective_teacher": 0.01998093837352601,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1867238683.hdf5::data/demo_0",
+      "field_cosine": 0.6687242277542718,
+      "input_file_sha256": "a5a77905fb32df105a9eaf1f89dd0a9dd9dcddd23ba33486aa0d8b452f7f0f36",
+      "pair_id": "a38754ac18ae47cc8ed254a817e078ef51fe1634f4e589b1668f74481f78a64e",
+      "projection_coefficient": 0.8909455288895112,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.002904194519382744,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -2.3638471595595345e-06,
+      "raw_rmse_to_clean_teacher": 0.021556554161054335,
+      "raw_rmse_to_defective_teacher": 0.01997857452636645,
+      "scene_seed": 1867238683,
+      "training_seed": 20261007
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.013440972584008474,
+      "decompensated_rmse_to_defective_teacher": 0.014166707579655264,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2051309778.hdf5::data/demo_0",
+      "field_cosine": 0.6320301504634654,
+      "input_file_sha256": "8dce32fc67e879d8c5cd98eb2687344aedf0d8cd072410ef523a89d531ffff2f",
+      "pair_id": "2fabaab2d6bf17c16f4838510e3217039052b5f18ff2025db958818ddd7878db",
+      "projection_coefficient": 0.8525938054470067,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.0008072448591709986,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.0022620168035210747,
+      "raw_rmse_to_clean_teacher": 0.014248217443179473,
+      "raw_rmse_to_defective_teacher": 0.011904690776134189,
+      "scene_seed": 2051309778,
+      "training_seed": 20261007
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.010256172140450917,
+      "decompensated_rmse_to_defective_teacher": 0.012425422457939334,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-82028131.hdf5::data/demo_0",
+      "field_cosine": 0.7053428582357087,
+      "input_file_sha256": "5821b434596965ce35b3396b4f0bae808405173b37a12fe6e53ac9fb4b69cd91",
+      "pair_id": "316cf6b6480bac88e59a2e173b6aee3a340ffa48b655e53f47a93b78e2a510b5",
+      "projection_coefficient": 2.1936623371790662,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.009232617329579288,
+      "raw_minus_decompensated_rmse_to_defective_teacher": 0.004221816875302764,
+      "raw_rmse_to_clean_teacher": 0.019488789470030205,
+      "raw_rmse_to_defective_teacher": 0.0166472393332421,
+      "scene_seed": 82028131,
+      "training_seed": 20261008
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.019386464429790928,
+      "decompensated_rmse_to_defective_teacher": 0.019745449345008357,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-887105991.hdf5::data/demo_0",
+      "field_cosine": 0.49067102457204975,
+      "input_file_sha256": "9fc973eddd9e76e73642a962ff4c5cd6097058fb22479e291dadd7ae3a4bb9cd",
+      "pair_id": "acddd0ef008a076c9ae6f03c817ce780482c9c14344a0a21f5e18b9991fc7047",
+      "projection_coefficient": 1.4778468256501518,
+      "raw_minus_decompensated_rmse_to_clean_teacher": -0.004405475758735676,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.007848933379906955,
+      "raw_rmse_to_clean_teacher": 0.014980988671055252,
+      "raw_rmse_to_defective_teacher": 0.011896515965101401,
+      "scene_seed": 887105991,
+      "training_seed": 20261008
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.01824932250723184,
+      "decompensated_rmse_to_defective_teacher": 0.019830796904979478,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1286713861.hdf5::data/demo_0",
+      "field_cosine": 0.5471688538806044,
+      "input_file_sha256": "9adef13a3de34efa54da0ccf25d879d785fc8bb76a0423912fdad6819d08cf9a",
+      "pair_id": "3ff3c41a02f30d0097868a30faa61a7369809be530ae4a007da9e8acbc3df64d",
+      "projection_coefficient": 0.7932180761057205,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.003337757554706399,
+      "raw_minus_decompensated_rmse_to_defective_teacher": 0.0007442510517133225,
+      "raw_rmse_to_clean_teacher": 0.02158708006193824,
+      "raw_rmse_to_defective_teacher": 0.0205750479566928,
+      "scene_seed": 1286713861,
+      "training_seed": 20261008
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.013138661748185987,
+      "decompensated_rmse_to_defective_teacher": 0.015410394062257119,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1439671736.hdf5::data/demo_0",
+      "field_cosine": 0.6956337311460634,
+      "input_file_sha256": "b731e30bf76296615190bdaf9a4262c50c44d0a411485b0193b68b1a7a244701",
+      "pair_id": "b979101e15899625d783088936201f34a91b7b3f288939ae6ec037001c086941",
+      "projection_coefficient": 1.3782849418462633,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.0008774075148530527,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.003148877952153673,
+      "raw_rmse_to_clean_teacher": 0.01401606926303904,
+      "raw_rmse_to_defective_teacher": 0.012261516110103446,
+      "scene_seed": 1439671736,
+      "training_seed": 20261008
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.016861137806704462,
+      "decompensated_rmse_to_defective_teacher": 0.01989413588083304,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1867238683.hdf5::data/demo_0",
+      "field_cosine": 0.625220177331493,
+      "input_file_sha256": "a5a77905fb32df105a9eaf1f89dd0a9dd9dcddd23ba33486aa0d8b452f7f0f36",
+      "pair_id": "a38754ac18ae47cc8ed254a817e078ef51fe1634f4e589b1668f74481f78a64e",
+      "projection_coefficient": 1.1695310969137755,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.002701098747392959,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.0014347859216018027,
+      "raw_rmse_to_clean_teacher": 0.01956223655409742,
+      "raw_rmse_to_defective_teacher": 0.018459349959231236,
+      "scene_seed": 1867238683,
+      "training_seed": 20261008
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.012105303898586571,
+      "decompensated_rmse_to_defective_teacher": 0.014521980335845527,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2051309778.hdf5::data/demo_0",
+      "field_cosine": 0.6839535414018487,
+      "input_file_sha256": "8dce32fc67e879d8c5cd98eb2687344aedf0d8cd072410ef523a89d531ffff2f",
+      "pair_id": "2fabaab2d6bf17c16f4838510e3217039052b5f18ff2025db958818ddd7878db",
+      "projection_coefficient": 1.3012967523376981,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.0021532618425295687,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.002541573494249518,
+      "raw_rmse_to_clean_teacher": 0.01425856574111614,
+      "raw_rmse_to_defective_teacher": 0.011980406841596009,
+      "scene_seed": 2051309778,
+      "training_seed": 20261008
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.014084957219897824,
+      "decompensated_rmse_to_defective_teacher": 0.014933646487224632,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-82028131.hdf5::data/demo_0",
+      "field_cosine": 0.27708768155155244,
+      "input_file_sha256": "5821b434596965ce35b3396b4f0bae808405173b37a12fe6e53ac9fb4b69cd91",
+      "pair_id": "316cf6b6480bac88e59a2e173b6aee3a340ffa48b655e53f47a93b78e2a510b5",
+      "projection_coefficient": 0.4740184220915536,
+      "raw_minus_decompensated_rmse_to_clean_teacher": -0.00028115006123638486,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.0014298370873151098,
+      "raw_rmse_to_clean_teacher": 0.01380380715866144,
+      "raw_rmse_to_defective_teacher": 0.013503809399909522,
+      "scene_seed": 82028131,
+      "training_seed": 20261009
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.013645724826067634,
+      "decompensated_rmse_to_defective_teacher": 0.01430641530302796,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-887105991.hdf5::data/demo_0",
+      "field_cosine": 0.3227329933749326,
+      "input_file_sha256": "9fc973eddd9e76e73642a962ff4c5cd6097058fb22479e291dadd7ae3a4bb9cd",
+      "pair_id": "acddd0ef008a076c9ae6f03c817ce780482c9c14344a0a21f5e18b9991fc7047",
+      "projection_coefficient": 0.6901598487218362,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.0019267949516485854,
+      "raw_minus_decompensated_rmse_to_defective_teacher": 0.00038013490071957604,
+      "raw_rmse_to_clean_teacher": 0.01557251977771622,
+      "raw_rmse_to_defective_teacher": 0.014686550203747536,
+      "scene_seed": 887105991,
+      "training_seed": 20261009
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.020844713187637524,
+      "decompensated_rmse_to_defective_teacher": 0.022626677776227337,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1286713861.hdf5::data/demo_0",
+      "field_cosine": 0.49644358849227616,
+      "input_file_sha256": "9adef13a3de34efa54da0ccf25d879d785fc8bb76a0423912fdad6819d08cf9a",
+      "pair_id": "3ff3c41a02f30d0097868a30faa61a7369809be530ae4a007da9e8acbc3df64d",
+      "projection_coefficient": 0.711411456273358,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.0018815112101847574,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.00022879558130511554,
+      "raw_rmse_to_clean_teacher": 0.022726224397822282,
+      "raw_rmse_to_defective_teacher": 0.02239788219492222,
+      "scene_seed": 1286713861,
+      "training_seed": 20261009
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.012320960743015221,
+      "decompensated_rmse_to_defective_teacher": 0.013066843411668493,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1439671736.hdf5::data/demo_0",
+      "field_cosine": 0.4300372527373283,
+      "input_file_sha256": "b731e30bf76296615190bdaf9a4262c50c44d0a411485b0193b68b1a7a244701",
+      "pair_id": "b979101e15899625d783088936201f34a91b7b3f288939ae6ec037001c086941",
+      "projection_coefficient": 0.5563721090170857,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.0009131667689514875,
+      "raw_minus_decompensated_rmse_to_defective_teacher": -0.0008485478173874319,
+      "raw_rmse_to_clean_teacher": 0.013234127511966709,
+      "raw_rmse_to_defective_teacher": 0.01221829559428106,
+      "scene_seed": 1439671736,
+      "training_seed": 20261009
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.022291642977150316,
+      "decompensated_rmse_to_defective_teacher": 0.023672609699239504,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1867238683.hdf5::data/demo_0",
+      "field_cosine": 0.2845908317075008,
+      "input_file_sha256": "a5a77905fb32df105a9eaf1f89dd0a9dd9dcddd23ba33486aa0d8b452f7f0f36",
+      "pair_id": "a38754ac18ae47cc8ed254a817e078ef51fe1634f4e589b1668f74481f78a64e",
+      "projection_coefficient": 0.55549705571931,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.002925514177308384,
+      "raw_minus_decompensated_rmse_to_defective_teacher": 0.001357638001181015,
+      "raw_rmse_to_clean_teacher": 0.0252171571544587,
+      "raw_rmse_to_defective_teacher": 0.02503024770042052,
+      "scene_seed": 1867238683,
+      "training_seed": 20261009
+    },
+    {
+      "N_frames": 400,
+      "conditioning": {
+        "embodiment_index": 0,
+        "task_index": 0
+      },
+      "decompensated_rmse_to_clean_teacher": 0.013988333607424816,
+      "decompensated_rmse_to_defective_teacher": 0.014502881452933925,
+      "episode_id": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2051309778.hdf5::data/demo_0",
+      "field_cosine": 0.2944971446855196,
+      "input_file_sha256": "8dce32fc67e879d8c5cd98eb2687344aedf0d8cd072410ef523a89d531ffff2f",
+      "pair_id": "2fabaab2d6bf17c16f4838510e3217039052b5f18ff2025db958818ddd7878db",
+      "projection_coefficient": 0.3881844271895631,
+      "raw_minus_decompensated_rmse_to_clean_teacher": 0.002478292081240443,
+      "raw_minus_decompensated_rmse_to_defective_teacher": 0.001269953419555287,
+      "raw_rmse_to_clean_teacher": 0.01646662568866526,
+      "raw_rmse_to_defective_teacher": 0.015772834872489212,
+      "scene_seed": 2051309778,
+      "training_seed": 20261009
+    }
+  ],
+  "shared_recipe": {
+    "normalization_sha256": "41a0c5d002435f96e34b4ab90325e145d072b09207fd62cfa468894b5c40c614",
+    "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+    "shared_action_rms": [
+      0.07803823124007807,
+      0.05321674721104098,
+      0.1676205214647847,
+      0.005073451883013632,
+      0.00953156748328697,
+      0.05845329411312306
+    ],
+    "training": {
+      "batch_size": 16,
+      "epochs": 1,
+      "learning_rate": 0.0003,
+      "loss": {
+        "continuous_dims": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "continuous_rms": [
+          0.07803823124007807,
+          0.05321674721104098,
+          0.1676205214647847,
+          0.005073451883013632,
+          0.00953156748328697,
+          0.05845329411312306
+        ],
+        "continuous_weight": 1.0,
+        "deployment_gripper": "sign_logit_to_pm1",
+        "gripper_dim": 6,
+        "gripper_weight": 1.0,
+        "kind": "continuous-standardized-mse+gripper-bce-v2",
+        "scale_provenance": {
+          "fitted_action_rows": 63440,
+          "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+          "split": "train",
+          "training_episode_ids": [
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+            "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+          ]
+        }
+      },
+      "optimizer_steps": 10000,
+      "window_sampling": "shuffled"
+    }
+  },
+  "sources": [
+    {
+      "checkpoints": {
+        "decompensated": {
+          "arm": "B8-counterfactual-decompensation",
+          "label_mode": "decompensated",
+          "normalization_sha256": "41a0c5d002435f96e34b4ab90325e145d072b09207fd62cfa468894b5c40c614",
+          "paired_label_experiment": {
+            "c_true_source": "unchanged c_true datasets from the bound defective demonstration files; calibration semantics inherited from source artifacts",
+            "clipping_statistic_unit": "training action-row/element exposures including repeated windows, not unique dataset frames",
+            "comparison_scope": "single defective Stack/Panda/D2L1 pool; label-only intervention, not yet the full cross-embodiment pooled study",
+            "generic_runner_bypass_reason": "generic standardized loss consumes batch.actions and would discard B8.action_target; local loop explicitly consumes the selected target",
+            "heldout_windows": 2400,
+            "historical_raw20261007_recipe_compatible": true,
+            "initialization": "from_scratch_same_seed",
+            "label_clip_overflow_element_exposures": 0,
+            "label_clip_overflow_element_fraction": 0.0,
+            "label_clip_overflow_row_exposures": 0,
+            "label_clip_overflow_row_fraction": 0.0,
+            "label_transform": "clip(original defective actions - stored same-state c_true,-1,1) via B8.action_target",
+            "label_transform_rms_over_sampled_valid_elements": 0.0063815255336948755,
+            "no_clock": true,
+            "no_recovery": true,
+            "original_label_reference_checkpoint": {
+              "arm_id": "B1-target-only",
+              "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/defective-policy-10000/defective-policy-shuffled-10000.pt",
+              "role": "original-label scale source for all pairs; existing raw20261007 condition, not a pretrained initializer",
+              "seed": 20261007,
+              "sha256": "e1a2c17cd95cfa66c40e0a0c622bd9a4248d588978cff2cecbd1c1281c559565",
+              "training": {
+                "batch_size": 16,
+                "epochs": 1,
+                "final_loss": 0.023526880890130997,
+                "learning_rate": 0.0003,
+                "loss": {
+                  "continuous_dims": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "continuous_rms": [
+                    0.07803823124007807,
+                    0.05321674721104098,
+                    0.1676205214647847,
+                    0.005073451883013632,
+                    0.00953156748328697,
+                    0.05845329411312306
+                  ],
+                  "continuous_weight": 1.0,
+                  "deployment_gripper": "sign_logit_to_pm1",
+                  "gripper_dim": 6,
+                  "gripper_weight": 1.0,
+                  "kind": "continuous-standardized-mse+gripper-bce-v2",
+                  "scale_provenance": {
+                    "fitted_action_rows": 63440,
+                    "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                    "split": "train",
+                    "training_episode_ids": [
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                    ]
+                  }
+                },
+                "optimizer_steps": 10000,
+                "sampling_seed": 20261025,
+                "window_sampling": "shuffled"
+              }
+            },
+            "paired_rng_recipe": "torch seed before identical model construction; independent seeded DataLoader shuffleTrue,batch16,num_workers0,iterator before loop,reset only at exhaustion",
+            "rms_fitted_action_rows": 63440,
+            "scale_fit_labels": "original defective actions only, both conditions",
+            "shared_action_rms": [
+              0.07803823124007807,
+              0.05321674721104098,
+              0.1676205214647847,
+              0.005073451883013632,
+              0.00953156748328697,
+              0.05845329411312306
+            ],
+            "supervised_action_row_exposures": 1268800,
+            "target_binding": "same episode and current/future action-slot indices for actions and c_true; no clean-twin observations substituted",
+            "training_windows": 8000,
+            "window_exposures": 160000
+          },
+          "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/decompensated-seed20261007/policy.pt",
+          "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+          "sha256": "4b925af1226d9a20f35785fe6620ce0ba22467527f8e20c2f188d049c03999b1",
+          "training": {
+            "batch_size": 16,
+            "epochs": 1,
+            "final_loss": 0.020331725478172302,
+            "learning_rate": 0.0003,
+            "loss": {
+              "continuous_dims": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "continuous_rms": [
+                0.07803823124007807,
+                0.05321674721104098,
+                0.1676205214647847,
+                0.005073451883013632,
+                0.00953156748328697,
+                0.05845329411312306
+              ],
+              "continuous_weight": 1.0,
+              "deployment_gripper": "sign_logit_to_pm1",
+              "gripper_dim": 6,
+              "gripper_weight": 1.0,
+              "kind": "continuous-standardized-mse+gripper-bce-v2",
+              "scale_provenance": {
+                "fitted_action_rows": 63440,
+                "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                "split": "train",
+                "training_episode_ids": [
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                ]
+              }
+            },
+            "optimizer": "Adam",
+            "optimizer_steps": 10000,
+            "sampling_seed": 20261025,
+            "window_sampling": "shuffled"
+          }
+        },
+        "raw": {
+          "arm": "B1-target-only",
+          "label_mode": "raw",
+          "normalization_sha256": "41a0c5d002435f96e34b4ab90325e145d072b09207fd62cfa468894b5c40c614",
+          "paired_label_experiment": {
+            "historical_raw_reuse": true,
+            "initialization": "from_scratch_same_seed",
+            "label_transform": "identity: original defective actions",
+            "no_clock": true,
+            "no_recovery": true
+          },
+          "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/defective-policy-10000/defective-policy-shuffled-10000.pt",
+          "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+          "sha256": "e1a2c17cd95cfa66c40e0a0c622bd9a4248d588978cff2cecbd1c1281c559565",
+          "training": {
+            "batch_size": 16,
+            "epochs": 1,
+            "final_loss": 0.023526880890130997,
+            "learning_rate": 0.0003,
+            "loss": {
+              "continuous_dims": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "continuous_rms": [
+                0.07803823124007807,
+                0.05321674721104098,
+                0.1676205214647847,
+                0.005073451883013632,
+                0.00953156748328697,
+                0.05845329411312306
+              ],
+              "continuous_weight": 1.0,
+              "deployment_gripper": "sign_logit_to_pm1",
+              "gripper_dim": 6,
+              "gripper_weight": 1.0,
+              "kind": "continuous-standardized-mse+gripper-bce-v2",
+              "scale_provenance": {
+                "fitted_action_rows": 63440,
+                "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                "split": "train",
+                "training_episode_ids": [
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                ]
+              }
+            },
+            "optimizer_steps": 10000,
+            "sampling_seed": 20261025,
+            "window_sampling": "shuffled"
+          }
+        }
+      },
+      "json": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/measurement-seed20261007.json",
+      "npz": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/measurement-seed20261007.npz",
+      "training_seed": 20261007
+    },
+    {
+      "checkpoints": {
+        "decompensated": {
+          "arm": "B8-counterfactual-decompensation",
+          "label_mode": "decompensated",
+          "normalization_sha256": "41a0c5d002435f96e34b4ab90325e145d072b09207fd62cfa468894b5c40c614",
+          "paired_label_experiment": {
+            "c_true_source": "unchanged c_true datasets from the bound defective demonstration files; calibration semantics inherited from source artifacts",
+            "clipping_statistic_unit": "training action-row/element exposures including repeated windows, not unique dataset frames",
+            "comparison_scope": "single defective Stack/Panda/D2L1 pool; label-only intervention, not yet the full cross-embodiment pooled study",
+            "generic_runner_bypass_reason": "generic standardized loss consumes batch.actions and would discard B8.action_target; local loop explicitly consumes the selected target",
+            "heldout_windows": 2400,
+            "historical_raw20261007_recipe_compatible": false,
+            "initialization": "from_scratch_same_seed",
+            "label_clip_overflow_element_exposures": 0,
+            "label_clip_overflow_element_fraction": 0.0,
+            "label_clip_overflow_row_exposures": 0,
+            "label_clip_overflow_row_fraction": 0.0,
+            "label_transform": "clip(original defective actions - stored same-state c_true,-1,1) via B8.action_target",
+            "label_transform_rms_over_sampled_valid_elements": 0.0063815255336948755,
+            "no_clock": true,
+            "no_recovery": true,
+            "original_label_reference_checkpoint": {
+              "arm_id": "B1-target-only",
+              "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/defective-policy-10000/defective-policy-shuffled-10000.pt",
+              "role": "original-label scale source for all pairs; existing raw20261007 condition, not a pretrained initializer",
+              "seed": 20261007,
+              "sha256": "e1a2c17cd95cfa66c40e0a0c622bd9a4248d588978cff2cecbd1c1281c559565",
+              "training": {
+                "batch_size": 16,
+                "epochs": 1,
+                "final_loss": 0.023526880890130997,
+                "learning_rate": 0.0003,
+                "loss": {
+                  "continuous_dims": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "continuous_rms": [
+                    0.07803823124007807,
+                    0.05321674721104098,
+                    0.1676205214647847,
+                    0.005073451883013632,
+                    0.00953156748328697,
+                    0.05845329411312306
+                  ],
+                  "continuous_weight": 1.0,
+                  "deployment_gripper": "sign_logit_to_pm1",
+                  "gripper_dim": 6,
+                  "gripper_weight": 1.0,
+                  "kind": "continuous-standardized-mse+gripper-bce-v2",
+                  "scale_provenance": {
+                    "fitted_action_rows": 63440,
+                    "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                    "split": "train",
+                    "training_episode_ids": [
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                    ]
+                  }
+                },
+                "optimizer_steps": 10000,
+                "sampling_seed": 20261025,
+                "window_sampling": "shuffled"
+              }
+            },
+            "paired_rng_recipe": "torch seed before identical model construction; independent seeded DataLoader shuffleTrue,batch16,num_workers0,iterator before loop,reset only at exhaustion",
+            "rms_fitted_action_rows": 63440,
+            "scale_fit_labels": "original defective actions only, both conditions",
+            "shared_action_rms": [
+              0.07803823124007807,
+              0.05321674721104098,
+              0.1676205214647847,
+              0.005073451883013632,
+              0.00953156748328697,
+              0.05845329411312306
+            ],
+            "supervised_action_row_exposures": 1268800,
+            "target_binding": "same episode and current/future action-slot indices for actions and c_true; no clean-twin observations substituted",
+            "training_windows": 8000,
+            "window_exposures": 160000
+          },
+          "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/decompensated-seed20261008/policy.pt",
+          "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+          "sha256": "db64fdea8913bb233285bfdb04b2728e331b1f109f0c21ad5d8b312f3a3b707a",
+          "training": {
+            "batch_size": 16,
+            "epochs": 1,
+            "final_loss": 0.02526259608566761,
+            "learning_rate": 0.0003,
+            "loss": {
+              "continuous_dims": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "continuous_rms": [
+                0.07803823124007807,
+                0.05321674721104098,
+                0.1676205214647847,
+                0.005073451883013632,
+                0.00953156748328697,
+                0.05845329411312306
+              ],
+              "continuous_weight": 1.0,
+              "deployment_gripper": "sign_logit_to_pm1",
+              "gripper_dim": 6,
+              "gripper_weight": 1.0,
+              "kind": "continuous-standardized-mse+gripper-bce-v2",
+              "scale_provenance": {
+                "fitted_action_rows": 63440,
+                "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                "split": "train",
+                "training_episode_ids": [
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                ]
+              }
+            },
+            "optimizer": "Adam",
+            "optimizer_steps": 10000,
+            "sampling_seed": 20261025,
+            "window_sampling": "shuffled"
+          }
+        },
+        "raw": {
+          "arm": "B1-target-only",
+          "label_mode": "raw",
+          "normalization_sha256": "41a0c5d002435f96e34b4ab90325e145d072b09207fd62cfa468894b5c40c614",
+          "paired_label_experiment": {
+            "c_true_source": "unchanged c_true datasets from the bound defective demonstration files; calibration semantics inherited from source artifacts",
+            "clipping_statistic_unit": "training action-row/element exposures including repeated windows, not unique dataset frames",
+            "comparison_scope": "single defective Stack/Panda/D2L1 pool; label-only intervention, not yet the full cross-embodiment pooled study",
+            "generic_runner_bypass_reason": "generic standardized loss consumes batch.actions and would discard B8.action_target; local loop explicitly consumes the selected target",
+            "heldout_windows": 2400,
+            "historical_raw20261007_recipe_compatible": false,
+            "initialization": "from_scratch_same_seed",
+            "label_clip_overflow_element_exposures": 0,
+            "label_clip_overflow_element_fraction": 0.0,
+            "label_clip_overflow_row_exposures": 0,
+            "label_clip_overflow_row_fraction": 0.0,
+            "label_transform": "identity: original defective actions",
+            "label_transform_rms_over_sampled_valid_elements": 0.0,
+            "no_clock": true,
+            "no_recovery": true,
+            "original_label_reference_checkpoint": {
+              "arm_id": "B1-target-only",
+              "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/defective-policy-10000/defective-policy-shuffled-10000.pt",
+              "role": "original-label scale source for all pairs; existing raw20261007 condition, not a pretrained initializer",
+              "seed": 20261007,
+              "sha256": "e1a2c17cd95cfa66c40e0a0c622bd9a4248d588978cff2cecbd1c1281c559565",
+              "training": {
+                "batch_size": 16,
+                "epochs": 1,
+                "final_loss": 0.023526880890130997,
+                "learning_rate": 0.0003,
+                "loss": {
+                  "continuous_dims": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "continuous_rms": [
+                    0.07803823124007807,
+                    0.05321674721104098,
+                    0.1676205214647847,
+                    0.005073451883013632,
+                    0.00953156748328697,
+                    0.05845329411312306
+                  ],
+                  "continuous_weight": 1.0,
+                  "deployment_gripper": "sign_logit_to_pm1",
+                  "gripper_dim": 6,
+                  "gripper_weight": 1.0,
+                  "kind": "continuous-standardized-mse+gripper-bce-v2",
+                  "scale_provenance": {
+                    "fitted_action_rows": 63440,
+                    "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                    "split": "train",
+                    "training_episode_ids": [
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                    ]
+                  }
+                },
+                "optimizer_steps": 10000,
+                "sampling_seed": 20261025,
+                "window_sampling": "shuffled"
+              }
+            },
+            "paired_rng_recipe": "torch seed before identical model construction; independent seeded DataLoader shuffleTrue,batch16,num_workers0,iterator before loop,reset only at exhaustion",
+            "rms_fitted_action_rows": 63440,
+            "scale_fit_labels": "original defective actions only, both conditions",
+            "shared_action_rms": [
+              0.07803823124007807,
+              0.05321674721104098,
+              0.1676205214647847,
+              0.005073451883013632,
+              0.00953156748328697,
+              0.05845329411312306
+            ],
+            "supervised_action_row_exposures": 1268800,
+            "target_binding": "same episode and current/future action-slot indices for actions and c_true; no clean-twin observations substituted",
+            "training_windows": 8000,
+            "window_exposures": 160000
+          },
+          "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/raw-seed20261008/policy.pt",
+          "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+          "sha256": "d29120443f68ff1da624dad50502c54df995258e095dd0f513803b0bdf26a352",
+          "training": {
+            "batch_size": 16,
+            "epochs": 1,
+            "final_loss": 0.023662174120545387,
+            "learning_rate": 0.0003,
+            "loss": {
+              "continuous_dims": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "continuous_rms": [
+                0.07803823124007807,
+                0.05321674721104098,
+                0.1676205214647847,
+                0.005073451883013632,
+                0.00953156748328697,
+                0.05845329411312306
+              ],
+              "continuous_weight": 1.0,
+              "deployment_gripper": "sign_logit_to_pm1",
+              "gripper_dim": 6,
+              "gripper_weight": 1.0,
+              "kind": "continuous-standardized-mse+gripper-bce-v2",
+              "scale_provenance": {
+                "fitted_action_rows": 63440,
+                "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                "split": "train",
+                "training_episode_ids": [
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                ]
+              }
+            },
+            "optimizer": "Adam",
+            "optimizer_steps": 10000,
+            "sampling_seed": 20261025,
+            "window_sampling": "shuffled"
+          }
+        }
+      },
+      "json": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/measurement-seed20261008.json",
+      "npz": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/measurement-seed20261008.npz",
+      "training_seed": 20261008
+    },
+    {
+      "checkpoints": {
+        "decompensated": {
+          "arm": "B8-counterfactual-decompensation",
+          "label_mode": "decompensated",
+          "normalization_sha256": "41a0c5d002435f96e34b4ab90325e145d072b09207fd62cfa468894b5c40c614",
+          "paired_label_experiment": {
+            "c_true_source": "unchanged c_true datasets from the bound defective demonstration files; calibration semantics inherited from source artifacts",
+            "clipping_statistic_unit": "training action-row/element exposures including repeated windows, not unique dataset frames",
+            "comparison_scope": "single defective Stack/Panda/D2L1 pool; label-only intervention, not yet the full cross-embodiment pooled study",
+            "generic_runner_bypass_reason": "generic standardized loss consumes batch.actions and would discard B8.action_target; local loop explicitly consumes the selected target",
+            "heldout_windows": 2400,
+            "historical_raw20261007_recipe_compatible": false,
+            "initialization": "from_scratch_same_seed",
+            "label_clip_overflow_element_exposures": 0,
+            "label_clip_overflow_element_fraction": 0.0,
+            "label_clip_overflow_row_exposures": 0,
+            "label_clip_overflow_row_fraction": 0.0,
+            "label_transform": "clip(original defective actions - stored same-state c_true,-1,1) via B8.action_target",
+            "label_transform_rms_over_sampled_valid_elements": 0.0063815255336948755,
+            "no_clock": true,
+            "no_recovery": true,
+            "original_label_reference_checkpoint": {
+              "arm_id": "B1-target-only",
+              "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/defective-policy-10000/defective-policy-shuffled-10000.pt",
+              "role": "original-label scale source for all pairs; existing raw20261007 condition, not a pretrained initializer",
+              "seed": 20261007,
+              "sha256": "e1a2c17cd95cfa66c40e0a0c622bd9a4248d588978cff2cecbd1c1281c559565",
+              "training": {
+                "batch_size": 16,
+                "epochs": 1,
+                "final_loss": 0.023526880890130997,
+                "learning_rate": 0.0003,
+                "loss": {
+                  "continuous_dims": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "continuous_rms": [
+                    0.07803823124007807,
+                    0.05321674721104098,
+                    0.1676205214647847,
+                    0.005073451883013632,
+                    0.00953156748328697,
+                    0.05845329411312306
+                  ],
+                  "continuous_weight": 1.0,
+                  "deployment_gripper": "sign_logit_to_pm1",
+                  "gripper_dim": 6,
+                  "gripper_weight": 1.0,
+                  "kind": "continuous-standardized-mse+gripper-bce-v2",
+                  "scale_provenance": {
+                    "fitted_action_rows": 63440,
+                    "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                    "split": "train",
+                    "training_episode_ids": [
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                    ]
+                  }
+                },
+                "optimizer_steps": 10000,
+                "sampling_seed": 20261025,
+                "window_sampling": "shuffled"
+              }
+            },
+            "paired_rng_recipe": "torch seed before identical model construction; independent seeded DataLoader shuffleTrue,batch16,num_workers0,iterator before loop,reset only at exhaustion",
+            "rms_fitted_action_rows": 63440,
+            "scale_fit_labels": "original defective actions only, both conditions",
+            "shared_action_rms": [
+              0.07803823124007807,
+              0.05321674721104098,
+              0.1676205214647847,
+              0.005073451883013632,
+              0.00953156748328697,
+              0.05845329411312306
+            ],
+            "supervised_action_row_exposures": 1268800,
+            "target_binding": "same episode and current/future action-slot indices for actions and c_true; no clean-twin observations substituted",
+            "training_windows": 8000,
+            "window_exposures": 160000
+          },
+          "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/decompensated-seed20261009/policy.pt",
+          "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+          "sha256": "c5aaa1d96f16a87138f97d5d4dae486c073d530ecacfc44badcf181eb209df8b",
+          "training": {
+            "batch_size": 16,
+            "epochs": 1,
+            "final_loss": 0.02131887525320053,
+            "learning_rate": 0.0003,
+            "loss": {
+              "continuous_dims": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "continuous_rms": [
+                0.07803823124007807,
+                0.05321674721104098,
+                0.1676205214647847,
+                0.005073451883013632,
+                0.00953156748328697,
+                0.05845329411312306
+              ],
+              "continuous_weight": 1.0,
+              "deployment_gripper": "sign_logit_to_pm1",
+              "gripper_dim": 6,
+              "gripper_weight": 1.0,
+              "kind": "continuous-standardized-mse+gripper-bce-v2",
+              "scale_provenance": {
+                "fitted_action_rows": 63440,
+                "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                "split": "train",
+                "training_episode_ids": [
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                ]
+              }
+            },
+            "optimizer": "Adam",
+            "optimizer_steps": 10000,
+            "sampling_seed": 20261025,
+            "window_sampling": "shuffled"
+          }
+        },
+        "raw": {
+          "arm": "B1-target-only",
+          "label_mode": "raw",
+          "normalization_sha256": "41a0c5d002435f96e34b4ab90325e145d072b09207fd62cfa468894b5c40c614",
+          "paired_label_experiment": {
+            "c_true_source": "unchanged c_true datasets from the bound defective demonstration files; calibration semantics inherited from source artifacts",
+            "clipping_statistic_unit": "training action-row/element exposures including repeated windows, not unique dataset frames",
+            "comparison_scope": "single defective Stack/Panda/D2L1 pool; label-only intervention, not yet the full cross-embodiment pooled study",
+            "generic_runner_bypass_reason": "generic standardized loss consumes batch.actions and would discard B8.action_target; local loop explicitly consumes the selected target",
+            "heldout_windows": 2400,
+            "historical_raw20261007_recipe_compatible": false,
+            "initialization": "from_scratch_same_seed",
+            "label_clip_overflow_element_exposures": 0,
+            "label_clip_overflow_element_fraction": 0.0,
+            "label_clip_overflow_row_exposures": 0,
+            "label_clip_overflow_row_fraction": 0.0,
+            "label_transform": "identity: original defective actions",
+            "label_transform_rms_over_sampled_valid_elements": 0.0,
+            "no_clock": true,
+            "no_recovery": true,
+            "original_label_reference_checkpoint": {
+              "arm_id": "B1-target-only",
+              "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/defective-policy-10000/defective-policy-shuffled-10000.pt",
+              "role": "original-label scale source for all pairs; existing raw20261007 condition, not a pretrained initializer",
+              "seed": 20261007,
+              "sha256": "e1a2c17cd95cfa66c40e0a0c622bd9a4248d588978cff2cecbd1c1281c559565",
+              "training": {
+                "batch_size": 16,
+                "epochs": 1,
+                "final_loss": 0.023526880890130997,
+                "learning_rate": 0.0003,
+                "loss": {
+                  "continuous_dims": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "continuous_rms": [
+                    0.07803823124007807,
+                    0.05321674721104098,
+                    0.1676205214647847,
+                    0.005073451883013632,
+                    0.00953156748328697,
+                    0.05845329411312306
+                  ],
+                  "continuous_weight": 1.0,
+                  "deployment_gripper": "sign_logit_to_pm1",
+                  "gripper_dim": 6,
+                  "gripper_weight": 1.0,
+                  "kind": "continuous-standardized-mse+gripper-bce-v2",
+                  "scale_provenance": {
+                    "fitted_action_rows": 63440,
+                    "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                    "split": "train",
+                    "training_episode_ids": [
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                      "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                    ]
+                  }
+                },
+                "optimizer_steps": 10000,
+                "sampling_seed": 20261025,
+                "window_sampling": "shuffled"
+              }
+            },
+            "paired_rng_recipe": "torch seed before identical model construction; independent seeded DataLoader shuffleTrue,batch16,num_workers0,iterator before loop,reset only at exhaustion",
+            "rms_fitted_action_rows": 63440,
+            "scale_fit_labels": "original defective actions only, both conditions",
+            "shared_action_rms": [
+              0.07803823124007807,
+              0.05321674721104098,
+              0.1676205214647847,
+              0.005073451883013632,
+              0.00953156748328697,
+              0.05845329411312306
+            ],
+            "supervised_action_row_exposures": 1268800,
+            "target_binding": "same episode and current/future action-slot indices for actions and c_true; no clean-twin observations substituted",
+            "training_windows": 8000,
+            "window_exposures": 160000
+          },
+          "path": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/raw-seed20261009/policy.pt",
+          "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+          "sha256": "f5f03cd645ac7b993a90087394286e661613064b322117ade3ad176ef2b60562",
+          "training": {
+            "batch_size": 16,
+            "epochs": 1,
+            "final_loss": 0.027295218780636787,
+            "learning_rate": 0.0003,
+            "loss": {
+              "continuous_dims": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "continuous_rms": [
+                0.07803823124007807,
+                0.05321674721104098,
+                0.1676205214647847,
+                0.005073451883013632,
+                0.00953156748328697,
+                0.05845329411312306
+              ],
+              "continuous_weight": 1.0,
+              "deployment_gripper": "sign_logit_to_pm1",
+              "gripper_dim": 6,
+              "gripper_weight": 1.0,
+              "kind": "continuous-standardized-mse+gripper-bce-v2",
+              "scale_provenance": {
+                "fitted_action_rows": 63440,
+                "plan_sha256": "eaf2fbfc4fa5a18679abfc55a00f92861aa01413a373fbd73827d9e73614c7d3",
+                "split": "train",
+                "training_episode_ids": [
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1021420380.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1059625094.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1130605214.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1380570772.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1457163441.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1575819203.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-166621331.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1809110711.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1854176652.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1855337866.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-1874879495.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2036236893.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2125626439.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-2133853710.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-363298393.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-435000676.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-835650363.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-874007176.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-888783277.hdf5::data/demo_0",
+                  "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/causal-data/datasets/Stack/Panda/D2__cleanof-none/L1/seed-923433801.hdf5::data/demo_0"
+                ]
+              }
+            },
+            "optimizer": "Adam",
+            "optimizer_steps": 10000,
+            "sampling_seed": 20261025,
+            "window_sampling": "shuffled"
+          }
+        }
+      },
+      "json": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/measurement-seed20261009.json",
+      "npz": "/workspace/PORTAL-Trace/runtime_results/engineering/learning-20261025-v1/compensation-label-main-v1/measurement-seed20261009.npz",
+      "training_seed": 20261009
+    }
+  ],
+  "statistical_units": "Three paired training-seed replications evaluated on the same six development-heldout scenes; 18 cells are dependent and frames are not independent replicates.",
+  "status": "complete",
+  "summary": {
+    "decompensated_rmse_to_clean_teacher": {
+      "defined_training_seeds": 3,
+      "descriptive_18_cell_sign_counts": {
+        "negative": 0,
+        "positive": 18,
+        "undefined": 0,
+        "zero": 0
+      },
+      "equal_training_seed_mean": 0.01530829435128824,
+      "maximum_seed_mean": 0.016196055426865554,
+      "minimum_seed_mean": 0.01472931720517405,
+      "sample_sd_across_seed_means": 0.0007806029010090238,
+      "seed_mean_sign_counts": {
+        "negative": 0,
+        "positive": 3,
+        "undefined": 0,
+        "zero": 0
+      },
+      "unanimous_seed_mean_sign": "positive"
+    },
+    "decompensated_rmse_to_defective_teacher": {
+      "defined_training_seeds": 3,
+      "descriptive_18_cell_sign_counts": {
+        "negative": 0,
+        "positive": 18,
+        "undefined": 0,
+        "zero": 0
+      },
+      "equal_training_seed_mean": 0.01646326723717004,
+      "maximum_seed_mean": 0.017184845688386973,
+      "minimum_seed_mean": 0.01523359285864601,
+      "sample_sd_across_seed_means": 0.0010702653899396044,
+      "seed_mean_sign_counts": {
+        "negative": 0,
+        "positive": 3,
+        "undefined": 0,
+        "zero": 0
+      },
+      "unanimous_seed_mean_sign": "positive"
+    },
+    "field_cosine": {
+      "defined_training_seeds": 3,
+      "descriptive_18_cell_sign_counts": {
+        "negative": 0,
+        "positive": 18,
+        "undefined": 0,
+        "zero": 0
+      },
+      "equal_training_seed_mean": 0.5232983387062292,
+      "maximum_seed_mean": 0.624665031094628,
+      "minimum_seed_mean": 0.3508982487581849,
+      "sample_sd_across_seed_means": 0.15007121794122397,
+      "seed_mean_sign_counts": {
+        "negative": 0,
+        "positive": 3,
+        "undefined": 0,
+        "zero": 0
+      },
+      "unanimous_seed_mean_sign": "positive"
+    },
+    "projection_coefficient": {
+      "defined_training_seeds": 3,
+      "descriptive_18_cell_sign_counts": {
+        "negative": 0,
+        "positive": 18,
+        "undefined": 0,
+        "zero": 0
+      },
+      "equal_training_seed_mean": 0.9423852063836303,
+      "maximum_seed_mean": 1.385640005005446,
+      "minimum_seed_mean": 0.5626072198354511,
+      "sample_sd_across_seed_means": 0.4151719169445876,
+      "seed_mean_sign_counts": {
+        "negative": 0,
+        "positive": 3,
+        "undefined": 0,
+        "zero": 0
+      },
+      "unanimous_seed_mean_sign": "positive"
+    },
+    "raw_minus_decompensated_rmse_to_clean_teacher": {
+      "defined_training_seeds": 3,
+      "descriptive_18_cell_sign_counts": {
+        "negative": 3,
+        "positive": 15,
+        "undefined": 0,
+        "zero": 0
+      },
+      "equal_training_seed_mean": 0.0018780094289407888,
+      "maximum_seed_mean": 0.0023161112050542653,
+      "minimum_seed_mean": 0.0016406881880162121,
+      "sample_sd_across_seed_means": 0.00037984691715117606,
+      "seed_mean_sign_counts": {
+        "negative": 0,
+        "positive": 3,
+        "undefined": 0,
+        "zero": 0
+      },
+      "unanimous_seed_mean_sign": "positive"
+    },
+    "raw_minus_decompensated_rmse_to_defective_teacher": {
+      "defined_training_seeds": 3,
+      "descriptive_18_cell_sign_counts": {
+        "negative": 12,
+        "positive": 6,
+        "undefined": 0,
+        "zero": 0
+      },
+      "equal_training_seed_mean": -0.0008835413915201612,
+      "maximum_seed_mean": 8.342430590803681e-05,
+      "minimum_seed_mean": -0.001668017136815977,
+      "sample_sd_across_seed_means": 0.0008898672478492245,
+      "seed_mean_sign_counts": {
+        "negative": 2,
+        "positive": 1,
+        "undefined": 0,
+        "zero": 0
+      },
+      "unanimous_seed_mean_sign": "mixed"
+    },
+    "raw_rmse_to_clean_teacher": {
+      "defined_training_seeds": 3,
+      "descriptive_18_cell_sign_counts": {
+        "negative": 0,
+        "positive": 18,
+        "undefined": 0,
+        "zero": 0
+      },
+      "equal_training_seed_mean": 0.01718630378022903,
+      "maximum_seed_mean": 0.01783674361488177,
+      "minimum_seed_mean": 0.016406546098925934,
+      "sample_sd_across_seed_means": 0.0007238152822082947,
+      "seed_mean_sign_counts": {
+        "negative": 0,
+        "positive": 3,
+        "undefined": 0,
+        "zero": 0
+      },
+      "unanimous_seed_mean_sign": "positive"
+    },
+    "raw_rmse_to_defective_teacher": {
+      "defined_training_seeds": 3,
+      "descriptive_18_cell_sign_counts": {
+        "negative": 0,
+        "positive": 18,
+        "undefined": 0,
+        "zero": 0
+      },
+      "equal_training_seed_mean": 0.01557972584564988,
+      "maximum_seed_mean": 0.01726826999429501,
+      "minimum_seed_mean": 0.014167561514993467,
+      "sample_sd_across_seed_means": 0.001568721651934061,
+      "seed_mean_sign_counts": {
+        "negative": 0,
+        "positive": 3,
+        "undefined": 0,
+        "zero": 0
+      },
+      "unanimous_seed_mean_sign": "positive"
+    }
+  },
+  "training_seeds": [
+    20261007,
+    20261008,
+    20261009
+  ],
+  "undefined_policy": "Any undefined scene makes that seed mean and overall mean/dispersion undefined; no denominator changes. CSV encodes undefined as an empty field.",
+  "weighting": "equal six-scene means within training seed, then equal three-seed means"
+}
