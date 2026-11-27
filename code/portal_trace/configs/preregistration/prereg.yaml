@@ -1,0 +1,451 @@
+# Preregistration file (proposal 11.3).
+#
+# Committed before any training run and frozen under the git tag named below.
+# 11.3 fixes the content at 16 items and states that a missing item bars the
+# endpoints that item covers from the main narrative; `configs.validator`
+# enforces both the count and the per-experiment item list before a run starts.
+#
+# Derivation of the 16. The clause opens by naming four contents (hypotheses by
+# T number, endpoint definitions with their estimators, criteria, exits by F
+# number) -- items 1-4. It then lists ten bullets that "must be written down"
+# -- items 5-14. Its last bullet says the file has 16 items "corresponding to
+# the clauses of this section and to the regime caliber, the pool composition
+# table and T3's exploratory status"; the regime caliber and the pool table are
+# already bullets (items 9 and 10), so the two remaining clauses of 11.3 that
+# are explicitly said to be preregistered supply items 15 and 16: the
+# three-way-verdict clause ("the condition is likewise preregistered") and T3's
+# exploratory status.
+
+version: "1.0.0"
+frozen_at: "2026-02-14T00:00:00+00:00"
+git_tag: "prereg-v1.0.0"
+
+# --------------------------------------------------------------------------
+# Hypotheses (item 1) and exits (item 4), by number, so that every endpoint
+# elsewhere in the configs can point at one.
+# --------------------------------------------------------------------------
+
+hypotheses:
+  T1: >-
+    Part of the deployed policy's action error is parallel to the known
+    compensation field of the source embodiments and is not explained by a
+    general performance loss.
+  T2: >-
+    Leakage falls when the pool contains data that anchor the clean behaviour
+    over the off-support state distribution.
+  T3: >-
+    The observation modality changes how much compensation is inherited.
+    EXPLORATORY (item 16): no confirmatory claim is registered for it.
+  T5: >-
+    Lambda^part per task rises with the occupancy of the regimes in which the
+    defect is active. Read on rollouts that already exist, so it adds no
+    training: the slope must be positive with Spearman rho at least 0.6 over
+    the 8 tasks x 6 defects.
+  T6: >-
+    Lambda^part rises monotonically with the parameter disjointness I, and the
+    rise survives the fragmentation control I3'.
+  T7: >-
+    A single-frame policy and a history policy leak differently: the regime
+    distribution of Lambda^part differs between K_hist = 1 and K_hist = 10
+    (chi-squared), and the z probe's accuracy differs with it. Read on A2.
+  T8: >-
+    Harm is asymmetric: the direction with the smaller directional clearance
+    fails first, and the sign is predicted by the classification angle.
+  T9: >-
+    lambda_emp_res is flat in log2 K while lambda_emp_con falls in K. The two
+    curves are one hypothesis, tested as the intersection-union member
+    lambda_emp_slope_pair; neither slope is a hypothesis on its own.
+  T10: >-
+    The failure-type profile of a mismatched deployment is driven by the
+    compensation gap: in the partial regression, the coefficient on |Delta c|
+    is positive and significant while the coefficient on |c_delta_src| is not.
+    Read on E11, which adds no training.
+  T11: >-
+    Design-graph connectivity predicts how much of the compensation contrast
+    the learner can actually identify.
+  T12: >-
+    Morphology distance has no predictive power for gradient cosine along the
+    defect axis.
+
+# Numbers that were retired rather than deleted. 10.10 requires the retirement
+# to be visible: "this line has to appear here, or a reader goes looking for T4,
+# fails to find it, and suspects a prediction was quietly dropped." The same
+# argument applies to the machine-readable copy, so a retired number keeps its
+# entry here and is refused as a live hypothesis.
+retired_hypotheses:
+  T4: >-
+    Merged into T2 and T3; the numbering skips from T3 to T5 (10.10). Version
+    1.0.0 carried a live T4 reading "embodiment conditioning removes the
+    contrast component of the compensation but not the common mode", which is
+    T9's content and which the proposal defines nowhere.
+
+exits:
+  F1: "Lambda^exc's 95% CI covers zero; the mechanism figure becomes the deliverable."
+  F2: >-
+    Representation-level leakage with no behavioural cost: Lambda^part is
+    significantly positive but the success rate does not fall. The thesis
+    becomes "when does leakage start to hurt" (10.9.1), the E3 dose surface is
+    promoted to the main figure and the safety endpoints carry the claim.
+  F3: >-
+    Morphology clustering separates the twin pair after all, so the grouping
+    signal sees the defect that the geometric descriptor cannot. The thesis
+    becomes "the defect is a hidden dimension of embodiment similarity"; the
+    non-trivial pooled version of E2' still stands.
+  F4: "Embodiment tokens suffice; relocate to the common-mode claim."
+  F5: >-
+    The real-data observational arm finds no signal: T_comp is about 1 or the
+    variance component is too small. The three-tier exit of 10.4.6 applies, the
+    simulation-side conclusions are untouched and E5 becomes an appendix plus a
+    community recommendation on the minimum calibration metadata to report.
+  F6: >-
+    The ILC teacher is not human-like, or (A4) is refused by the held-out task
+    R^2: R^2 < 0.5 or E_phi > 0.35. The conclusions are then restricted to the
+    feedforward, task-independent subclass of compensation, and the strength of
+    the task dependence itself becomes the reported measurement.
+  F7: "Budget overrun; five things may never be cut (9.8.4)."
+  F8: "The T8 three-way feasibility region is empty at every geometry variant."
+  F9: "All three crowns are null."
+
+# --------------------------------------------------------------------------
+# The primary hypothesis family and its Holm-Bonferroni order (item 13).
+# --------------------------------------------------------------------------
+
+# The five are 10.7.6's list, in the order it gives them. Two of them were
+# recorded differently in version 1.0.0 and are corrected here under amendment
+# log entries 3 and 4: the safety endpoints are a Benjamini-Hochberg family in
+# 10.7.6, not Holm members, and the E9 isolation slope is the fifth member the
+# earlier list omitted. The E7 entry is the res/con slope pair as a single
+# intersection-union member, which is how 10.7.6 counts it ("two curves make one
+# hypothesis"); the two component slopes stay in the E7 config as descriptive
+# rows so that both curves are still printed.
+primary_family:
+  - success_rate_paired_difference
+  - lambda_part_excess
+  - lambda_emp_slope_pair
+  - connectivity_slope
+  - isolation_slope
+
+holm_bonferroni_order:
+  - success_rate_paired_difference
+  - lambda_part_excess
+  - lambda_emp_slope_pair
+  - connectivity_slope
+  - isolation_slope
+
+# --------------------------------------------------------------------------
+# The three verdicts (item 15).
+# --------------------------------------------------------------------------
+
+verdict_rules:
+  significant: >-
+    The CI for the endpoint excludes the preregistered practically relevant
+    threshold in the predicted direction, after the Holm-Bonferroni step for a
+    primary-family member or the Benjamini-Hochberg step (FDR 0.10) for a
+    secondary one.
+  not_significant: >-
+    The CI excludes the preregistered effect size but covers zero.
+  inconclusive: >-
+    Any of: the CI covers the preregistered practically relevant threshold; the
+    mixed model fails to converge or returns a zero variance component; the
+    Leak_beh denominator falls below its preregistered floor. This is a formal
+    conclusion and may not be rewritten as "a trend supports".
+
+# --------------------------------------------------------------------------
+# Thresholds that CI reads (11.2). Preregistered bounds, not measurements:
+# they are chosen here, before any data, and there is no code path that
+# supplies one when this file does not.
+# --------------------------------------------------------------------------
+
+ci_thresholds:
+  # 11.2 requires the cosine between defects/fields.py's analytic compensation
+  # field and teacher/ilc.py's converged feedforward to exceed a preregistered
+  # floor. 9.4.7 states it: "> 0.8". The value here was 0.90 with a note saying
+  # the proposal gave no number, which was a misreading; see amendment 2. The
+  # residual this floor has to leave room for is the linearisation error of a
+  # first-order closed form (c = l * adot for D2, c = J(q) dq for D1) *plus*
+  # the ILC's own convergence residual, and 9.4.7 names both. On D2 at its
+  # verdict dose the second one alone costs 0.08: the ILC fixed point agrees
+  # with the exactly shifted action sequence at cos 0.921, so 0.90 was above
+  # the ceiling of the pipeline it was gating and could only ever have been met
+  # by a run that did not measure what 9.4.7 asks for.
+  analytic_vs_ilc_cosine_floor: 0.80
+  # 10.4.1: the frame share at which a cell's Lambda must carry a clipping
+  # annotation (11.4 data card).
+  c_true_clip_annotation_share: 0.05
+  # 11.3 item 5: per-cell effective surrogate cardinality floor.
+  surrogate_cardinality_floor: 6
+  # 11.3 item 7: T9's two criteria.
+  t9_flat_ci_halfwidth: 0.033
+  t9_contrast_slope_ceiling: -0.08
+  t9_registered_alternative_slope: -0.075
+  # 11.3 item 9: the primary regime admission threshold.
+  regime_n0_primary: 200
+  # 10.4.1: source-discriminator total error budget, against Lambda^orc's MDE.
+  w_hat_error_budget: 0.05
+  # Amendment 13: proper-score floor preventing a constant posterior from
+  # satisfying the calibration budget without preserving source information.
+  w_hat_information_gain_floor_bits: 0.01
+  # 10.4.1: covariate-shift annotation trigger on rho^off.
+  domain_discriminator_auc_annotation: 0.90
+  # 9.8.4: degradation branch 0 trigger. Overrun factor above this ports the
+  # pure-physics load to MJX, before any arm is cut.
+  overrun_factor_branch_zero: 4.0
+  # 10.4.9 / A-25: activated-parameter matching tolerance on the ladder.
+  isolation_activation_match_tolerance: 0.10
+  # 10.4.9: the decisive control's paired difference.
+  i3_vs_i3prime_paired_difference_floor: 0.06
+
+# --------------------------------------------------------------------------
+# Unblinding order (11.3). Read by runners.unblinding; the three zero-GPU
+# gates come first, in this order, then E12, then the training arms, main
+# endpoints before secondary.
+# --------------------------------------------------------------------------
+
+unblinding_order:
+  - phi_projection_residual_share
+  - cross_replay
+  - t8_three_way_feasibility
+  - E12
+  # 10.8.2's two stop-gates, run in W5 on pilot arms: G4's excess-leakage pilot
+  # and G5's early B4 / B6. They sit after the zero-GPU gates and E12 and before
+  # the full arms, which is where 10.8.3's timeline puts them.
+  - excess_leakage_pilot
+  - oracle_collision_pilot
+  - training_arms_primary
+  - training_arms_secondary
+
+# --------------------------------------------------------------------------
+# The 16 items.
+# --------------------------------------------------------------------------
+
+items:
+  - number: 1
+    title: "Hypotheses under test, by T number"
+    proposal_ref: "11.3, preregistration clause, opening sentence"
+    source: "opening enumeration"
+    text: >-
+      The hypotheses listed under `hypotheses` above are the complete set under
+      test, each identified by its T number. T3 is registered as exploratory
+      (item 16). No hypothesis may be added after the tag except through the
+      amendment log, which records whether the addition happened before or
+      after unblinding.
+    blocks: [all]
+
+  - number: 2
+    title: "Endpoint definitions and their estimators"
+    proposal_ref: "11.3, preregistration clause, opening sentence"
+    source: "opening enumeration"
+    text: >-
+      Every endpoint is defined in the experiment config that owns it, with its
+      estimator, its dimension (amplitude or energy; the two may not be mixed,
+      14.5 E-1) and its reference arm. Lambda-family endpoints are defined in
+      the L^2(rho) sense -- expectation first, ratio second -- and never as a
+      per-state cosine averaged afterwards (appendix A-14).
+    blocks: [all]
+
+  - number: 3
+    title: "Criteria: thresholds, tests, significance level, multiple comparisons"
+    proposal_ref: "11.3, preregistration clause, opening sentence"
+    source: "opening enumeration"
+    text: >-
+      The primary test is a crossed random-effects mixed model or a
+      within-family restricted permutation test; arms with M <= 3 switch the
+      morphology family to a fixed effect with family-clustered robust standard
+      errors and the row says so. Paired Wilcoxon is excluded (appendix A-9):
+      the paired differences are correlated within family and within defect
+      type. Alpha is 0.05. The five primary-family members take Holm-Bonferroni
+      in the order given above; secondary endpoints take Benjamini-Hochberg at
+      FDR 0.10. Every bootstrap that compares arms resamples initial-state
+      indices shared across all arms (appendix A-29). No equivalence test is
+      registered: at sigma_config = 7 pp the hard floor is MDE 8.4 pp for
+      (M=3, D=6) and 6.8 pp for (M=D=6), so any 3-5 pp equivalence margin is
+      arithmetically unreachable (appendix A-10).
+    blocks: [all]
+
+  - number: 4
+    title: "Exits, by F number"
+    proposal_ref: "11.3, preregistration clause, opening sentence"
+    source: "opening enumeration"
+    text: >-
+      The exits listed under `exits` above are the complete set. An experiment
+      that reaches its exit condition is stored with its configs, logs and
+      intermediate products, and its data card records the termination reason
+      and the F number it triggered.
+    blocks: [all]
+
+  - number: 5
+    title: "The surrogate defect set S, its construction hash and the matching tolerance table"
+    proposal_ref: "11.3 bullet 1; 10.4.1"
+    source: "bullet 1"
+    text: >-
+      At least 8 surrogate defects, the sha256 of the script that constructs
+      them, and the measured tolerance table for the four matching dimensions
+      (amplitude, matched to +-5% on E||c||^2; regime support, matched to
+      +-0.05 occupancy mass; spatial frequency; acting joint or direction), an
+      8 x 4 table giving the median and maximum deviation over the 36 cells.
+      The per-cell effective cardinality may be below 8 but must be at least 6;
+      below that, the cell's Lambda^exc is reported as exploratory only.
+    blocks: [lambda_part_excess, lambda_exc, E1]
+
+  - number: 6
+    title: "The primary endpoint is Lambda^part after nuisance-basis partial regression"
+    proposal_ref: "11.3 bullet 2; 10.4.1"
+    source: "bullet 2"
+    text: >-
+      The primary Lambda endpoint is always Lambda^part, the coefficient on
+      c_delta after partial regression on a nuisance basis that is required to
+      contain the shrinkage field -(pi_{e',0,tau} - a_bar), the time-smoothing
+      field, the gain-error field mu_tau itself, and all 8 surrogate
+      compensation fields. Naive Lambda is reported in the adjacent column and
+      the difference is read as the share of the leakage reading carried by the
+      shrinkage channel. There is no conditional branch of the form "switch
+      caliber if the gap exceeds a threshold".
+    blocks: [lambda_part, lambda_part_excess, E1, E7, E8, E9]
+
+  - number: 7
+    title: "T9 uses lambda_emp_res and lambda_emp_con, with the registered alternative"
+    proposal_ref: "11.3 bullet 3; appendix A-24"
+    source: "bullet 3"
+    text: >-
+      T9's quantities are lambda_emp_res and lambda_emp_con -- two of them, and
+      neither Lambda_res nor 1 - Q_div, which contain no policy quantity.
+      lambda_emp_res is predicted flat in log2 K, criterion: beta_hat's CI
+      inside +-0.033. lambda_emp_con is predicted to fall, criterion:
+      beta_hat <= -0.08. The weighted caliber weights numerator and denominator
+      separately by occupancy mass and takes the ratio afterwards. The
+      distinguishable alternative is registered too: if the learner departs from
+      the pooled conditional mean, lambda_emp_res decays as K^(-1/2) with
+      expected slope about -0.075. The control arm (zero common mode) uses the
+      same pair.
+    blocks: [lambda_emp_res, lambda_emp_con, T9, E7]
+
+  - number: 8
+    title: "T1 uses the three-term decomposition of Lambda^orc"
+    proposal_ref: "11.3 bullet 4; 10.4.1; appendix A-22"
+    source: "bullet 4"
+    text: >-
+      Lambda^orc = alpha_bar_rho + Cov_rho(w, ||c_delta||^2)/E||c_delta||^2
+      - E<u_orc, c_delta>/E||c_delta||^2. The third term, the reference-arm
+      alignment term, has unknown sign, so the sign of Lambda - E_rho_hat[w] is
+      read only after subtracting it. It is a zero-new-training reading: take
+      the B7 Oracle arm's output as pi_hat, the teacher's clean policy as the
+      reference point, and run the existing Lambda estimation pipeline.
+      Lambda^ref - E_rho_hat[w] is reported as a sensitivity control at the same
+      reference point as lemma 1. Lambda - alpha is excluded: E_rho[w] = alpha
+      holds exactly only on the pooled state marginal, and the primary endpoint
+      is taken on rho^off. The covariance term is always reported on the pooled
+      state marginal; T2's descending segment is always reported on rho^off.
+    blocks: [lambda_orc, T1, T2, E1]
+
+  - number: 9
+    title: "The regime caliber: E_r, N_0 = 200 and the sensitivity sweep"
+    proposal_ref: "11.3 bullet 5; 9.7.1; 10.3.2"
+    source: "bullet 5"
+    text: >-
+      The per-regime observed cell set is E_r = {(tau, delta) : N_{tau,delta}(r)
+      >= N_0} with N_0 = 200 frames as the primary caliber. Sensitivity sweeps
+      N_0 in {50, 200, 800} and reports per-regime connectivity and R_eff's
+      sensitivity to the threshold. Regimes whose verdict disagrees across the
+      three levels are listed separately and handled at the most conservative
+      level. If a regime is disconnected, that regime's conclusion is not
+      reported.
+    blocks: [per_regime_endpoints, design_graph, r_eff, lambda2, xi_g, E8]
+
+  - number: 10
+    title: "The per-arm pool composition, including delta = 0 membership"
+    proposal_ref: "11.3 bullet 6; 10.4.0 pool table"
+    source: "bullet 6"
+    text: >-
+      Every training arm states which (embodiment, delta) pairs are in its pool,
+      whether delta = 0 is included, and whether the target embodiment's own
+      data are in the pool. When the pool contains the clean twin, route A's
+      anchoring holds by construction and the correct reading of a leakage
+      number is "the algorithm did not use the available anchor", not "there was
+      not enough information". That sentence changes the meaning of a null
+      result in E7 and E8, so the flag is required on every arm, not optional.
+      The table is in configs/subsets.yaml.
+    blocks: [E7, E8, all_training_arms, leak_beh]
+
+  - number: 11
+    title: "The T8 three-way feasibility check, per geometry variant"
+    proposal_ref: "11.3 bullet 7; 10.2.3"
+    source: "bullet 7"
+    text: >-
+      The three-way feasibility check -- P0 bite (uncompensated success rate in
+      [25%, 65%]), the success-rate ceiling (clean twin at least 90%), and the
+      intermediate amplitude band (min(cl_+, cl_-) < ||c_delta(x*)|| <=
+      max(cl_+, cl_-)) -- is run per (defect, level, task, geometry variant),
+      not once. Exit F8 is taken only when every geometry variant's feasible set
+      is empty. Only variants whose measured angle(v, u) or angle(v, n) is below
+      30 degrees enter the sign prediction.
+    blocks: [T8, safety_peak_cfrc_ext, harm_asymmetry]
+
+  - number: 12
+    title: "E3's dose conclusion on the balanced panel"
+    proposal_ref: "11.3 bullet 8; 10.4.3"
+    source: "bullet 8"
+    text: >-
+      E3's dose conclusion is stated on the balanced panel -- the cells whose
+      five levels are all judged converged -- as the main narrative. The curves
+      over all cells are reported alongside, with a worst-case imputation bound.
+    blocks: [E3, dose_slope]
+
+  - number: 13
+    title: "The main decision endpoint is the success-rate paired difference"
+    proposal_ref: "11.3 bullet 9; 10.7.4"
+    source: "bullet 9"
+    text: >-
+      The main decision endpoint is J(Oracle) - J(pooled), the success-rate
+      paired difference (MDE 7.3 pp after the t correction), together with the
+      safety endpoint. It has a unit and no heavy-tailed denominator. Leak_beh
+      is demoted to a descriptive companion and carries a preregistered effect
+      size, without which "not significant" has no boundary to be read against.
+      The five members of the primary hypothesis family and their
+      Holm-Bonferroni ranks are fixed above.
+    blocks: [success_rate_paired_difference, safety_peak_cfrc_ext, leak_beh]
+
+  - number: 14
+    title: "The subset list and the design (M, D, S) of every arm"
+    proposal_ref: "11.3 bullet 10; 10.4.0"
+    source: "bullet 10"
+    text: >-
+      Every arm that does not run all 36 configurations lists the (family,
+      defect) cells it does run and the design (M, D, S) it belongs to. The five
+      named subsets are S36, S18, S9, S6 and S^(4); they are registered in
+      configs/subsets.yaml and referenced by name everywhere. S's final value is
+      fixed by the seed-layer variance pilot (3 / 5 / 8 seeds) before the main
+      arms run; the rule is registered here rather than checked afterwards --
+      take the smallest S in {3, 5, 8} whose seed-layer variance share, measured
+      on the S6 pilot, leaves the primary endpoint's MDE at or below 7.3 pp.
+    blocks: [all_summary_rows, mde, inconclusive_rule]
+
+  - number: 15
+    title: "The conditions under which an endpoint is declared inconclusive"
+    proposal_ref: "11.3, three-way verdict clause"
+    source: "clause: three-way verdict ('the condition is likewise preregistered')"
+    text: >-
+      Every endpoint's verdict is one of significant, not significant, or
+      inconclusive; the conditions are in `verdict_rules` above and are frozen
+      with this file. Inconclusive is a permitted formal conclusion and may not
+      be rewritten as "a trend supports". An endpoint whose verdict rule is not
+      registered here does not enter the main narrative.
+    blocks: [all]
+
+  - number: 16
+    title: "T3's exploratory status"
+    proposal_ref: "11.3, last bullet (named explicitly)"
+    source: "clause: named explicitly in the 16-item bullet"
+    text: >-
+      T3 -- the success-rate paired difference between E4b's varied-defect arm
+      and its K=4 all-identical-defect control, whose morphology diversity is
+      matched -- is registered as exploratory. Under E4b's design (M, D, S) =
+      (4, 1, 3) its MDE is 9.4 pp, which no attainable seed count repairs
+      because the morphology layer is divided by M alone; 5 seeds reach only
+      9.1 pp and only widening to 6 families reaches 7.7 pp. It therefore
+      carries no confirmatory criterion, does not enter the primary hypothesis
+      family, takes no multiple-comparison slot, and is reported as exploratory
+      however it comes out. The minimum effect that would be required to
+      promote it to a confirmatory endpoint is registered here as 9.5 pp. What
+      E4b contributes to the secondary family is the monotone trend in K, not
+      this two-point difference.
+    blocks: [T3, e4b_paired_difference]

@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "selection_unit": ["family", "defect"],
+  "ordered_core_tasks": [
+    "NutAssemblySquareTight-v0",
+    "NutAssemblyRoundTight-v0",
+    "ToolHang",
+    "Stack",
+    "Door",
+    "Wipe"
+  ],
+  "ordered_heldout_tasks": [
+    "PickPlaceCan",
+    "Lift"
+  ],
+  "aggregation_thresholds": {
+    "cell_success_rate_pct": [25.0, 65.0],
+    "minimum_clean_twin_rate_pct": 90.0,
+    "minimum_core_tasks_passing": 4,
+    "minimum_heldout_tasks_passing": 1
+  },
+  "rollout_success": {
+    "predicate": "environment_task_success",
+    "horizon_steps": 400,
+    "terminal_hold_steps": 20,
+    "terminal_hold_seconds": 1.0,
+    "amendment": {
+      "index": 11,
+      "sha256": "42ba0105fb5004207b5902cf4e72acc2ce3fd4e186469b5613093ef741c98e30"
+    }
+  },
+  "tie_break": {
+    "ordered_levels": [0, 1, 2, 3, 4]
+  },
+  "defect_admission": {
+    "minimum_families_with_selected_level": 6,
+    "minimum_admitted_defects": 5
+  },
+  "before_unblinding_amendment": {
+    "index": 10,
+    "sha256": "5ea130395274aae97619160200e081bf33154c95f3e04231bc40b0b71415e646"
+  }
+}

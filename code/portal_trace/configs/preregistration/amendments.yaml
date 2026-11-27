@@ -1,0 +1,359 @@
+header: Append-only amendment log for the preregistration file (proposal 11.3). Every
+  entry states whether the amendment was made before or after the data were unblinded;
+  entries made after unblinding name the stages that had already been unblinded.
+amendments:
+- index: 1
+  recorded_at: '2026-02-14T00:00:00+00:00'
+  item_number: 2
+  summary: Proprio vector width corrected from 52 to 70 in every hdf5 shape.
+  rationale: 'Measured, not assumed: robosuite 1.5.2''s native robot0_proprio-state
+    is 50 wide on a 7-DoF arm, not the 32 that 9.6.1 assumes. The stored vector is
+    therefore 50 + 7 tau_g + 6 wrist F/T + 7 DoF mask = 70. This changes an endpoint
+    definition only in the sense that the observation width appears in it, so it is
+    recorded here rather than edited into the file silently.'
+  before_unblinding: true
+  git_commit: ''
+  author: configs
+  unblinded_stages: []
+- index: 2
+  recorded_at: '2026-07-31T14:57:55+00:00'
+  item_number: 3
+  summary: analytic_vs_ilc_cosine_floor corrected from 0.90 to 0.80, the number 9.4.7
+    states.
+  rationale: 'The entry was recorded as a free choice, with the note that the proposal
+    states the requirement without a number. 9.4.7 does state one: the cosine between
+    the ILC fixed point''s feedforward and the E-4 analytic field must exceed 0.8,
+    and teacher/ilc.py''s analytic_cosine already quotes it. The floor is therefore
+    transcribed rather than chosen. It is also the only value the check can carry:
+    on D2 at l = 50 ms the ILC fixed point agrees with the exactly shifted nominal
+    action sequence at cos 0.921 -- measured on recorded actions alone, with no analytic
+    field involved -- so 0.90 left 0.02 for the linearisation error that 9.4.7 exists
+    to measure, and the analytic field reads 0.899 against it while agreeing with
+    that same shifted sequence at cos 0.9999. Recorded as an amendment rather than
+    edited in place because the value gates a CI assertion.'
+  before_unblinding: true
+  git_commit: ''
+  author: teacher
+  unblinded_stages: []
+- index: 3
+  recorded_at: '2026-08-01T05:28:30+00:00'
+  item_number: 13
+  summary: 'Primary hypothesis family corrected to the five members 10.7.6 lists:
+    the safety endpoint leaves it for the Benjamini-Hochberg family, the E9 isolation
+    slope joins it, and the E7 res/con slope pair becomes one intersection-union member
+    instead of one of its two halves.'
+  rationale: 'Transcription, not a change of plan. 10.7.6 names the five as the success-rate
+    paired difference, Lambda^exc, the Lambda^emp res/con slope pair (two curves,
+    one hypothesis), the Lambda^part-ln R_eff slope and the Lambda^part-I slope, and
+    puts the four safety endpoints under Benjamini-Hochberg at FDR 0.10. Version 1.0.0
+    registered safety_peak_cfrc_ext as Holm member 3, omitted the E9 slope entirely,
+    and listed only lambda_emp_res for the pair, so the registered family was neither
+    10.7.6''s nor the one eval/stats.py already implemented -- that module carried
+    the correct five under a different set of names, which is why no check compared
+    them. Recorded here rather than edited in place because it moves an endpoint into
+    and out of the family whose family-wise error rate is controlled. No data have
+    been unblinded: no training arm has been run.'
+  before_unblinding: true
+  git_commit: ''
+  author: configs
+  unblinded_stages: []
+- index: 4
+  recorded_at: '2026-08-01T05:28:30+00:00'
+  item_number: 1
+  summary: T5, T7 and T10 added to the hypothesis list, and F2, F3, F5 and F6 added
+    to the exit list, from the proposal tables that already define all twelve and
+    all nine.
+  rationale: 'Item 1 says the listed hypotheses are the complete set under test and
+    item 4 says the same of the exits, so an omission is not a silent gap: it makes
+    the file assert that T5, T7 and T10 are not under test and that F2, F3, F5 and
+    F6 are not available as exits, while 10.7.9 and 10.9 define all of them and other
+    configs already point at them. The text of each is transcribed from the proposal''s
+    own hypothesis and failure-mode tables rather than restated. No data have been
+    unblinded.'
+  before_unblinding: true
+  git_commit: ''
+  author: configs
+  unblinded_stages: []
+- index: 5
+  recorded_at: '2026-08-01T06:59:37+00:00'
+  item_number: null
+  summary: Two W5 pilot stages, excess_leakage_pilot and oracle_collision_pilot, inserted
+    into unblinding_order between E12 and the training arms, so that G4 and G5 have
+    a position in the order they are unblinded in.
+  rationale: 'G4 and G5 are not zero-GPU gates: 10.8.2 gives G4 72 runs on the S6
+    pilot and G5 84 runs bringing B4 and B6 forward, and 10.8.3 puts both in W5 while
+    the full arms start in W6. The order previously went from E12 straight to the
+    training arms, so the two gates that decide whether the full arms are worth running
+    had no recorded position and their pilot readings would have been unblinded under
+    the training-arm entry that comes after them. The placement is 10.8.3''s timeline,
+    transcribed. Recorded here because the unblinding order is part of the frozen
+    file even though no numbered item owns it. No data have been unblinded.'
+  before_unblinding: true
+  git_commit: ''
+  author: runners
+  unblinded_stages: []
+- index: 6
+  recorded_at: '2026-08-01T07:14:01+00:00'
+  item_number: 3
+  summary: E9's isolation_slope MDE corrected from 0.074 to 0.078, the value 10.7.5's
+    table registers, and the slope MDE table of 10.7.5 frozen in code as eval.stats.SLOPE_MDE_TABLE
+    with its designs and regressor geometry.
+  rationale: '0.074 is the MDE of the nominal isolation ladder 0 / 0.28 / 0.71 / 1.00,
+    whose sum of squared deviations is 0.593. 10.4.9''s own formula puts I2 at 0.42
+    rather than 0.71 because the shared visual trunk carries 56% of the parameters
+    and the index sums over all blocks, and on that ladder the sum is 0.532 and the
+    MDE is 0.078. 10.7.5 prints 0.078 as the row''s value with the nominal one in
+    parentheses, so the configuration had registered the comparison instead of the
+    number, against a ladder E9 does not run. The verdict does not change: the registered
+    effect 0.12 is 1.5x the measured-ladder MDE and 1.6x the nominal one. Recorded
+    rather than edited in place because an MDE is a preregistered threshold and a
+    verdict is read against it. The four rows of the table now recompute themselves
+    from sigma_config = 0.060 and sigma_seed = 0.030, so a threshold can no longer
+    outlive the design it came from. No data have been unblinded.'
+  before_unblinding: true
+  git_commit: ''
+  author: eval
+  unblinded_stages: []
+- index: 7
+  recorded_at: '2026-08-01T07:36:10+00:00'
+  item_number: 1
+  summary: T4 moved from the live hypotheses to a new `retired_hypotheses` block;
+    T5 given an endpoint (E1.lambda_part_regime_occupancy_slope); E5 and P1's zero-result
+    exits prefixed with the F numbers they carry (F5, F6).
+  rationale: '10.10 states that T4 was merged into T2 and T3 and that the numbering
+    skips from T3 to T5; the proposal''s only mention of T4 is that retirement, and
+    it defines no T4 anywhere. Version 1.0.0 nonetheless registered a live T4 whose
+    text was T9''s content, so the same claim was registered twice under two numbers.
+    It is retired rather than deleted because 10.10 requires the retirement to stay
+    visible -- a reader who finds T3 followed by T5 must be able to tell a merge from
+    a dropped prediction -- and a retired number is now refused as a live one so it
+    cannot return by copy-and-paste. Separately, T5 was registered under item 1 and
+    predicted in 10.10 but read by no endpoint in any config; it now has one on E1,
+    which is where the trained policies are, with P1''s occupancy mass as the regressor
+    and no new training. Finally, F5 and F6 were unreachable: E5 and P1 stated those
+    exits in prose, so a null result would have had no preregistered destination.
+    No data have been unblinded.'
+  before_unblinding: true
+  git_commit: ''
+  author: eval
+  unblinded_stages: []
+- index: 8
+  recorded_at: '2026-08-25T00:00:00+00:00'
+  item_number: 2
+  summary: P0 decision-level selection unit corrected to one level per (family,
+    defect), yielding 36 independently identified S36 choices.
+  rationale: >-
+    The calibration configuration said one level per defect while the arm notes
+    said one level per family. Neither statement identifies the physical dose
+    used by the main S36 statistical unit: the same injection parameter maps
+    through a family-specific Jacobian, controller and actuator scale, so a level
+    cannot be borrowed across families, while a family also carries six distinct
+    defects. The only unit consistent with the declared S36 cells and the
+    per-family observable table is therefore (family, defect). This amendment
+    fixes only the selection unit. It deliberately does not choose the still
+    missing cross-task aggregation thresholds or tie-breaking rule. No formal P0
+    shard and no training arm have been unblinded; the existing one-rollout smoke
+    is a pipeline check and not a scientific result.
+  before_unblinding: true
+  git_commit: ''
+  author: configs
+  unblinded_stages: []
+- index: 9
+  recorded_at: '2026-08-25T00:00:00+00:00'
+  item_number: 10
+  summary: Stale B7 pool YAML corrected to the evaluated target embodiment's
+    single clean twin, with 1400 demonstrations per core task.
+  rationale: >-
+    The authoritative 10.4.0 pool object and the proposal's B7 definition both
+    specify one cell, not seven: the clean twin of the defective embodiment being
+    evaluated, trained on the same reference trajectories and the same 1400-demo
+    budget for each core task. The stale subsets.yaml row had mechanically copied
+    B2's 200 + 6 x 200 shape and incorrectly marked the defective target as being
+    in the Oracle pool. This amendment corrects that configuration transcription;
+    it does not change the registered Oracle method. No formal P0 shard or
+    training arm has been unblinded.
+  before_unblinding: true
+  git_commit: ''
+  author: configs
+  unblinded_stages: []
+- index: 10
+  recorded_at: '2026-09-16T21:35:00+08:00'
+  item_number: 2
+  summary: >-
+    P0 cross-task aggregation and tie-breaking rule fixed before formal
+    collection: one level per (family, defect), 4 of 6 core tasks and 1 of 2
+    held-out tasks must pass, and ties use ascending level order.
+  rationale: >-
+    Amendment 8 fixed the selection unit but deliberately left the reduction
+    from eight task-level Goldilocks cells to one selected level undefined.
+    This amendment makes that reduction explicit before any formal P0 shard or
+    training arm is unblinded. The majority core-task requirement preserves the
+    six-task training support while allowing one task-specific runtime failure;
+    the held-out requirement prevents a level that only works on core tasks from
+    entering the main matrix. The ascending tie-break is deterministic and is
+    applied only among eligible levels. No formal P0 shard or training arm has
+    been unblinded.
+  before_unblinding: true
+  git_commit: ''
+  author: configs
+  unblinded_stages: []
+- index: 11
+  recorded_at: '2026-09-16T23:18:38+08:00'
+  item_number: 2
+  summary: >-
+    P0 rollout success corrected from any one-frame predicate hit to a terminal
+    one-second hold: all final 20 control frames must satisfy the task predicate.
+  rationale: >-
+    The first ten completed P0 cells exposed an implementation-level ambiguity
+    in the phrase "tracker succeeds": OSCTracker stopped evaluating the task
+    predicate after its first true frame. A bounded diagnostic on the already
+    unblinded NutAssemblySquareTight-v0/Panda/D2/L4 cell found only two isolated
+    true frames in a 400-frame defective rollout, followed by a terminal radial
+    error of 1.292 mm against the registered 1.000 mm tolerance; the clean twin
+    held success for the final 60 frames. Counting that defective rollout as a
+    success measures tolerance crossing rather than task completion. The fixed
+    horizon remains 400 frames and early stopping remains forbidden. One second
+    is fixed from the 20 Hz control rate before any further cells are collected,
+    and both teacher and policy evaluation now use the same terminal-hold rule.
+    All P0 protocol and shard artifacts from commit 9abcd14 are invalidated as
+    decision evidence and retained only as provenance of the discovered failure.
+  before_unblinding: false
+  git_commit: ''
+  author: teacher
+  unblinded_stages:
+    - 'P0 partial: Stack/Panda/D2 L0-L4, 20 paired rollouts per cell'
+    - 'P0 partial: NutAssemblySquareTight-v0/Panda/D2 L0-L4, 20 paired rollouts per cell'
+- index: 12
+  recorded_at: '2026-09-16T12:00:00+08:00'
+  item_number: 2
+  summary: >-
+    Correct Wipe contact geometry and Door reference kinematics; define Door as
+    the unlocked hinge-loading variant before restarting P0.
+  rationale: >-
+    Terminal-hold P0 diagnostics showed that the clean Wipe reference erased 97
+    of 100 markers because its commanded contact plane could settle micrometres
+    above several marker centres. Increasing the fixed penetration from 2 mm to
+    4 mm, centring the footprint by 2 mm, and dwelling on the final marker made
+    the native all-marker predicate terminally true without changing that
+    predicate. Door diagnostics independently showed two specification errors:
+    the old path rotated the handle about Door_frame's body origin rather than
+    the compiled Door_hinge anchor (55 mm kinematic error at 0.1 rad), and its
+    commanded 0.55 rad exceeded the hinge's 0.4 rad limit. The locked variant
+    additionally couples latch release to the intended r2 hinge-load carrier and
+    produced discontinuous, seed-sensitive failures unrelated to the studied
+    embodiment defect. Door is therefore fixed as robosuite's standard unlocked
+    variant, follows the real hinge joint, and holds 0.35 rad with fixed wrist
+    yaw. The success predicate remains the native hinge_qpos > 0.3 condition.
+    Existing P0 shards were generated from different references and are invalid
+    as decision evidence; a new source commit, preflight, protocol and shards are
+    required. The rotation interpolator is also replaced by SciPy's stable
+    rotation-vector implementation after the old formula produced NaNs at pi.
+  before_unblinding: false
+  git_commit: ''
+  author: teacher
+  unblinded_stages:
+    - 'P0 partial: Panda/D2 all eight tasks, five levels, 20 paired rollouts per cell'
+- index: 13
+  recorded_at: '2026-10-02T00:00:00+08:00'
+  item_number: 10
+  summary: >-
+    Source-posterior calibration changed from frame-pooled affine Platt scaling
+    to pair-balanced group-robust Platt scaling, with a 0.01 bit proper-score
+    informativeness floor.
+  rationale: >-
+    Engineering runs on 8, 18 and 26 twin pairs showed that adding more seeds did
+    not monotonically reduce held-out calibration error. The 26-pair diagnostic
+    exposed strong between-pair heterogeneity: a single frame-pooled affine fit
+    could be accurate on average while failing individual environment pairs.
+    Calibration therefore remains one global monotone transform, but its loss is
+    now an entropic risk over complete twin pairs and its fixed robustness and
+    shrinkage grids are selected only by leave-one-pair-out folds inside the
+    calibration split. Selection minimizes worst-pair ECE plus source-fraction
+    recovery error, subject to every held-out calibration pair retaining at least
+    0.01 bit per-frame log-score gain over its constant empirical-prior predictor.
+    The information gate prevents a nearly constant 0.5 posterior from passing
+    the 0.05 calibration budget by discarding the covariance signal used by the
+    Lambda decomposition. This amendment was
+    made after inspecting engineering held-out diagnostics, so every existing
+    source-discriminator held-out result is consumed and cannot confirm the
+    method. Confirmation requires a newly generated, untouched held-out set and
+    one fixed-method evaluation. Its environment seeds are fixed in an immutable
+    reservation before collection. That reservation fixes every seed's
+    sacrificial or held-out role, the collection commit and runtime fingerprint,
+    and its own hash is written to the dataset root and every episode. The final
+    runner requires a separate validation plan, rejects every
+    development-seed/pair/file overlap, and uses only that plan's held-out
+    complete pairs. Its formal gate uses the single pair with the largest joint
+    ECE, source-fraction-recovery, and support-gap burden; pooled metrics are
+    descriptive only. The reservation also binds the
+    exact training seed, optimizer budget, architecture dimensions,
+    normalization hash and calibration-facing run settings, so the new
+    held-out cannot be searched across configurations.
+  before_unblinding: false
+  git_commit: ''
+  author: source-discriminator
+  unblinded_stages:
+    - 'engineering source-discriminator pilots: 8, 18 and 26 twin pairs'
+- index: 14
+  recorded_at: '2026-10-02T00:00:00+08:00'
+  item_number: 10
+  summary: >-
+    Source-discriminator representation learning changed from frame-pooled BCE
+    and pooled checkpoint selection to pair/class-balanced GroupDRO training and
+    worst-pair checkpoint selection.
+  rationale: >-
+    Applying Amendment 13's pair-robust calibrator and worst-pair gate to the
+    consumed 26-pair engineering checkpoint produced pooled AUC 0.6481 but
+    worst-pair AUC 0.4886, worst-pair information gain -0.0031 bit and a joint
+    worst-pair error budget of 0.2228 against the registered 0.05 limit. This
+    establishes that a global affine calibrator cannot repair a representation
+    learned and selected by frame-pooled objectives. The fitting sampler now
+    gives every complete twin pair and both source/target classes equal sampling
+    probability. The model loss is a GroupDRO-weighted risk over per-pair BCE,
+    while pair identity is removed before the observation encoder and is never
+    available at inference. Checkpoints are evaluated separately on each
+    reserved selection pair: any checkpoint without an AUC orientation failure
+    outranks every checkpoint with one, then the admissible checkpoint minimizing
+    worst-pair BCE, worst-pair ECE plus source-fraction error, and mean pair BCE
+    is selected. If all checkpoints fail orientation, fewer failed pairs and
+    higher worst-pair AUC define the recovery order. All existing held-out
+    source-discriminator results are consumed engineering evidence. The revised
+    method is schema /7; its first 26-pair run is development-only, and formal
+    confirmation still requires one untouched prospective reservation and
+    validation set after the method and commit are frozen.
+  before_unblinding: false
+  git_commit: ''
+  author: source-discriminator
+  unblinded_stages:
+    - 'engineering source-discriminator pilots: 8, 18 and 26 twin pairs'
+    - '26-pair /6 worst-pair calibration diagnostic'
+- index: 15
+  recorded_at: '2026-10-02T00:00:00+08:00'
+  item_number: 10
+  summary: >-
+    Source-discriminator token reduction changed from a single token-count-weighted
+    mean to equal-slot modality pooling before learned fusion.
+  rationale: >-
+    The consumed 26-pair /7 engineering run remained nearly uninformative after
+    pair-balanced GroupDRO: pooled information gain was 0.0030 bit and worst-pair
+    information gain was -0.0002 bit. A post-hoc separability diagnostic on the
+    same consumed development data found that a fixed L2 linear probe over the
+    five-frame normalized proprio history reached held-out AUC 0.5997 and 0.0297
+    bit information gain, while the coarse visual-history probe reached AUC
+    0.5533 with negative information gain and the time-only negative control was
+    exactly AUC 0.5. The /7 encoder averaged approximately ninety visual tokens,
+    five proprio tokens and one task token together, so the most informative
+    modality received only a small token-count share. Schema /8 keeps the data
+    splits, pair/class-balanced sampler, GroupDRO objective, checkpoint rule,
+    calibrator and formal gates unchanged. It averages tokens within each
+    available modality, concatenates the modality summaries, and applies one
+    learned fusion layer before the existing binary head. This is a post-hoc
+    method change after development unblinding. Existing data may only be used
+    for engineering comparison; formal confirmation requires a new untouched
+    prospective reservation after /8 is frozen at a clean commit.
+  before_unblinding: false
+  git_commit: ''
+  author: source-discriminator
+  unblinded_stages:
+    - 'engineering source-discriminator pilots: 8, 18 and 26 twin pairs'
+    - '26-pair /7 pair-aware run and source-separability diagnostic'
