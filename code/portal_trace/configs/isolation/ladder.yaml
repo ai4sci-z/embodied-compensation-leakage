@@ -1,0 +1,93 @@
+# The E9 isolation ladder I0-I3 and the decisive control I3' (proposal 10.4.9).
+#
+# The independent variable is the parameter disjointness I, written as a
+# computable threshold-free formula so that the main regression's regressor is
+# reproducible. For a parameter block p (expert / head / layer), let
+# s_{k,p} = E_{x ~ rho_k}[g_p(x)] be embodiment k's expected routing-weight share
+# on block p (1 for a dense block, 0/1 for hard routing, the expected softmax
+# weight for soft routing) and n_p the block's parameter count. Then
+#
+#   I = 1 - sum_p n_p [ C(K,2)^-1 sum_{k<k'} min(s_{k,p}, s_{k',p}) ]
+#           / sum_p n_p s_bar_p ,      s_bar_p = (1/K) sum_k s_{k,p}
+#
+# Fully shared dense gives I = 0; fully disjoint gives I = 1.
+#
+# Only one capacity caliber is matched. Appendix A-25: matching the total and
+# the activated parameter counts at once is arithmetically impossible, because a
+# dense rung has activated equal to total while K disjoint modules are off by a
+# factor of K in one of the two. The preregistered caliber is the activated
+# count -- it decides fitting capacity -- and the total count is reported and
+# enters the main regression as log(total parameters).
+
+schema_version: 1
+
+isolation_definition: >-
+  I = 1 - sum_p n_p * [C(K,2)^-1 sum_{k<k'} min(s_kp, s_k'p)] / sum_p n_p * s_bar_p,
+  where s_kp is embodiment k's expected routing-weight share on parameter block
+  p and n_p is that block's parameter count. Threshold-free by construction: a
+  threshold on "is this parameter shared" would make the regressor
+  irreproducible under soft routing.
+
+matched_quantity: activated_parameters
+match_tolerance: 0.10
+reported_covariate: log_total_parameters
+second_independent_variable: hb_moe_routing_entropy
+
+rungs:
+  - rung_id: I0
+    implementation: fully shared dense
+    expected_isolation: 0.00
+    role: lower end
+    split_rule: none
+
+  - rung_id: I1
+    implementation: >-
+      HB-MoE soft routing in the HiMoE-VLA arrangement: AS-MoE at the action
+      expert's boundary layer handles action-space differences, HB-MoE in the
+      adjacent inner layers handles residual heterogeneity, dense Transformer
+      blocks in between; AS-Reg contrastive regulariser plus HB-Reg load
+      balancing.
+    expected_isolation: 0.28
+    role: soft isolation
+    split_rule: soft routing by embodiment
+
+  - rung_id: I2
+    implementation: hard-routed disjoint action heads
+    expected_isolation: 0.71
+    role: middle
+    split_rule: hard routing by embodiment
+
+  - rung_id: I3
+    implementation: >-
+      per-embodiment fine-tuning, including the Latent Action Diffusion style
+      per-embodiment decoder (this is baseline B12).
+    expected_isolation: 1.00
+    role: upper end
+    split_rule: by embodiment identity
+
+  - rung_id: I3prime
+    implementation: >-
+      K disjoint modules whose parameter count and per-module data volume are
+      identical to I3, split by a random pooled subset rather than by embodiment
+      identity.
+    expected_isolation: 1.00
+    role: decisive control
+    split_rule: random pooled subset
+    is_decisive_control: true
+
+# 10.4.9. The main setting keeps the action space literally identical (a fixed
+# nominal embodiment varying only in delta), so the AS-MoE branch carries no
+# action-space difference and the whole isolation range comes from HB-MoE and
+# the head structure. That is what makes isolation a clean continuous axis here.
+notes: >-
+  I3' is the precondition for this crown. I2 and I3 each give a module 1/K of
+  the data, so the isolation axis moves the per-module data volume with it, and
+  a rise in Lambda could be explained entirely by "each module enters the
+  low-data regime, shrinks harder, and the shrinkage direction is not orthogonal
+  to c_delta" -- a confound that runs in the same direction as the tested
+  mechanism. I3' holds parameter count, activated count and per-module data
+  volume fixed and varies only whether the split follows embodiment identity. If
+  I3' and I3 do not differ, E9 measured fragmentation and the T6 bridge has no
+  support. 9.8.4 keeps I3' out of the first degradation step for the same
+  reason: without it the surviving I0-I3 comparison cannot be separated from the
+  data-volume confound at all.
